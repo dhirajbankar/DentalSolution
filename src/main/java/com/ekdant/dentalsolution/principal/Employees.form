@@ -42,6 +42,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="searchTxt" min="-2" pref="269" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="displayingEmployeeCountLbl" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="addBtn" min="-2" pref="125" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -49,11 +50,8 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="deleteBtn" min="-2" pref="125" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="treatmentBtn" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="cancelBtn" min="-2" pref="125" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="displayingEmployeeCountLbl" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -79,7 +77,6 @@
                   <Component id="addBtn" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="updateBtn" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="deleteBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="treatmentBtn" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="cancelBtn" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -227,26 +224,11 @@
         <Property name="mnemonic" type="int" value="68"/>
         <Property name="text" type="java.lang.String" value="Delete"/>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="treatmentBtn"/>
+          <ComponentRef name="default"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="treatmentBtn">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/EkDant/icones/Patient Boy 1.png"/>
-        </Property>
-        <Property name="mnemonic" type="int" value="84"/>
-        <Property name="text" type="java.lang.String" value="Treatment"/>
-        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="cancelBtn"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="treatmentBtnActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cancelBtn">

@@ -63,7 +63,8 @@ public class CityDao {
         return cities;
     }
     
-    public void getCities(JComboBox citiesCB) {        
+    public void getCities(JComboBox citiesCB) { 
+        citiesCB.removeAllItems();
         List<CityBean> cities = fetchCities();
         for (CityBean city : cities){
                 citiesCB.addItem(city.getName());

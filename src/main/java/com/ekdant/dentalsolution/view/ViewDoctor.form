@@ -133,7 +133,7 @@
                           <Group type="102" attributes="0">
                               <Component id="birthDayLbl" min="-2" pref="118" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="birthdayDC" min="-2" max="-2" attributes="0"/>
+                              <Component id="birthdayDC" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>

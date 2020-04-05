@@ -136,17 +136,17 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="birthDayLbl" min="-2" pref="132" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="birthdayDC" min="-2" max="-2" attributes="0"/>
+                              <Component id="birthdayDC" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <Component id="addressLbl" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
                           <Component id="cityLbl" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
                           <Component id="mobileLbl" min="-2" pref="132" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="preMedicalHistoryPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="300" max="-2" attributes="0"/>
-                      <EmptySpace pref="229" max="32767" attributes="0"/>
+                      <EmptySpace pref="220" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

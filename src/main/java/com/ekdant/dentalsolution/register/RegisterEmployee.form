@@ -42,7 +42,7 @@
                       <Component id="cancelBtn" min="-2" pref="129" max="-2" attributes="0"/>
                       <EmptySpace pref="578" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="mainTabbedPane" alignment="1" max="32767" attributes="2"/>
+                  <Component id="mainTabbedPane" alignment="1" pref="32767" max="32767" attributes="2"/>
               </Group>
           </Group>
       </Group>
@@ -139,12 +139,12 @@
                                       <Component id="nameTxt" min="-2" pref="200" max="-2" attributes="1"/>
                                       <Component id="addressTxt" alignment="0" min="-2" pref="200" max="-2" attributes="1"/>
                                       <Component id="genderCB" alignment="0" min="-2" pref="75" max="-2" attributes="1"/>
-                                      <Component id="birthdayDC" min="-2" max="-2" attributes="0"/>
+                                      <Component id="birthdayDC" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="493" max="32767" attributes="0"/>
+                      <EmptySpace pref="32398" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

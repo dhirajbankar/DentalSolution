@@ -68,7 +68,7 @@ public class DoctorBean {
     }
 
     public String getAddress() {
-        return address;
+        return address != null ? address : "";
     }
 
     public void setAddress(String address) {
@@ -76,7 +76,7 @@ public class DoctorBean {
     }
 
     public String getCity() {
-        return city;
+        return city != null ? city : "";
     }
 
     public void setCity(String city) {

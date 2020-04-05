@@ -44,7 +44,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
         List<ClinicBean> clinics = clinicDao.fetchClinics();
         UserBean staff = userDao.fetchStaff();
         staffId = staff.getUserId();
-        ClinicBean clinic = clinics.get(0);
+        ClinicBean clinic = clinics.isEmpty() ? new ClinicBean() : clinics.get(0);
         clinicId = clinic.getId();
         clinicNameTxt.setText(clinic.getName());
         clinicAddressTxt.setText(clinic.getAddress());

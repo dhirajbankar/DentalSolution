@@ -69,7 +69,7 @@ public class Treatment extends javax.swing.JDialog {
     
     private void persistTreatment() throws HeadlessException {
         String newTreatmentName = newTreatmentNameTxt.getText();
-        if(newTreatmentName.isEmpty() && newTreatmentName.length()>0){
+        if(!newTreatmentName.isEmpty() && newTreatmentName.length()>0){
             if(treatmentDao.treatmentNotPresent(newTreatmentName)){
                 TreatmentBean treatment = new TreatmentBean();
                 treatment.setTreatmentName(newTreatmentName);

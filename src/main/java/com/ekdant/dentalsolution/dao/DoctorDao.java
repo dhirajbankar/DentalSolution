@@ -43,7 +43,7 @@ public class DoctorDao {
                 doctor.setTelephone(rs.getString("TELEPHONE"));
                 doctor.setMobile(rs.getString("MOBILE"));
                 doctor.setEmail(rs.getString("EMAIL"));
-                if(rs.getString("BIRTHDAY").isEmpty())
+                if(rs.getString("BIRTHDAY") != null && !rs.getString("BIRTHDAY").isEmpty())
                     doctor.setBirthDate(databaseDateFormat.parse(rs.getString("BIRTHDAY")));
                 doctor.setDegree(rs.getString("DEGREE"));
                 doctor.setRegistrationNo(rs.getString("REGISTRATIONNO"));
@@ -74,7 +74,7 @@ public class DoctorDao {
                 doctor.setTelephone(rs.getString("TELEPHONE"));
                 doctor.setMobile(rs.getString("MOBILE"));
                 doctor.setEmail(rs.getString("EMAIL"));
-                if(rs.getString("BIRTHDAY").isEmpty())
+                if(rs.getString("BIRTHDAY") != null && !rs.getString("BIRTHDAY").isEmpty())
                     doctor.setBirthDate(databaseDateFormat.parse(rs.getString("BIRTHDAY")));
                 doctor.setDegree(rs.getString("DEGREE"));
                 doctor.setRegistrationNo(rs.getString("REGISTRATIONNO"));
@@ -102,7 +102,7 @@ public class DoctorDao {
                 doctor.setTelephone(rs.getString("TELEPHONE"));
                 doctor.setMobile(rs.getString("MOBILE"));
                 doctor.setEmail(rs.getString("EMAIL"));
-                if(rs.getString("BIRTHDAY").isEmpty())
+                if(rs.getString("BIRTHDAY") != null && !rs.getString("BIRTHDAY").isEmpty())
                     doctor.setBirthDate(databaseDateFormat.parse(rs.getString("BIRTHDAY")));
                 doctor.setDegree(rs.getString("DEGREE"));
                 doctor.setRegistrationNo(rs.getString("REGISTRATIONNO"));
@@ -130,7 +130,7 @@ public class DoctorDao {
                 doctor.setTelephone(rs.getString("TELEPHONE"));
                 doctor.setMobile(rs.getString("MOBILE"));
                 doctor.setEmail(rs.getString("EMAIL"));
-                if(rs.getString("BIRTHDAY").isEmpty())
+                if(rs.getString("BIRTHDAY") != null && !rs.getString("BIRTHDAY").isEmpty())
                     doctor.setBirthDate(databaseDateFormat.parse(rs.getString("BIRTHDAY")));
                 doctor.setDegree(rs.getString("DEGREE"));
                 doctor.setRegistrationNo(rs.getString("REGISTRATIONNO"));
@@ -167,12 +167,15 @@ public class DoctorDao {
         int doctorId = 0;
         
         String birthDateStr = "";
+        if(doctor.getBirthDate() != null && !doctor.getBirthDate().toString().isEmpty()){
         try{
             birthDateStr = "'" + databaseDateFormat.format(doctor.getBirthDate()) + "'";            
-        }catch(Exception e){ }        
+        }catch(Exception e){ } 
+        
+        }       
         
         String doctorInsertQuery = "INSERT INTO DOCTORS (NAME,TYPE,BIRTHDAY,GENDER,PHOTO,ADDRESS,CITY,TELEPHONE,MOBILE,EMAIL,AGE,DEGREE,REGISTRATIONNO,SPECIALIZATION,ACTIVEIND) "+
-                "VALUES ('"+doctor.getName()+"','"+doctor.getType()+"',"+birthDateStr+",'"+doctor.getGender()+"', NULL,'"+doctor.getAddress()+"','"+doctor.getCity()+"','"+doctor.getTelephone()+"','"+doctor.getMobile()+"','"+doctor.getEmail()+"',"+doctor.getAge()+",'"+doctor.getDegree()+"','"+doctor.getRegistrationNo()+"','"+doctor.getSpecialization()+"',1)";
+                "VALUES ('"+doctor.getName()+"','"+doctor.getType()+"','"+birthDateStr+"','"+doctor.getGender()+"', NULL,'"+doctor.getAddress()+"','"+doctor.getCity()+"','"+doctor.getTelephone()+"','"+doctor.getMobile()+"','"+doctor.getEmail()+"',"+doctor.getAge()+",'"+doctor.getDegree()+"','"+doctor.getRegistrationNo()+"','"+doctor.getSpecialization()+"',1)";
         
         try {
             connection.stmt.executeUpdate(doctorInsertQuery);
@@ -218,14 +221,14 @@ public class DoctorDao {
     }
     
     public boolean doctorSettingsRequired() {
-        boolean settingsRequired = true;        
+        int count = 0;        
         
         try {
             ResultSet rs = connection.getResult("SELECT COUNT(*) FROM USERS WHERE USERTYPE = 'Doctor' AND ACTIVEIND = 1");
             while(rs.next()){
-                return rs.getInt(1) == 1;
+                count = rs.getInt(1);
             }
         } catch (Exception ex) {System.out.println(ex.getMessage());}
-        return settingsRequired;
+        return count == 0;
     }
 }

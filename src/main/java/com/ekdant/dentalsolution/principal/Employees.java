@@ -66,7 +66,6 @@ public class Employees extends javax.swing.JFrame {
         addBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
-        treatmentBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         displayingEmployeeCountLbl = new javax.swing.JLabel();
 
@@ -178,20 +177,9 @@ public class Employees extends javax.swing.JFrame {
         deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Patient Boy 1 Delete.png"))); // NOI18N
         deleteBtn.setMnemonic('D');
         deleteBtn.setText("Delete");
-        deleteBtn.setNextFocusableComponent(treatmentBtn);
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
-            }
-        });
-
-        treatmentBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Patient Boy 1.png"))); // NOI18N
-        treatmentBtn.setMnemonic('T');
-        treatmentBtn.setText("Treatment");
-        treatmentBtn.setNextFocusableComponent(cancelBtn);
-        treatmentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                treatmentBtnActionPerformed(evt);
             }
         });
 
@@ -218,6 +206,7 @@ public class Employees extends javax.swing.JFrame {
                                 .addComponent(searchLbl)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(displayingEmployeeCountLbl)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -225,10 +214,7 @@ public class Employees extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(treatmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(displayingEmployeeCountLbl))
+                                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -248,7 +234,6 @@ public class Employees extends javax.swing.JFrame {
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBtn)
-                    .addComponent(treatmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
@@ -303,13 +288,6 @@ public class Employees extends javax.swing.JFrame {
         }         
     }//GEN-LAST:event_deleteBtnActionPerformed
 
-    private void treatmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_treatmentBtnActionPerformed
-        int SelectedRow = this.jTableEmployees.getSelectedRow();
-        if(SelectedRow == -1) {
-            JOptionPane.showMessageDialog(null,"Please Select Employee!!", "Error!", JOptionPane.ERROR_MESSAGE);
-        }        
-    }//GEN-LAST:event_treatmentBtnActionPerformed
-
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
@@ -327,7 +305,6 @@ public class Employees extends javax.swing.JFrame {
     private javax.swing.JTable jTableEmployees;
     private javax.swing.JLabel searchLbl;
     private javax.swing.JTextField searchTxt;
-    private javax.swing.JButton treatmentBtn;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 

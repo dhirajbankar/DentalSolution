@@ -199,7 +199,7 @@ public class PatientTreatment extends javax.swing.JFrame {
 
     private void loadTreatments() throws HeadlessException {
         List<TreatmentBean> treatments = treatmentDao.fetchTreatments();
-        treatmentList.removeAll();
+        treatmentList.removeAllItems();
         for (TreatmentBean treatment : treatments) {
             treatmentList.addItem(treatment.getTreatmentName());
         }
@@ -296,6 +296,7 @@ public class PatientTreatment extends javax.swing.JFrame {
 
     private void loadReferedBy() {
         List<ReferedByBean> referedBy = referedByDao.fetchReferedBy();
+        reffByCB.removeAllItems();
         for (ReferedByBean refered : referedBy) {
             reffByCB.addItem(refered.getName());
         }
@@ -938,10 +939,14 @@ public class PatientTreatment extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.setOpaque(false);
         jScrollPane3.setViewportView(jTree1);
+
+        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         labWorkLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         labWorkLbl.setForeground(new java.awt.Color(51, 51, 255));
@@ -1300,6 +1305,8 @@ public class PatientTreatment extends javax.swing.JFrame {
             priscriptionHistoryTbl.getColumnModel().getColumn(4).setPreferredWidth(30);
         }
 
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         labWorkHistoryLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         labWorkHistoryLbl.setForeground(new java.awt.Color(51, 51, 255));
 
@@ -1620,13 +1627,12 @@ public class PatientTreatment extends javax.swing.JFrame {
     }//GEN-LAST:event_saveprintBtnActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        populateReferedBy();
         loadTreatments();
+        loadReferedBy();
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void newTreatmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTreatmentBtnActionPerformed
         new Treatment(true).setVisible(true);
-        populateReferedBy();
     }//GEN-LAST:event_newTreatmentBtnActionPerformed
 
     private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBtnActionPerformed

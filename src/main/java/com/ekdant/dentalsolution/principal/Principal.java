@@ -215,8 +215,8 @@ public class Principal extends javax.swing.JFrame {
     
     private void backUp(){
         String fileName = "ekDantBackup_"+displayDateFormat.format(today)+".sqlite";
-        File sourceFile = new File(baseLocation+"\\"+databaseFile);
-        File backupFile1 = new File(settingsDao.getMySQLPath() + "\\" + fileName);
+        File sourceFile = new File(baseLocation + File.separatorChar + databaseFile);
+        File backupFile1 = new File(settingsDao.getMySQLPath() + File.separatorChar + fileName);
         
         InputStream is = null;
         OutputStream os = null;

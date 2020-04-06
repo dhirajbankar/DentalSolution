@@ -11,6 +11,7 @@ import com.ekdant.dentalsolution.domain.ExpenseBean;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +25,7 @@ public class ExpenseTracking extends javax.swing.JFrame {
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
     ExpenseDao expenseDao;
-    
+    Date today = new Date();
     
     /**
      * Creates new form ExpenseTracking
@@ -35,6 +36,7 @@ public class ExpenseTracking extends javax.swing.JFrame {
         initComponents();  
         loadExpenseCategories();
         loadExpenseHistory(null);
+        dateDP.setDate(today);
     }
     
     private void loadExpenseCategories(){
@@ -184,6 +186,8 @@ public class ExpenseTracking extends javax.swing.JFrame {
         dateLbl.setForeground(new java.awt.Color(51, 51, 255));
         dateLbl.setText("Date");
 
+        dateDP.setToolTipText("Expense Date");
+
         javax.swing.GroupLayout newExpensePanelLayout = new javax.swing.GroupLayout(newExpensePanel);
         newExpensePanel.setLayout(newExpensePanelLayout);
         newExpensePanelLayout.setHorizontalGroup(
@@ -205,7 +209,7 @@ public class ExpenseTracking extends javax.swing.JFrame {
                             .addComponent(notesTxt)
                             .addComponent(categoryCB, 0, 130, Short.MAX_VALUE)
                             .addComponent(amountTxt)
-                            .addComponent(dateDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(dateDP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
         newExpensePanelLayout.setVerticalGroup(

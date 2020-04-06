@@ -9,6 +9,7 @@ import com.ekdant.dentalsolution.dao.SettingsDao;
 import com.ekdant.dentalsolution.document.BackupDirectory;
 import com.ekdant.dentalsolution.domain.ClinicBean;
 import com.ekdant.dentalsolution.domain.DoctorBean;
+import com.ekdant.dentalsolution.expense.ExpenseTracking;
 
 import com.ekdant.dentalsolution.labwork.LabWorkTracking;
 import com.ekdant.dentalsolution.masters.Cities;
@@ -53,7 +54,7 @@ import javax.swing.border.TitledBorder;
  * @author Sushant
  */
 public class Principal extends javax.swing.JFrame {
-    String lookAndFeel = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
+    String lookAndFeel = "javax.swing.plaf.metal.MetalLookAndFeel";
     public String logedInUser = null;
     public String logedInUserType = null;
     PatientsDao patientsDao;
@@ -340,7 +341,6 @@ public class Principal extends javax.swing.JFrame {
         setBackground(new java.awt.Color(226, 225, 225));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setName("framePrincipal"); // NOI18N
-        setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height-Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom));
         setResizable(false);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -712,7 +712,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(yesterdayInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patientsVisitYesterdayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(patientsVisitYesterdayTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         customInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -755,39 +755,35 @@ public class Principal extends javax.swing.JFrame {
         customInfoPanel.setLayout(customInfoPanelLayout);
         customInfoPanelLayout.setHorizontalGroup(
             customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customInfoPanelLayout.createSequentialGroup()
+            .addGroup(customInfoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, customInfoPanelLayout.createSequentialGroup()
-                        .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(patientsVisitPeriodLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(newPatientsPeriodLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(patientsVisitPeriodTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, customInfoPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customInfoPanelLayout.createSequentialGroup()
                         .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(newPatientsPeriodTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(customInfoPanelLayout.createSequentialGroup()
-                                .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(customInfoPanelLayout.createSequentialGroup()
-                                        .addComponent(startDateLbl)
-                                        .addGap(41, 41, 41))
-                                    .addGroup(customInfoPanelLayout.createSequentialGroup()
-                                        .addComponent(startDateDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)))
-                                .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(endDateLbl)
-                                    .addComponent(endDateDC, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26))))))
+                                .addComponent(startDateLbl)
+                                .addGap(65, 65, 65))
+                            .addComponent(startDateDC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(endDateDC, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endDateLbl))
+                        .addContainerGap())
+                    .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, customInfoPanelLayout.createSequentialGroup()
+                            .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(patientsVisitPeriodLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(newPatientsPeriodLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(patientsVisitPeriodTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(newPatientsPeriodTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         customInfoPanelLayout.setVerticalGroup(
             customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customInfoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(startDateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(endDateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(endDateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startDateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(customInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(startDateDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1324,7 +1320,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_labBtnActionPerformed
 
     private void expenseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenseBtnActionPerformed
-        //new ExpenseTracking().setVisible(true);
+        new ExpenseTracking().setVisible(true);
     }//GEN-LAST:event_expenseBtnActionPerformed
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained

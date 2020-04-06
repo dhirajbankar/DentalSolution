@@ -42,6 +42,17 @@ public class ReportsDao {
         return treatmentReports;
     }
     
+    public List<Integer> fetchTreatmentYears(){
+    List<Integer> treatmentYears = new ArrayList<Integer>();
+        ResultSet rs = connection.getResult("SELECT distinct(DATE) AS YEAR FROM CHECKUP CK WHERE CK.ACTIVEIND = 1 GROUP BY TREATMENT");
+        try{
+            while (rs.next()){
+                treatmentYears.add(rs.getInt("YEAR"));
+            }
+        }catch(Exception e){System.out.println(e.getMessage());}
+        return treatmentYears;
+    }
+    
     public List<ReferedByReportBean> fetchReferedByReport(Date startDate, Date endDate){
         List<ReferedByReportBean> referedByReports = new ArrayList<ReferedByReportBean>();
         ResultSet rs = connection.getResult("SELECT SUM(fees) AS TOTALFEES, COUNT(*) AS OPD, REFFEREDBY FROM CHECKUP CK WHERE DATE(DATE) >=  '" + databaseDateFormat.format(startDate) + "' AND DATE(DATE) <=  '" + databaseDateFormat.format(endDate) + "' AND CK.ACTIVEIND = 1 AND REFFEREDBY != '' GROUP BY REFFEREDBY");
@@ -66,7 +77,7 @@ public class ReportsDao {
                 MonthlyReportBean monthlyReport = new MonthlyReportBean();
                 monthlyReport.setOpd(rs.getInt("OPD"));
                 monthlyReport.setFees(rs.getFloat("FEES"));
-                if(rs.getString("DATE").isEmpty())
+                if(rs.getString("DATE") != null && !rs.getString("DATE").isEmpty())
                     monthlyReport.setDate(databaseDateFormat.parse(rs.getString("DATE")));
                 monthlyReport.setConsultingFees(rs.getFloat("CONSULTATIONDOCTORFEES"));
                 monthlyReports.add(monthlyReport);

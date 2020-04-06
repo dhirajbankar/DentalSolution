@@ -11,7 +11,6 @@ import com.ekdant.dentalsolution.domain.ActivationBean;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.DateFormat;
-import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

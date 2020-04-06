@@ -47,7 +47,7 @@ public class DiskUtils {
     catch(Exception e){
         e.printStackTrace();
     }
-    return result.trim().isBlank() ? getSerialNumber() : result.trim();
+    return result.trim().isEmpty() ? getSerialNumber() : result.trim();
   }
   
     public static final String getSerialNumber() {

@@ -13,7 +13,10 @@ package com.ekdant.dentalsolution.utilities;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 public class DiskUtils {
   private DiskUtils() {  }
@@ -44,11 +47,62 @@ public class DiskUtils {
     catch(Exception e){
         e.printStackTrace();
     }
-    return result.trim();
+    return result.trim().isBlank() ? getSerialNumber() : result.trim();
   }
+  
+    public static final String getSerialNumber() {
+        String sn = "";
+		
+		OutputStream os = null;
+		InputStream is = null;
+
+		Runtime runtime = Runtime.getRuntime();
+		Process process = null;
+		try {
+			process = runtime.exec(new String[] { "/usr/sbin/system_profiler", "SPHardwareDataType" });
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		os = process.getOutputStream();
+		is = process.getInputStream();
+
+		try {
+			os.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		String line = null;
+		String marker = "Serial Number";
+		try {
+			while ((line = br.readLine()) != null) {
+				if (line.contains(marker)) {
+					sn = line.split(":")[1].trim();
+					break;
+				}
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		if (sn == null) {
+			throw new RuntimeException("Cannot find computer SN");
+		}
+
+		return sn;
+	}
 
   public static void main(String[] args){
     String sn = DiskUtils.getSerialNumber("D");
+    System.out.println("Sr Number : "+sn);
     javax.swing.JOptionPane.showConfirmDialog((java.awt.Component)
          null, sn, "Serial Number of C:",
          javax.swing.JOptionPane.DEFAULT_OPTION);

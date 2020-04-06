@@ -8,18 +8,17 @@ package com.ekdant.dentalsolution.utilities;
 import com.ekdant.dentalsolution.dao.TokensDao;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.UUID;
 
 /**
  *
@@ -132,13 +131,70 @@ public class Utils {
             input.close();
         } catch (Exception e) {
         }
-        result = result.trim();
+        result = result.trim().isBlank() ? getSerialNumberForMac().trim() : result.trim();
         return getValidString(formatFileName(result)).trim();
     }
+    
+    public static final String getSerialNumberForMac() {
+        String sn = "";
+		
+		OutputStream os = null;
+		InputStream is = null;
+
+		Runtime runtime = Runtime.getRuntime();
+		Process process = null;
+		try {
+			process = runtime.exec(new String[] { "/usr/sbin/system_profiler", "SPHardwareDataType" });
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		os = process.getOutputStream();
+		is = process.getInputStream();
+
+		try {
+			os.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		String line = null;
+		String marker = "Serial Number";
+		try {
+			while ((line = br.readLine()) != null) {
+				if (line.contains(marker)) {
+					sn = line.split(":")[1].trim();
+					break;
+				}
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		if (sn == null) {
+			throw new RuntimeException("Cannot find computer SN");
+		}
+
+		return sn;
+	}
 
     private static String formatFileName(String fileName){
         String normalized = Normalizer.normalize(fileName, Normalizer.Form.NFD);
         String result = normalized.replaceAll("[^A-Za-z0-9]", "");
         return result;
+    }
+    
+    public static void main(String args []) throws Exception{
+        System.out.println("K1:" +  AES.decrypt(tokensDao.getTokenByte("K1")));
+        System.out.println("K2:" +  AES.decrypt(tokensDao.getTokenByte("K2")));
+        System.out.println("K3:" +  AES.decrypt(tokensDao.getTokenByte("K3")));
+        System.out.println("K4:" +  AES.decrypt(tokensDao.getTokenByte("K4")));
     }
 }

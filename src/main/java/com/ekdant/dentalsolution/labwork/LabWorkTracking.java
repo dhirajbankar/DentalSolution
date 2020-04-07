@@ -54,6 +54,7 @@ public class LabWorkTracking extends javax.swing.JFrame {
         labWorkSubmittedOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                updateLabWorkStatus(2);
+               loadLabworkDetails(searchTxt.getText());
             }
         });
         rightClickPopupMenu.add(labWorkSubmittedOption);
@@ -62,6 +63,7 @@ public class LabWorkTracking extends javax.swing.JFrame {
         labWorkReceivedOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                updateLabWorkStatus(3);
+               loadLabworkDetails(searchTxt.getText());
             }
         });
         rightClickPopupMenu.add(labWorkReceivedOption);
@@ -70,6 +72,7 @@ public class LabWorkTracking extends javax.swing.JFrame {
         closeOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                updateLabWorkStatus(4);
+               loadLabworkDetails(searchTxt.getText());
             }
         });
          rightClickPopupMenu.add(closeOption);

@@ -53,13 +53,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="searchTxt" min="-2" pref="195" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                          <Component id="addBtn" linkSize="1" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="addBtn" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="updateBtn" linkSize="1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="deleteBtn" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="updateBtn" min="-2" pref="102" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="deleteBtn" min="-2" pref="102" max="-2" attributes="0"/>
                       </Group>
                       <Component id="messagePanel" alignment="0" max="32767" attributes="0"/>
                   </Group>

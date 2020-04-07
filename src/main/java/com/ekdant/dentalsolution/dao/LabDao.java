@@ -143,7 +143,7 @@ public class LabDao {
         return success;
     }
 
-    public List<LabWorkBean> fetchLabWorks(String searchText) {
+    public List<LabWorkBean> fetchLabWorks(String searchText, boolean showClosed) {
         List<LabWorkBean> labWorks = new ArrayList<LabWorkBean>();
         String query = "";
         if(searchText == null || searchText.isEmpty())
@@ -172,11 +172,13 @@ public class LabDao {
 
                 lab.setId(rs.getInt("LABID"));
                 lab.setName(rs.getString("LABNAME"));
-                lab.setName(rs.getString("LABCONTACT"));
+                lab.setContact(rs.getString("LABCONTACT"));
 
                 labWork.setPatient(patient);
                 labWork.setCheckup(checkup);
                 labWork.setLab(lab);
+                if(labWork.getStatus() == 4 && !showClosed)
+                    continue;
                 labWorks.add(labWork);
             }
         } catch (Exception e) { }

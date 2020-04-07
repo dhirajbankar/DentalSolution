@@ -86,7 +86,7 @@ public class LabWorkTracking extends javax.swing.JFrame {
     }
     
     private void loadLabworkDetails(String searchText) {
-        List<LabWorkBean> labWorks = labDao.fetchLabWorks(searchText);
+        List<LabWorkBean> labWorks = labDao.fetchLabWorks(searchText,showClosedWorkCB.isSelected());
         DefaultTableModel model = (DefaultTableModel)labWorkTrackingTbl.getModel();
         model.setNumRows(0);
 
@@ -187,6 +187,7 @@ public class LabWorkTracking extends javax.swing.JFrame {
         searchTxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         labWorkTrackingTbl = new javax.swing.JTable();
+        showClosedWorkCB = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lab work Tracking");
@@ -266,6 +267,13 @@ public class LabWorkTracking extends javax.swing.JFrame {
             labWorkTrackingTbl.getColumnModel().getColumn(0).setMaxWidth(0);
         }
 
+        showClosedWorkCB.setText("Show Closed Work");
+        showClosedWorkCB.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                showClosedWorkCBStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout expenseHistoryPanelLayout = new javax.swing.GroupLayout(expenseHistoryPanel);
         expenseHistoryPanel.setLayout(expenseHistoryPanelLayout);
         expenseHistoryPanelLayout.setHorizontalGroup(
@@ -274,6 +282,8 @@ public class LabWorkTracking extends javax.swing.JFrame {
             .addGroup(expenseHistoryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(showClosedWorkCB)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(labWorkTrackingLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -283,7 +293,9 @@ public class LabWorkTracking extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labWorkTrackingLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(expenseHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showClosedWorkCB))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                 .addContainerGap())
@@ -341,6 +353,10 @@ public class LabWorkTracking extends javax.swing.JFrame {
     private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTxtActionPerformed
+
+    private void showClosedWorkCBStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_showClosedWorkCBStateChanged
+        loadLabworkDetails(searchTxt.getText());
+    }//GEN-LAST:event_showClosedWorkCBStateChanged
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
@@ -351,6 +367,7 @@ public class LabWorkTracking extends javax.swing.JFrame {
     private javax.swing.JTable labWorkTrackingTbl;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField searchTxt;
+    private javax.swing.JCheckBox showClosedWorkCB;
     // End of variables declaration//GEN-END:variables
  
 }

@@ -400,7 +400,7 @@
                               <Component id="feesLbl" linkSize="12" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="fees" min="-2" pref="75" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="156" max="32767" attributes="0"/>
                               <Component id="consultingDocFeeLbl" min="-2" pref="160" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="consultingDocFeeTxt" min="-2" pref="74" max="-2" attributes="0"/>
@@ -419,8 +419,8 @@
                               <Component id="addPriscriptionMedicineDurationTxt" min="-2" pref="61" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="36" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Component id="addPriscriptionBtn" pref="57" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="addPriscriptionBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="dignosisSummery" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -513,18 +513,21 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="addPriscriptionBtn" linkSize="11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="addPriscriptionMedicineNameTxt" linkSize="11" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="addPriscriptionTypeCB" linkSize="11" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Component id="priscriptionLbl" linkSize="10" alignment="3" max="32767" attributes="0"/>
-                                      <Component id="addPriscriptionMedicineStrengthTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="addPriscriptionMedicineFrequencyCB" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="addPriscriptionMedicineConditionBox" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="addPriscriptionMedicineDurationTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="addPriscriptionMedicineNameTxt" linkSize="11" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="addPriscriptionTypeCB" linkSize="11" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                                          <Component id="priscriptionLbl" linkSize="10" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="addPriscriptionMedicineStrengthTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addPriscriptionMedicineFrequencyCB" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addPriscriptionMedicineConditionBox" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addPriscriptionMedicineDurationTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
+                                  <Component id="addPriscriptionBtn" linkSize="11" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="211" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -687,7 +690,7 @@
             <Component class="javax.swing.JTextField" name="dignosisSummery">
               <Properties>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="priscriptionNewTbl"/>
+                  <ComponentRef name="addPriscriptionTypeCB"/>
                 </Property>
               </Properties>
             </Component>
@@ -1021,9 +1024,17 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="addPriscriptionMedicineNameTxt"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="addPriscriptionMedicineNameTxt">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="addPriscriptionMedicineStrengthTxt"/>
+                </Property>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Java2sAutoTextField(medicines)"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
@@ -1032,12 +1043,20 @@
             <Component class="javax.swing.JButton" name="addPriscriptionBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="fees"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addPriscriptionBtnActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="addPriscriptionMedicineStrengthTxt">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="addPriscriptionMedicineFrequencyCB"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="addPriscriptionMedicineFrequencyCB">
               <Properties>
@@ -1052,14 +1071,25 @@
                     <StringItem index="6" value="1   -   1   -   0"/>
                   </StringArray>
                 </Property>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="addPriscriptionMedicineConditionBox"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="addPriscriptionMedicineConditionBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="BM"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="addPriscriptionMedicineDurationTxt"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="addPriscriptionMedicineDurationTxt">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="addPriscriptionBtn"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addPriscriptionMedicineDurationTxtActionPerformed"/>
               </Events>
@@ -1563,6 +1593,9 @@
             </Property>
             <Property name="mnemonic" type="int" value="67"/>
             <Property name="text" type="java.lang.String" value="Cancel"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="saveprintBtn"/>
+            </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[91, 33]"/>
             </Property>
@@ -1604,6 +1637,9 @@
               <Image iconType="3" name="/EkDant/icones/Print.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Save and Print Priscription"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="printBtn"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveprintBtnActionPerformed"/>

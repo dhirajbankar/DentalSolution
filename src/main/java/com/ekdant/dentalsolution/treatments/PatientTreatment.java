@@ -526,6 +526,13 @@ public class PatientTreatment extends javax.swing.JFrame {
         }
     }
     
+    private void resetAddPriscriptionRow(){
+        addPriscriptionMedicineNameTxt.setText("");
+        addPriscriptionMedicineStrengthTxt.setText("");
+        addPriscriptionMedicineDurationTxt.setText("");
+        addPriscriptionMedicineConditionBox.setSelected(false);
+    }
+    
     private void addPriscriptionRow(){
         String newMedicineType = addPriscriptionTypeCB.getSelectedItem().toString();
         String medicineName = addPriscriptionMedicineNameTxt.getText();
@@ -544,6 +551,7 @@ public class PatientTreatment extends javax.swing.JFrame {
                 ""
             });
         }
+        resetAddPriscriptionRow();
     }
     
     /**
@@ -898,7 +906,7 @@ public class PatientTreatment extends javax.swing.JFrame {
 
         consultingDocFeeTxt.setNextFocusableComponent(saveBtn);
 
-        dignosisSummery.setNextFocusableComponent(priscriptionNewTbl);
+        dignosisSummery.setNextFocusableComponent(addPriscriptionTypeCB);
 
         priscriptionLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         priscriptionLbl.setForeground(new java.awt.Color(51, 51, 255));
@@ -1071,17 +1079,27 @@ public class PatientTreatment extends javax.swing.JFrame {
             priscriptionNewTbl.getColumnModel().getColumn(5).setPreferredWidth(20);
         }
 
+        addPriscriptionTypeCB.setNextFocusableComponent(addPriscriptionMedicineNameTxt);
+
+        addPriscriptionMedicineNameTxt.setNextFocusableComponent(addPriscriptionMedicineStrengthTxt);
+
         addPriscriptionBtn.setText("Add");
+        addPriscriptionBtn.setNextFocusableComponent(fees);
         addPriscriptionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addPriscriptionBtnActionPerformed(evt);
             }
         });
 
+        addPriscriptionMedicineStrengthTxt.setNextFocusableComponent(addPriscriptionMedicineFrequencyCB);
+
         addPriscriptionMedicineFrequencyCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0   -   0   -   1", "1   -   0   -   0", "1   -   0   -   1", "1   -   1   -   1", "0   -   1   -   0", "0   -   1   -   1", "1   -   1   -   0" }));
+        addPriscriptionMedicineFrequencyCB.setNextFocusableComponent(addPriscriptionMedicineConditionBox);
 
         addPriscriptionMedicineConditionBox.setText("BM");
+        addPriscriptionMedicineConditionBox.setNextFocusableComponent(addPriscriptionMedicineDurationTxt);
 
+        addPriscriptionMedicineDurationTxt.setNextFocusableComponent(addPriscriptionBtn);
         addPriscriptionMedicineDurationTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addPriscriptionMedicineDurationTxtActionPerformed(evt);
@@ -1110,7 +1128,7 @@ public class PatientTreatment extends javax.swing.JFrame {
                         .addComponent(feesLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(fees, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                         .addComponent(consultingDocFeeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(consultingDocFeeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1128,8 +1146,8 @@ public class PatientTreatment extends javax.swing.JFrame {
                         .addComponent(addPriscriptionMedicineDurationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(addPriscriptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addPriscriptionBtn))
                     .addComponent(dignosisSummery)
                     .addGroup(newTreatmentPanelLayout.createSequentialGroup()
                         .addGroup(newTreatmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1205,16 +1223,18 @@ public class PatientTreatment extends javax.swing.JFrame {
                             .addComponent(dignosisSummery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(newTreatmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addPriscriptionBtn)
-                            .addComponent(addPriscriptionMedicineNameTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(newTreatmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(addPriscriptionTypeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(priscriptionLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(addPriscriptionMedicineStrengthTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(addPriscriptionMedicineFrequencyCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(addPriscriptionMedicineConditionBox)
-                                .addComponent(addPriscriptionMedicineDurationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2)))
+                            .addGroup(newTreatmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(addPriscriptionMedicineNameTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(newTreatmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(addPriscriptionTypeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(priscriptionLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(addPriscriptionMedicineStrengthTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addPriscriptionMedicineFrequencyCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addPriscriptionMedicineConditionBox)
+                                    .addComponent(addPriscriptionMedicineDurationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
+                            .addComponent(addPriscriptionBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newTreatmentPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -1493,6 +1513,7 @@ public class PatientTreatment extends javax.swing.JFrame {
         cancelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Treatment Delete.png"))); // NOI18N
         cancelBtn.setMnemonic('C');
         cancelBtn.setText("Cancel");
+        cancelBtn.setNextFocusableComponent(saveprintBtn);
         cancelBtn.setPreferredSize(new java.awt.Dimension(91, 33));
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1516,6 +1537,7 @@ public class PatientTreatment extends javax.swing.JFrame {
         saveprintBtn.setForeground(new java.awt.Color(51, 51, 255));
         saveprintBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Print.png"))); // NOI18N
         saveprintBtn.setText("Save and Print Priscription");
+        saveprintBtn.setNextFocusableComponent(printBtn);
         saveprintBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveprintBtnActionPerformed(evt);

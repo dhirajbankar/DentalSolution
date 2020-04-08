@@ -1362,7 +1362,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_myClinicItemActionPerformed
 
     private void expenseTrackingItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenseTrackingItemActionPerformed
-        //new ExpenseTracking().setVisible(true);
+        new ExpenseTracking().setVisible(true);
     }//GEN-LAST:event_expenseTrackingItemActionPerformed
 
     private void backupDirectoryItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupDirectoryItemActionPerformed

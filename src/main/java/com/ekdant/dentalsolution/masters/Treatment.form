@@ -182,8 +182,8 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="newTreatmentChargeTxt" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="saveNewTreatmentBtn" min="-2" pref="85" max="-2" attributes="0"/>
-                      <EmptySpace pref="65" max="32767" attributes="0"/>
+                      <Component id="saveNewTreatmentBtn" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace pref="50" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

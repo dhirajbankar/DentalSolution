@@ -134,7 +134,7 @@ public class MedicineDao {
     public List<String> fetchMedicineTypesForSearch(String searchText){
         List<String> medicineTypes = new ArrayList<String>();
         String sql = "SELECT * FROM MEDICINETYPE WHERE ACTIVEIND = 1";
-        if(searchText == null || searchText.isEmpty()){
+        if(searchText != null && !searchText.isEmpty()){
             sql = "SELECT * FROM MEDICINETYPE WHERE MEDICINETYPE LIKE '%"+searchText+"%' AND ACTIVEIND = 1 ORDER BY MEDICINETYPE";
         }
         else{

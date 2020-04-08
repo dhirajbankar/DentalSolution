@@ -76,7 +76,8 @@ public class PreMedicalHistory extends javax.swing.JDialog {
     
      private void updatePreMedicalhistory() {
         boolean updateFlag = false;
-        preMedicalHistoryTbl.getCellEditor().stopCellEditing();
+        if(preMedicalHistoryTbl.getCellEditor() != null)
+            preMedicalHistoryTbl.getCellEditor().stopCellEditing();
         HashMap<Integer,String> tableCities = new HashMap<Integer, String>();
         int totalRows= preMedicalHistoryTbl.getModel().getRowCount();
         for(int row=0;row<totalRows;row++){

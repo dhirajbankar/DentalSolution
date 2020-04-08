@@ -74,7 +74,8 @@ public class MedicineType extends javax.swing.JDialog {
         
     private void updateMedicineType() {
         boolean updateFlag = false;
-        medicineTypeTbl.getCellEditor().stopCellEditing();
+        if(medicineTypeTbl.getCellEditor() != null)
+            medicineTypeTbl.getCellEditor().stopCellEditing();
         int totalRows= medicineTypeTbl.getModel().getRowCount();
         for(int row=0;row<totalRows;row++){
             if(!(medicineTypeList.get(row).equalsIgnoreCase(medicineTypeTbl.getValueAt(row, 0).toString())))

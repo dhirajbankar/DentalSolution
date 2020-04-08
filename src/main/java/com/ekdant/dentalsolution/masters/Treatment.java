@@ -74,7 +74,8 @@ public class Treatment extends javax.swing.JDialog {
                 TreatmentBean treatment = new TreatmentBean();
                 treatment.setTreatmentName(newTreatmentName);
                 treatment.setTreatmentDescription(newTreatmentDiscriptionTxt.getText());
-                treatment.setTreatmentCharges(Float.parseFloat(newTreatmentChargeTxt.getText()));
+                if(!newTreatmentChargeTxt.getText().isEmpty())
+                    treatment.setTreatmentCharges(Float.parseFloat(newTreatmentChargeTxt.getText()));
 
                 if (treatmentDao.addTreatment(treatment)) {
                     messageLbl.setForeground(Color.blue);
@@ -108,7 +109,8 @@ public class Treatment extends javax.swing.JDialog {
     }
     
     private void updateClicked() throws NumberFormatException {
-        treatmentTbl.getCellEditor().stopCellEditing();
+        if(treatmentTbl.getCellEditor() != null)
+            treatmentTbl.getCellEditor().stopCellEditing();
         int totalRows = treatmentTbl.getModel().getRowCount();
         for (int row = 0; row < totalRows; row++) {
             TreatmentBean treatment = new TreatmentBean();
@@ -270,8 +272,8 @@ public class Treatment extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(newTreatmentChargeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(saveNewTreatmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addComponent(saveNewTreatmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         newTreatmentPanelLayout.setVerticalGroup(
             newTreatmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

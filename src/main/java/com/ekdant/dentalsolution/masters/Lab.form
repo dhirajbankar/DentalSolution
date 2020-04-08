@@ -195,7 +195,7 @@
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="newLabAddressTxt" linkSize="6" min="-2" pref="165" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="saveNewLab" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="saveNewLab" min="-2" pref="94" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel2" linkSize="4" min="-2" pref="165" max="-2" attributes="0"/>
@@ -205,7 +205,7 @@
                               <Component id="jLabel4" linkSize="6" min="-2" pref="165" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

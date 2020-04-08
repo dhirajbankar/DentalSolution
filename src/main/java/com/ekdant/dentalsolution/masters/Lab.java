@@ -104,7 +104,8 @@ public class Lab extends javax.swing.JDialog {
     }
 
     private void updateClicked() throws NumberFormatException {
-        labTbl.getCellEditor().stopCellEditing();
+        if(labTbl.getCellEditor() != null)
+            labTbl.getCellEditor().stopCellEditing();
         int totalRows = labTbl.getModel().getRowCount();
         for (int row = 0; row < totalRows; row++) {
             LabBean lab = new LabBean();
@@ -301,14 +302,14 @@ public class Lab extends javax.swing.JDialog {
                         .addGap(0, 0, 0)
                         .addComponent(newLabAddressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveNewLab, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(saveNewLab, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(newLabPanelLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         newLabPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {citiesCB, jLabel2});

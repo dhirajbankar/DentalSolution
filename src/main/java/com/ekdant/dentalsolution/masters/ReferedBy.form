@@ -195,7 +195,7 @@
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="newReferedByAddressTxt" linkSize="6" min="-2" pref="165" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="saveNewReferedByBtn" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="saveNewReferedByBtn" min="-2" pref="94" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel2" linkSize="4" min="-2" pref="165" max="-2" attributes="0"/>
@@ -205,7 +205,7 @@
                               <Component id="jLabel4" linkSize="6" min="-2" pref="165" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -360,10 +360,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="updateBtn" linkSize="7" min="-2" pref="98" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="deleteBtn" linkSize="7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="updateBtn" min="-2" pref="118" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="deleteBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="450" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

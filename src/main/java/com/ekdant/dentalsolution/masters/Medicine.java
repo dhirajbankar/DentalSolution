@@ -94,7 +94,8 @@ public class Medicine extends javax.swing.JDialog {
         
     private void updateClicked() throws NumberFormatException {
         int totalRows = medicineTbl.getModel().getRowCount();
-        medicineTbl.getCellEditor().stopCellEditing();
+        if(medicineTbl.getCellEditor() != null)
+            medicineTbl.getCellEditor().stopCellEditing();
         for (int row = 0; row < totalRows; row++) {
             MedicineBean medicine = new MedicineBean();
             medicine.setId(Integer.parseInt(medicineTbl.getValueAt(row, 0).toString()));

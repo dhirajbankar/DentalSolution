@@ -89,7 +89,7 @@ public class LabDao {
     
     public boolean updateLab(LabBean lab) {
         boolean success = true;
-        String sql = "UPDATE LAB SET NAME = '" + lab.getName() + "',CITY = '" + lab.getCity() + "',CONTACT = '" + lab.getContact() + "',ADDRESS = '" + lab.getAddress() + "' WHERE ID = '" + lab.getId() + "'";
+        String sql = "UPDATE LAB SET NAME = '" + lab.getName() + "',CITY = '" + lab.getCity() + "',CONTACT = '" + lab.getContact() + "',ADDRESS = '" + lab.getAddress() + "' WHERE LABID = '" + lab.getId() + "'";
         try {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {

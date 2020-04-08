@@ -83,7 +83,8 @@ public class Cities extends javax.swing.JDialog {
    
     private void updateCities() {
         boolean updateFlag = false;
-        cityTbl.getCellEditor().stopCellEditing();
+        if(cityTbl.getCellEditor() != null)    
+            cityTbl.getCellEditor().stopCellEditing();
         int totalRows= cityTbl.getModel().getRowCount();
         for(int row=0;row<totalRows;row++){
             if(!(cityMap.get(Integer.parseInt(cityTbl.getValueAt(row, 0).toString()))).equalsIgnoreCase(cityTbl.getValueAt(row, 1).toString()))

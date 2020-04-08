@@ -129,7 +129,7 @@ public class ExpenseDao {
     public boolean deleteExpenseCategory(ExpenseCategoryBean expenseCategory){
         boolean success = true;
         try {
-            String deleteExpenseCategorySQL = "INSERT INTO EXPENSECATEGORY ( EXPENSECATEGORY, ACTIVEIND) VALUES( '"+expenseCategory.getName()+"', 1)";
+            String deleteExpenseCategorySQL = "UPDATE EXPENSECATEGORY SET ACTIVEIND = 0 WHERE ID = " +expenseCategory.getId()+ "";
             connection.stmt.execute(deleteExpenseCategorySQL);
         } catch (SQLException ex) { success = false; }
         return success;

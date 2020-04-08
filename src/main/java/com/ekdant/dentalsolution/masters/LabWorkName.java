@@ -81,7 +81,8 @@ public class LabWorkName extends javax.swing.JDialog {
     
     private void updateCities() {
         boolean updateFlag = false;
-        labWorkNameTbl.getCellEditor().stopCellEditing();
+        if(labWorkNameTbl.getCellEditor() != null)
+            labWorkNameTbl.getCellEditor().stopCellEditing();
         int totalRows= labWorkNameTbl.getModel().getRowCount();
         for(int row=0;row<totalRows;row++){
             if (!(labWorkNameMap.get(Integer.parseInt(labWorkNameTbl.getValueAt(row, 0).toString()))).equalsIgnoreCase(labWorkNameTbl.getValueAt(row, 1).toString())) {

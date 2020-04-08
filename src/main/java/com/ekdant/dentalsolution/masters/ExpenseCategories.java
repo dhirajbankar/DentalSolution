@@ -87,7 +87,8 @@ public class ExpenseCategories extends javax.swing.JDialog {
     
      private void updateExpenseCategories() {
         boolean updateFlag = false;
-        expenseCategoryTbl.getCellEditor().stopCellEditing();
+        if(expenseCategoryTbl.getCellEditor() != null)
+            expenseCategoryTbl.getCellEditor().stopCellEditing();
         HashMap<Integer,String> tableCities = new HashMap<Integer, String>();
         int totalRows= expenseCategoryTbl.getModel().getRowCount();
         for(int row=0;row<totalRows;row++){

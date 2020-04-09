@@ -57,7 +57,8 @@ public class Reports extends javax.swing.JFrame {
         treatmentDao = new TreatmentDao();
         reportsDao = new ReportsDao();
         referedByDao = new ReferedByDao();
-        initComponents();        
+        initComponents();
+        populateYears();
     }
 
     private void dateReport() throws HeadlessException {
@@ -462,6 +463,18 @@ public class Reports extends javax.swing.JFrame {
             //this.reportBtn.doClick();
         }
     }
+    
+    private void populateYears() {
+       List<Integer> treatmentYears = reportsDao.fetchTreatmentYears();
+       y_year.removeAllItems();
+       treatmentReportYearDropDown.removeAllItems();
+       refferedByReportYearCB.removeAllItems();
+       for(Integer year : treatmentYears){
+           y_year.addItem(year);
+           treatmentReportYearDropDown.addItem(year);
+           refferedByReportYearCB.addItem(year);
+       }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -690,8 +703,6 @@ public class Reports extends javax.swing.JFrame {
         yearSelectLbl.setForeground(new java.awt.Color(51, 51, 255));
         yearSelectLbl.setText("Select Year :");
 
-        y_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
-
         yearlyReportBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Medical Invoice 3D Search.png"))); // NOI18N
         yearlyReportBtn.setText("View Report");
         yearlyReportBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -858,8 +869,6 @@ public class Reports extends javax.swing.JFrame {
         yearReportLbl.setForeground(new java.awt.Color(51, 51, 255));
         yearReportLbl.setText("Report For Year");
 
-        treatmentReportYearDropDown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
-
         treatmentReportBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Medical Invoice Flat Search.png"))); // NOI18N
         treatmentReportBtn.setText("View Report");
         treatmentReportBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -981,8 +990,6 @@ public class Reports extends javax.swing.JFrame {
         refferedByReportYearLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         refferedByReportYearLbl.setForeground(new java.awt.Color(51, 51, 255));
         refferedByReportYearLbl.setText("Report For Year");
-
-        refferedByReportYearCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
         refferedByViewReportBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Medical Invoice Flat Search.png"))); // NOI18N
         refferedByViewReportBtn.setText("View Report");

@@ -430,20 +430,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="y_year">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="8">
-                    <StringItem index="0" value="2013"/>
-                    <StringItem index="1" value="2014"/>
-                    <StringItem index="2" value="2015"/>
-                    <StringItem index="3" value="2016"/>
-                    <StringItem index="4" value="2017"/>
-                    <StringItem index="5" value="2018"/>
-                    <StringItem index="6" value="2019"/>
-                    <StringItem index="7" value="2020"/>
-                  </StringArray>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="yearlyReportBtn">
               <Properties>
@@ -804,19 +790,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="treatmentReportYearDropDown">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="7">
-                        <StringItem index="0" value="2014"/>
-                        <StringItem index="1" value="2015"/>
-                        <StringItem index="2" value="2016"/>
-                        <StringItem index="3" value="2017"/>
-                        <StringItem index="4" value="2018"/>
-                        <StringItem index="5" value="2019"/>
-                        <StringItem index="6" value="2020"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="treatmentReportBtn">
                   <Properties>
@@ -1028,19 +1001,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="refferedByReportYearCB">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="7">
-                            <StringItem index="0" value="2014"/>
-                            <StringItem index="1" value="2015"/>
-                            <StringItem index="2" value="2016"/>
-                            <StringItem index="3" value="2017"/>
-                            <StringItem index="4" value="2018"/>
-                            <StringItem index="5" value="2019"/>
-                            <StringItem index="6" value="2020"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="refferedByViewReportBtn">
                       <Properties>

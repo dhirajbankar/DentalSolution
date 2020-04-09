@@ -44,13 +44,18 @@ public class ReportsDao {
     
     public List<Integer> fetchTreatmentYears(){
     List<Integer> treatmentYears = new ArrayList<Integer>();
-        ResultSet rs = connection.getResult("SELECT distinct(DATE) AS YEAR FROM CHECKUP CK WHERE CK.ACTIVEIND = 1 GROUP BY TREATMENT");
+        ResultSet rs = connection.getResult("SELECT distinct strftime('%Y',DATE) AS YEAR FROM CHECKUP CK WHERE CK.ACTIVEIND = 1 ORDER BY YEAR");
         try{
             while (rs.next()){
                 treatmentYears.add(rs.getInt("YEAR"));
             }
         }catch(Exception e){System.out.println(e.getMessage());}
         return treatmentYears;
+    }
+    
+    public static void main(String args []){
+        ReportsDao rd = new ReportsDao();
+        System.out.println(rd.fetchTreatmentYears().toString());
     }
     
     public List<ReferedByReportBean> fetchReferedByReport(Date startDate, Date endDate){

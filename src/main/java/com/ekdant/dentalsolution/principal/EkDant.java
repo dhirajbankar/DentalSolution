@@ -12,6 +12,7 @@ import com.ekdant.dentalsolution.dao.ClinicDao;
 import com.ekdant.dentalsolution.dao.DoctorDao;
 import com.ekdant.dentalsolution.dao.SettingsDao;
 import com.ekdant.dentalsolution.document.BackupDirectory;
+import com.ekdant.dentalsolution.utilities.DatabaseUtility;
 
 /**
  *
@@ -24,6 +25,7 @@ public class EkDant {
     SettingsDao settingsDao;
     
     public EkDant(){
+        DatabaseUtility du = new DatabaseUtility();
         doctorDao = new DoctorDao();
         clinicDao = new ClinicDao();
         settingsDao = new SettingsDao();

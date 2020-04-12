@@ -6,12 +6,10 @@ import javax.swing.*;
  * @author Sushant
  */
 public class ConnectionPool {
-    final private static String driver = "org.sqlite.JDBC"; // MySQL JDBC driver
-    //final private static String driver = "com.mysql.jdbc.Driver"; // MySQL JDBC driver
-    final private static String url = "jdbc:sqlite:ConvertedEkdant.sqlite";
-    //final private static String url = "jdbc:mysql://localhost:3306/EkDant" ;
-    final private static String username = "root";
-    final private static String password = "root";
+    final private static String DRIVER = "org.sqlite.JDBC"; 
+    final private static String URL = "jdbc:sqlite:DentalSolution.sqlite";
+    final private static String USERNAME = "root";
+    final private static String PASSWORD = "root";
     private static ConnectionPool connection;
     private static Connection conn = null;
     public Statement stmt = null;
@@ -19,17 +17,21 @@ public class ConnectionPool {
     public static ConnectionPool getInstance(){
         if(connection == null){
             try {
-                Class.forName(driver);
+                Class.forName(DRIVER);
                 connection = new ConnectionPool();
                 
-                connection.conn = DriverManager.getConnection(url, username, password);
-            } catch (ClassNotFoundException ex) {System.out.println(ex.getMessage());} 
-            catch (SQLException ex) {System.out.println(ex.getMessage());}
-            System.out.println("Connected :D");
+                connection.conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            } catch (ClassNotFoundException ex) {
+                System.out.println(ex.getMessage());
+            } 
+            catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            System.out.println("Connected :D"+PropertiesCache.getInstance().getProperty(URL));
         }
         return connection;
     }
-
+    
     public void CloseDB(){
 
     }

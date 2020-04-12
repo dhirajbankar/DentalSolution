@@ -27,6 +27,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.23</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.apache.ibatis</groupId>
+            <artifactId>ibatis-core</artifactId>
+            <version>3.0</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class UserDao {
     ConnectionPool connection;
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(UserDao.class);
     
     public UserDao(){
         connection = ConnectionPool.getInstance();
@@ -35,6 +36,7 @@ public class UserDao {
                 user.setUserType(rs.getString("userType"));
             }
         } catch (SQLException erroSQL) {
+            logger.error(erroSQL);
         }
         return user;
     }
@@ -51,6 +53,7 @@ public class UserDao {
                 user.setUserType(rs.getString("userType"));
             }
         } catch (SQLException erroSQL) {
+            logger.error(erroSQL);
         }
         return user;
     }
@@ -67,6 +70,7 @@ public class UserDao {
                 user.setUserType(rs.getString("userType"));
             }
         } catch (SQLException errorSQL) {
+            logger.error(errorSQL);
         }
         return user;
     }
@@ -86,7 +90,7 @@ public class UserDao {
                 users.add(user);
             }
         }
-        catch(SQLException ex){System.out.println(ex.getMessage());}
+        catch(SQLException ex){logger.error(ex);}
         return users;
     }
     
@@ -97,6 +101,7 @@ public class UserDao {
             connection.stmt.execute(userInsertQuery);
         } catch (Exception e) {
             success = false;
+            logger.error(e);
         }
         return success;
     }
@@ -108,6 +113,7 @@ public class UserDao {
             connection.stmt.execute(userUpdateQuery);
         } catch (Exception e) {
             success = false;
+            logger.error(e);
         }
         return success;
     }
@@ -119,6 +125,7 @@ public class UserDao {
             connection.stmt.execute(userUpdateQuery);
         } catch (Exception e) {
             success = false;
+            logger.error(e);
         }
         return success;
     }
@@ -130,7 +137,7 @@ public class UserDao {
             while(rs.next()){
                 cityCount = rs.getInt(1);
             }
-        } catch (SQLException ex) { }
+        } catch (SQLException ex) { logger.error(ex);}
         return cityCount > 0;
     }
 }

@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -23,6 +24,7 @@ public class ExpenseDao {
     
     ConnectionPool connection;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(ExpenseDao.class);
     
     public ExpenseDao(){
         connection = ConnectionPool.getInstance();
@@ -36,7 +38,7 @@ public class ExpenseDao {
             while(rs.next()){
                 expenseCategories.add(rs.getString("EXPENSECATEGORY"));
             }
-        }catch(SQLException e){ }
+        }catch(SQLException e){ logger.error(e);}
         return expenseCategories;
     }
     
@@ -62,7 +64,7 @@ public class ExpenseDao {
                 expenses.add(expense);
             }
         }
-        catch(Exception errorTable){ System.out.println(errorTable.getMessage());}
+        catch(Exception errorTable){ logger.error(errorTable);}
         return expenses;
     }
     
@@ -71,7 +73,10 @@ public class ExpenseDao {
         try {
             String sql = "INSERT INTO EXPENSES ( EXPENSECATEGORY, AMOUNT, DATE, NOTES, ACTIVEIND) VALUES( '"+expense.getExpenseCategory()+"', "+expense.getAmount()+", '"+databaseDateFormat.format(expense.getDate())+"', '"+expense.getNotes()+"', 1)";
             connection.stmt.execute(sql);
-        } catch (SQLException ex) { success = false; }
+        } catch (SQLException ex) { 
+            success = false; 
+            logger.error(ex);
+        }
         return success;
     }
     
@@ -80,7 +85,10 @@ public class ExpenseDao {
         try {
             String insertExpenseCategorySQL = "INSERT INTO EXPENSECATEGORY ( EXPENSECATEGORY, ACTIVEIND) VALUES( '"+expenseCategory.getName()+"', 1)";
             connection.stmt.execute(insertExpenseCategorySQL);
-        } catch (SQLException ex) { success = false; }
+        } catch (SQLException ex) { 
+            success = false; 
+            logger.error(ex);
+        }
         return success;
     }
     
@@ -102,7 +110,7 @@ public class ExpenseDao {
                 expenseCategories.add(expenseCategory);
             }
         }
-        catch(SQLException errorTable){ }
+        catch(SQLException errorTable){ logger.error(errorTable);}
         return expenseCategories;
     }
      
@@ -113,7 +121,7 @@ public class ExpenseDao {
             while(rs.next()){
                 expenseCategoryCount = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return expenseCategoryCount == 0;
     }
     
@@ -122,7 +130,10 @@ public class ExpenseDao {
         try {
             String updateExpenseCategorySQL = "UPDATE EXPENSECATEGORY SET EXPENSECATEGORY = '" + expenseCategory.getName() + "' WHERE ID = " + expenseCategory.getId();
             connection.stmt.execute(updateExpenseCategorySQL);
-        } catch (SQLException ex) { success = false; }
+        } catch (SQLException ex) { 
+            success = false; 
+            logger.error(ex);
+        }
         return success;
     }
     
@@ -131,7 +142,10 @@ public class ExpenseDao {
         try {
             String deleteExpenseCategorySQL = "UPDATE EXPENSECATEGORY SET ACTIVEIND = 0 WHERE ID = " +expenseCategory.getId()+ "";
             connection.stmt.execute(deleteExpenseCategorySQL);
-        } catch (SQLException ex) { success = false; }
+        } catch (SQLException ex) { 
+            success = false; 
+            logger.error(ex);
+        }
         return success;
     }
 }

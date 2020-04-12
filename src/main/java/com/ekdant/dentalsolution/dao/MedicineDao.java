@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -18,6 +19,7 @@ import java.util.List;
  */
 public class MedicineDao {
     ConnectionPool connection;
+    final static Logger logger = Logger.getLogger(MedicineDao.class);
     public MedicineDao(){
         connection = ConnectionPool.getInstance();
     }
@@ -34,7 +36,7 @@ public class MedicineDao {
                 medicine.setType(rs.getString("TYPE"));
                 medicines.add(medicine);
             }
-        }catch(SQLException e){System.out.println(e.getMessage());}
+        }catch(SQLException e){logger.error(e);}
         return medicines;
     }
     
@@ -56,7 +58,7 @@ public class MedicineDao {
                 medicine.setType(rs.getString("TYPE"));
                 medicines.add(medicine);
             }
-        }catch(SQLException ex){System.out.println(ex.getMessage());}
+        }catch(SQLException ex){logger.error(ex);}
         return medicines;
     }
     
@@ -68,7 +70,7 @@ public class MedicineDao {
             while(rs.next()){
                 medicineCount = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return medicineCount > 0;
     }
     
@@ -79,7 +81,10 @@ public class MedicineDao {
             
             try {
                 connection.stmt.execute(sql);
-            } catch (SQLException ex) { success = false;}
+            } catch (SQLException ex) { 
+                success = false;
+                logger.error(ex);
+            }
         }           
         return success;
     }
@@ -92,6 +97,7 @@ public class MedicineDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
          
         return success;
@@ -104,6 +110,7 @@ public class MedicineDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
          
         return success;
@@ -116,7 +123,7 @@ public class MedicineDao {
             while(rs.next()){
                 medicineCount = rs.getInt(1);
             }
-        } catch (SQLException ex) { }
+        } catch (SQLException ex) { logger.error(ex);}
         return medicineCount == 0;
     }
     
@@ -127,7 +134,7 @@ public class MedicineDao {
             while(rs.next()){
                 medicineTypes.add(rs.getString("MEDICINETYPE"));
             }
-        }catch(SQLException ex){System.out.println(ex.getMessage());}
+        }catch(SQLException ex){logger.error(ex);}
         return medicineTypes;
     }
     
@@ -144,7 +151,7 @@ public class MedicineDao {
             while(rs.next()){
                 medicineTypes.add(rs.getString("MEDICINETYPE"));
             }
-        }catch(SQLException ex){System.out.println(ex.getMessage());}
+        }catch(SQLException ex){logger.error(ex);}
         return medicineTypes;
     }
     
@@ -155,7 +162,7 @@ public class MedicineDao {
             while(rs.next()){
                 medicineTypeCount = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return medicineTypeCount == 0;
     }
     
@@ -167,6 +174,7 @@ public class MedicineDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
          
         return success;
@@ -180,6 +188,7 @@ public class MedicineDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
          
         return success;
@@ -193,6 +202,7 @@ public class MedicineDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
          
         return success;

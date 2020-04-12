@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -19,6 +20,7 @@ import javax.swing.JComboBox;
  */
 public class CityDao {
     ConnectionPool connection;
+    final static Logger logger = Logger.getLogger(CityDao.class);
     
     public CityDao(){
         connection = ConnectionPool.getInstance();
@@ -34,7 +36,7 @@ public class CityDao {
                 city.setName(rs.getString("CITYNAME"));
                 cities.add(city);
             }
-        } catch (SQLException e) {System.out.println(e.getMessage());} 
+        } catch (SQLException e) {logger.error(e);} 
         return cities;
     }
 
@@ -45,7 +47,7 @@ public class CityDao {
             while(rs.next()){
                 cityCount = rs.getInt(1);
             }
-        } catch (SQLException ex) { }
+        } catch (SQLException ex) { logger.error(ex);}
         return cityCount == 0;
     }
     
@@ -59,7 +61,7 @@ public class CityDao {
                 city.setName(rs.getString("CITYNAME"));
                 cities.add(city);
             }
-        } catch (SQLException e) {System.out.println(e.getMessage());} 
+        } catch (SQLException e) {logger.error(e);} 
         return cities;
     }
     
@@ -80,6 +82,7 @@ public class CityDao {
                 break;
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return newlyAddedCity;
     }
@@ -91,6 +94,7 @@ public class CityDao {
             connection.stmt.execute(insertCitySQL);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -102,6 +106,7 @@ public class CityDao {
             connection.stmt.execute(updateCitySQL);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -113,6 +118,7 @@ public class CityDao {
             connection.stmt.execute(updateCitySQL);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }

@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -27,6 +28,7 @@ public class LabDao {
 
     ConnectionPool connection;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(LabDao.class);
 
     public LabDao() {
         connection = ConnectionPool.getInstance();
@@ -46,6 +48,7 @@ public class LabDao {
                 labs.add(lab);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return labs;
     }
@@ -64,6 +67,7 @@ public class LabDao {
                 labs.add(lab);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return labs;
     }
@@ -75,7 +79,7 @@ public class LabDao {
             while(rs.next()){
                 labCount = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return labCount == 0;
     }
     
@@ -83,7 +87,10 @@ public class LabDao {
         boolean success = true;
         try {
             connection.stmt.execute("INSERT INTO LAB ( NAME, CITY, CONTACT, ADDRESS, ACTIVEIND) VALUES( '" + lab.getName() + "', '" + lab.getCity() + "', '" + lab.getContact() + "', '" + lab.getAddress() + "', 1)");
-        } catch (SQLException ex) { success = false;}
+        } catch (SQLException ex) { 
+            success = false;
+            logger.error(ex);
+        }
         return success;
     }
     
@@ -94,6 +101,7 @@ public class LabDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -105,6 +113,7 @@ public class LabDao {
             connection.stmt.execute(deleteLabQuery);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -117,6 +126,7 @@ public class LabDao {
                 labId = rs.getInt("LABID");
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return labId;
     }
@@ -128,6 +138,7 @@ public class LabDao {
             connection.stmt.execute(labWorkQuery);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -139,6 +150,7 @@ public class LabDao {
             connection.stmt.execute(labWorkQuery);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -181,7 +193,7 @@ public class LabDao {
                     continue;
                 labWorks.add(labWork);
             }
-        } catch (Exception e) { }
+        } catch (Exception e) { logger.error(e);}
         return labWorks;
     }
     
@@ -207,7 +219,7 @@ public class LabDao {
                 lab.setAddress(rs.getString("ADDRESS"));
                 labWork.setLab(lab);
             }
-        }catch(Exception e){System.out.println(e.getMessage().toString());}
+        }catch(Exception e){logger.error(e);}
         return labWork;
     }
     
@@ -222,6 +234,7 @@ public class LabDao {
                 labWorkNames.add(labWorkName);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return labWorkNames;
     }
@@ -242,6 +255,7 @@ public class LabDao {
                 labWorkNames.add(labWorkName);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return labWorkNames;
     }
@@ -253,7 +267,7 @@ public class LabDao {
             while(rs.next()){
                 labWorkNameCount = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return labWorkNameCount == 0;
     }
     
@@ -263,7 +277,10 @@ public class LabDao {
         try {
             connection.stmt.execute(insertLabWorkNameSQL);
             
-        } catch (SQLException ex) { success = false; }
+        } catch (SQLException ex) { 
+            success = false; 
+            logger.error(ex);
+        }
         return success;
     }
     
@@ -273,7 +290,10 @@ public class LabDao {
         try {
             connection.stmt.execute(updateLabWorkNameSQL);
             
-        } catch (SQLException ex) { success = false; }
+        } catch (SQLException ex) { 
+            success = false; 
+            logger.error(ex);
+        }
         return success;
     }
     
@@ -283,7 +303,10 @@ public class LabDao {
         try {
             connection.stmt.execute(deleteLabWorkNameSQL);
             
-        } catch (SQLException ex) { success = false; }
+        } catch (SQLException ex) { 
+            success = false; 
+            logger.error(ex);
+        }
         return success;
     }
     
@@ -294,7 +317,7 @@ public class LabDao {
             while(rs.next()){
                count = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return count;
     }
 }

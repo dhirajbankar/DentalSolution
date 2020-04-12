@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -21,6 +22,7 @@ import java.util.List;
 public class DoctorDao {
     ConnectionPool connection;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(DoctorDao.class);
     
     public DoctorDao(){
         connection = ConnectionPool.getInstance();
@@ -50,7 +52,7 @@ public class DoctorDao {
                 doctor.setSpecialization(rs.getString("SPECIALIZATION"));
                 doctors.add(doctor);
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return doctors;
     }
     
@@ -81,7 +83,7 @@ public class DoctorDao {
                 doctor.setSpecialization(rs.getString("SPECIALIZATION"));
                 doctors.add(doctor);
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return doctors;
     }
     
@@ -109,7 +111,7 @@ public class DoctorDao {
                 doctor.setSpecialization(rs.getString("SPECIALIZATION"));
                 
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return doctor;
     }
     
@@ -137,7 +139,7 @@ public class DoctorDao {
                 doctor.setSpecialization(rs.getString("SPECIALIZATION"));
                 
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return doctor;
     }
     
@@ -148,7 +150,7 @@ public class DoctorDao {
             while(rs.next()){
                 doctorId = rs.getInt(1);
             }
-        } catch (SQLException ex) { }
+        } catch (SQLException ex) { logger.error(ex);}
         return doctorId;
     }
     
@@ -159,7 +161,7 @@ public class DoctorDao {
             while(rs.next()){
                 totalCount = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return totalCount;
     }
     
@@ -170,7 +172,7 @@ public class DoctorDao {
         if(doctor.getBirthDate() != null && !doctor.getBirthDate().toString().isEmpty()){
         try{
             birthDateStr = "'" + databaseDateFormat.format(doctor.getBirthDate()) + "'";            
-        }catch(Exception e){ } 
+        }catch(Exception e){ logger.error(e);} 
         
         }       
         
@@ -184,7 +186,7 @@ public class DoctorDao {
             if (rs.next()) {
                 doctorId = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
 
         return doctorId;
     }
@@ -204,6 +206,7 @@ public class DoctorDao {
         try {
             connection.stmt.executeUpdate(doctorUpdateQuery);
         } catch (SQLException ex) {
+            logger.error(ex);
             return false;
         }
         return true;
@@ -216,6 +219,7 @@ public class DoctorDao {
             connection.stmt.executeUpdate(deleteDoctorQuery);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -228,7 +232,7 @@ public class DoctorDao {
             while(rs.next()){
                 count = rs.getInt(1);
             }
-        } catch (Exception ex) {System.out.println(ex.getMessage());}
+        } catch (Exception ex) {logger.error(ex);}
         return count == 0;
     }
 }

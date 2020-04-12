@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -23,6 +24,7 @@ public class CheckUpDao {
     ConnectionPool connection;
     PatientsDao patientsDao;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(CheckUpDao.class);
     
     public CheckUpDao(){
         connection = ConnectionPool.getInstance();
@@ -54,6 +56,7 @@ public class CheckUpDao {
                 checkup.setPriscriptions(patientsDao.fetchPriscription(checkupId));
             }
         } catch (Exception e) {
+            logger.error(e);
         }
         return checkup;
     }
@@ -84,6 +87,7 @@ public class CheckUpDao {
                 checkups.add(checkup);
             }
         } catch (Exception e) {
+            logger.error(e);
         }
         return checkups;
     }
@@ -117,6 +121,7 @@ public class CheckUpDao {
                 checkups.add(checkup);
             }
         } catch (Exception e) {
+            logger.error(e);
         }
         return checkups;
     }
@@ -126,7 +131,7 @@ public class CheckUpDao {
         String nextVisitDateStr = null;
         try{
             nextVisitDateStr = "'" + databaseDateFormat.format(checkup.getNextVisitDate()) + "'";
-        }catch(Exception e){ }
+        }catch(Exception e){ logger.error(e);}
                 
         String dateStr = databaseDateFormat.format(checkup.getDate());
         String insertCheckUp = "INSERT INTO CHECKUP(patientId, treatment, dignosis, priscription, fees, consultantingDoctorFee, nextVisitDate, date, dentistName, refferedBy, bp, pulse, weight, activeind) "
@@ -137,7 +142,7 @@ public class CheckUpDao {
             if (rs.next()) {
                 patientTreatmentId = rs.getInt(1);
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return patientTreatmentId;
     }  
     
@@ -146,7 +151,10 @@ public class CheckUpDao {
         try {
             String deleteTreatmentQuery = "UPDATE CHECKUP SET ACTIVEIND = 0 WHERE CHECKUPID = "+checkup.getCheckupId();
             connection.stmt.executeUpdate(deleteTreatmentQuery);            
-        } catch (SQLException ex) { success = false; }
+        } catch (SQLException ex) { 
+            success = false; 
+            logger.error(ex);
+        }
         return success;
     }
     

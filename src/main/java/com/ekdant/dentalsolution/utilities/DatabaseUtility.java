@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -26,6 +27,7 @@ public class DatabaseUtility {
     final private static String USERNAME = "root";
     final private static String PASSWORD = "root";
     final private static String DBTEMPLATEPATH = "/Users/raut.sushant/Downloads/DentalSolution-master/DentalSolution/src/main/java/com/ekdant/dentalsolution/utilities/newSQLTemplate.sql";
+    final static Logger logger = Logger.getLogger(DatabaseUtility.class);
     
     public DatabaseUtility() {
         
@@ -38,25 +40,27 @@ public class DatabaseUtility {
         
             reader = new BufferedReader(new FileReader(DBTEMPLATEPATH));
             sr.runScript(reader);
+            logger.debug("Database Creation completed");
         }catch (FileNotFoundException ex) {
-            System.out.println(ex);
+            logger.error(ex);
         } catch (ClassNotFoundException ex) {
-            System.out.println(ex);
+            logger.error(ex);
         } catch (SQLException ex) {
-            System.out.println(ex);
+            logger.error(ex);
         }
     }
      
     private static boolean tablePresent(String tableName) {
         String result = "";
+        String sql = "SELECT name FROM sqlite_master WHERE type='table' AND name='users'";
         ConnectionPool con = ConnectionPool.getInstance();
-        ResultSet rs = con.getResult("SELECT name FROM sqlite_master WHERE type='table' AND name='users'");
+        ResultSet rs = con.getResult(sql);
         try {
             while(rs.next()){
                 result = rs.getString("name");
             }
         } catch (SQLException ex) {
-            
+            logger.error("The SQL command not work: "+ex+",  SQL past: "+sql);
         }
         return result.equalsIgnoreCase(tableName);
     }

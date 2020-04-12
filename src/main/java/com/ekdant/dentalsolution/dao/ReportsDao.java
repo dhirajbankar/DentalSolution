@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -23,6 +24,7 @@ import java.util.List;
 public class ReportsDao {
     ConnectionPool connection;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(ReportsDao.class);
     public ReportsDao(){
         connection = ConnectionPool.getInstance();
     }
@@ -38,7 +40,7 @@ public class ReportsDao {
                 treatmentReport.setTreatmentName(rs.getString("TREATMENT"));
                 treatmentReports.add(treatmentReport);
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return treatmentReports;
     }
     
@@ -49,13 +51,8 @@ public class ReportsDao {
             while (rs.next()){
                 treatmentYears.add(rs.getInt("YEAR"));
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return treatmentYears;
-    }
-    
-    public static void main(String args []){
-        ReportsDao rd = new ReportsDao();
-        System.out.println(rd.fetchTreatmentYears().toString());
     }
     
     public List<ReferedByReportBean> fetchReferedByReport(Date startDate, Date endDate){
@@ -69,7 +66,7 @@ public class ReportsDao {
                 referedByReport.setReferedBy(rs.getString("REFFEREDBY"));
                 referedByReports.add(referedByReport);
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return referedByReports;
     }
     
@@ -87,7 +84,7 @@ public class ReportsDao {
                 monthlyReport.setConsultingFees(rs.getFloat("CONSULTATIONDOCTORFEES"));
                 monthlyReports.add(monthlyReport);
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return monthlyReports;
     }
     
@@ -103,7 +100,7 @@ public class ReportsDao {
                 monthlyReport.setConsultingFees(rs.getFloat("CONSULTATIONDOCTORFEES"));
                 monthlyReports.add(monthlyReport);
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return monthlyReports;
     }
 }

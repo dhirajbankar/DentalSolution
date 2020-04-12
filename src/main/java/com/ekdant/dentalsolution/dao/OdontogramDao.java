@@ -9,6 +9,7 @@ import com.ekdant.dentalsolution.domain.OdontogramBean;
 import com.ekdant.dentalsolution.utilities.ConnectionPool;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 public class OdontogramDao {
     
     ConnectionPool connection;
+    final static Logger logger = Logger.getLogger(OdontogramDao.class);
     
     public OdontogramDao(){
         connection = ConnectionPool.getInstance();
@@ -63,6 +65,7 @@ public class OdontogramDao {
                 odontogramBean.setOdon38(rs.getString("38_odon"));
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return odontogramBean;
     }
@@ -107,6 +110,7 @@ public class OdontogramDao {
             connection.stmt.execute(odontoInsert);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -152,6 +156,7 @@ public class OdontogramDao {
             connection.stmt.execute(odontoUpdate);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }

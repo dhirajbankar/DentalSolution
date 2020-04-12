@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -22,6 +23,7 @@ import java.util.GregorianCalendar;
 public class ActivationDao {
     ConnectionPool connection;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(ActivationDao.class);
     
     public ActivationDao(){
         connection = ConnectionPool.getInstance();
@@ -37,10 +39,12 @@ public class ActivationDao {
         try {
             startDateStr = "'" + databaseDateFormat.format(activation.getStartDate()) + "'";
         } catch (Exception e) {
+            logger.error("Error Parsing date "+ e);
         }
         try {
             endDateStr = "'" + databaseDateFormat.format(activation.getEndDate()) + "'";
         } catch (Exception e) {
+            logger.error("Error Parsing date "+ e);
         }
         String sql = "INSERT INTO ACTIVATION( ACTIVATIONKEY, ACTIVATIONDATE, STARTDATE, ENDDATE, ACTIVATIONDAYS, ACTIVEIND) VALUES ( '"+activation.getActivationFileKey()+"', '" + databaseDateFormat.format(today) + "', " + startDateStr + ", " + endDateStr + ", " + activation.getActivationDays() + ", 1)";
         try {
@@ -60,7 +64,7 @@ public class ActivationDao {
                     activationPresent = true;
                 }                
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return activationPresent;
     }
 }

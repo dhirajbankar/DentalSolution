@@ -14,8 +14,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +24,7 @@ public class TokensDao {
 
     ConnectionPool connection;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(TokensDao.class);
     
     public TokensDao(){
         connection = ConnectionPool.getInstance();
@@ -38,7 +37,7 @@ public class TokensDao {
             while (rs.next()) {
                 settingValue = rs.getString("VALUE");
             }
-        } catch (SQLException ex) {}
+        } catch (SQLException ex) {logger.error(ex);}
         return settingValue;
     }
 
@@ -47,6 +46,7 @@ public class TokensDao {
             connection.stmt.execute("UPDATE TOKENS SET VALUE = '" + tokenValue + "' WHERE KEYNAME = '" + token + "'");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error while activation", "ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.error(ex);
         }
     }
     
@@ -54,7 +54,7 @@ public class TokensDao {
         String expirationDate = null;
         try {
             expirationDate = AES.decrypt(getTokenByte("K4")).trim();
-        } catch (Exception ex) {System.out.println(ex.getMessage());}
+        } catch (Exception ex) {logger.error(ex);}
         return expirationDate;
     }
     
@@ -62,7 +62,7 @@ public class TokensDao {
         Date currentExpirationDate = new Date();
         try {
             currentExpirationDate = databaseDateFormat.parse(fetchCurrentExpirationDate());
-        } catch (ParseException ex) {System.out.println(ex.getMessage());}
+        } catch (ParseException ex) {logger.error(ex);}
         return currentExpirationDate;
     }
     
@@ -70,7 +70,7 @@ public class TokensDao {
         String expirationDate = "";
         try {
             expirationDate = AES.decrypt(getTokenByte("K1"));
-        } catch (Exception ex) {System.out.println(ex.getMessage());}
+        } catch (Exception ex) {logger.error(ex);}
         return expirationDate.trim();
     }
 
@@ -83,7 +83,7 @@ public class TokensDao {
         String value = null;
         try{
             value = AES.decrypt(getTokenByte(token));
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return value;
     }
 }

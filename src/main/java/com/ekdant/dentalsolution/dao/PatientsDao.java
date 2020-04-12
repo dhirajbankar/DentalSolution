@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -26,6 +27,7 @@ public class PatientsDao {
 
     static ConnectionPool connection;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(PatientsDao.class);
 
     public PatientsDao() {
         connection = ConnectionPool.getInstance();
@@ -39,6 +41,7 @@ public class PatientsDao {
                 patientCount = rs.getInt(1);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return patientCount;
     }
@@ -52,6 +55,7 @@ public class PatientsDao {
         try {
             birthDateStr = "'" + databaseDateFormat.format(patient.getBirthDate()) + "'";
         } catch (Exception e) {
+            logger.error(e);
         }
 
         String patientInsertQuery = "INSERT INTO PATIENTS (NAME,CASEID,BIRTHDAY,GENDER,PHOTO,ADDRESS,CITY,TELEPHONE,MOBILE,EMAIL,AGE,PREMEDICALHISTORY,CREATEDTM,ACTIVEIND) VALUES ('" + patient.getName() + "','" + patient.getCaseId() + "', " + birthDateStr + ",'" + patient.getGender() + "', NULL,'" + patient.getAddress() + "','" + patient.getCity() + "','" + patient.getTelephone() + "','" + patient.getMobile() + "','" + patient.getEmail() + "'," + patient.getAge() + ",'" + patient.getPreMedicalHistory() + "', '" + databaseDateFormat.format(today) + "', 1)";
@@ -63,6 +67,7 @@ public class PatientsDao {
                 patientId = rs.getInt(1);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
 
         return patientId;
@@ -74,6 +79,7 @@ public class PatientsDao {
         try {
             birthDateStr = "'" + databaseDateFormat.format(patient.getBirthDate()) + "'";
         } catch (Exception e) {
+            logger.error(e);
         }
         String patientUpdateQuery = "UPDATE PATIENTS SET NAME = '" + patient.getName() + "', BIRTHDAY = " + birthDateStr + ","
                 + "GENDER  = '" + patient.getGender() + "', PHOTO = NULL, ADDRESS = '" + patient.getAddress() + "', "
@@ -83,6 +89,7 @@ public class PatientsDao {
         try {
             connection.stmt.executeUpdate(patientUpdateQuery);
         } catch (SQLException ex) {
+            logger.error(ex);
             return false;
         }
         return true;
@@ -94,6 +101,7 @@ public class PatientsDao {
         try {
             deleteSuccess = connection.stmt.executeUpdate(deletePatientQuery);
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return deleteSuccess;
     }
@@ -123,6 +131,7 @@ public class PatientsDao {
                 patients.add(patient);
             }
         } catch (Exception e) {
+            logger.error(e);
         }
         return patients;
     }
@@ -148,6 +157,7 @@ public class PatientsDao {
                 patient.setPreMedicalHistory(rs.getString("PREMEDICALHISTORY"));
             }
         } catch (Exception e) {
+            logger.error(e);
         }
         return patient;
     }
@@ -172,6 +182,7 @@ public class PatientsDao {
                 patient.setPreMedicalHistory(rs.getString("PREMEDICALHISTORY"));
             }
         } catch (Exception e) {
+            logger.error(e);
         }
         return patient;
     }
@@ -184,6 +195,7 @@ public class PatientsDao {
                 count = rs.getInt(1);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return count;
     }
@@ -196,6 +208,7 @@ public class PatientsDao {
                 count = rs.getInt(1);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return count;
     }
@@ -216,7 +229,7 @@ public class PatientsDao {
                 priscriptions.add(priscription);
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.error(e);
         }
         return priscriptions;
     }
@@ -228,6 +241,7 @@ public class PatientsDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }

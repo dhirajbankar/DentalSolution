@@ -7,13 +7,10 @@ package com.ekdant.dentalsolution.dao;
 
 import com.ekdant.dentalsolution.domain.SettingsBean;
 import com.ekdant.dentalsolution.utilities.ConnectionPool;
-import com.ekdant.dentalsolution.utilities.Utils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +19,7 @@ import java.util.logging.Logger;
 public class SettingsDao {
     
     ConnectionPool connection;
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(SettingsDao.class);
     
     public SettingsDao(){
         connection = ConnectionPool.getInstance();
@@ -35,8 +33,7 @@ public class SettingsDao {
                 settingValue = rs.getString("VALUE");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
         return settingValue;
     }
@@ -52,7 +49,7 @@ public class SettingsDao {
                 setting.setEditable(rs.getInt("EDITABLE") > 0);
                 settings.add(setting);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return settings;
     }
     
@@ -64,7 +61,7 @@ public class SettingsDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
          
         return success;
@@ -78,7 +75,7 @@ public class SettingsDao {
             while (rs.next()) {
                 mySQLPath = rs.getString(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return mySQLPath;
     }
 }

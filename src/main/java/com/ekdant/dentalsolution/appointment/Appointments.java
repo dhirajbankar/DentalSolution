@@ -649,7 +649,7 @@ public class Appointments extends javax.swing.JFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, patientLbl, patientTxt});
 
-        appointmentTbl.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        appointmentTbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         appointmentTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

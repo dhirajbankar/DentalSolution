@@ -1,6 +1,7 @@
 package com.ekdant.dentalsolution.utilities;
 import java.sql.*;
 import javax.swing.*;
+import org.apache.log4j.Logger;
 /**
  *
  * @author Sushant
@@ -13,6 +14,7 @@ public class ConnectionPool {
     private static ConnectionPool connection;
     private static Connection conn = null;
     public Statement stmt = null;
+    final static Logger logger = Logger.getLogger(ConnectionPool.class);
     
     public static ConnectionPool getInstance(){
         if(connection == null){
@@ -22,12 +24,12 @@ public class ConnectionPool {
                 
                 connection.conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             } catch (ClassNotFoundException ex) {
-                System.out.println(ex.getMessage());
+                logger.error(ex);
             } 
             catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                logger.error(ex);
             }
-            System.out.println("Connected :D"+PropertiesCache.getInstance().getProperty(URL));
+            logger.debug("Connected :D");
         }
         return connection;
     }
@@ -44,9 +46,11 @@ public class ConnectionPool {
         }
         catch(SQLException erroSQL){
              JOptionPane.showMessageDialog(null,"The SQL command not work: "+erroSQL+",  SQL past: "+sql);
+             logger.error("The SQL command not work: "+erroSQL+",  SQL past: "+sql);
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,"The SQL command not work: "+e+",  SQL past: "+sql);
+            logger.error("The SQL command not work: "+e+",  SQL past: "+sql);
         }
         return result;
     }
@@ -59,6 +63,7 @@ public class ConnectionPool {
         }
         catch(SQLException erroSQL){
              JOptionPane.showMessageDialog(null,"The SQL command not work: "+erroSQL+",  SQL past: "+sql);
+             logger.error("The SQL command not work: "+erroSQL+",  SQL past: "+sql);
         }
     }
 }

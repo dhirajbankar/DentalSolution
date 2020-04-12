@@ -108,7 +108,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter Doctor Name","ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        else if(clinicAddressTxt.getText().isEmpty() || clinicAddressTxt.getText().length() < 10){
+        else if(clinicContactTxt.getText().isEmpty() || clinicContactTxt.getText().length() < 10){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter Doctor Mobile Number","ERROR", JOptionPane.ERROR_MESSAGE);
         }

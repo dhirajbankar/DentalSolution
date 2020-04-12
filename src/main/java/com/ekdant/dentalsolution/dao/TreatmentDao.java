@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 public class TreatmentDao {
     
     ConnectionPool connection;
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(TreatmentDao.class);
     public TreatmentDao(){
         connection = ConnectionPool.getInstance();
     }
@@ -36,7 +37,7 @@ public class TreatmentDao {
                 treatment.setTreatmentCharges(rs.getFloat("treatmentCharges"));
                 treatments.add(treatment);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}        
+        } catch (SQLException ex) {logger.error(ex);}        
         return treatments;
     }
     
@@ -57,7 +58,7 @@ public class TreatmentDao {
                 treatment.setTreatmentCharges(rs.getFloat("treatmentCharges"));
                 treatments.add(treatment);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}        
+        } catch (SQLException ex) {logger.error(ex);}        
         return treatments;
     }
     
@@ -68,7 +69,7 @@ public class TreatmentDao {
             while(rs.next()){
                 treatmentId = rs.getInt(1);
             }
-        } catch (SQLException ex) { }
+        } catch (SQLException ex) { logger.error(ex);}
         return treatmentId;
     }
     
@@ -80,7 +81,7 @@ public class TreatmentDao {
             while(rs.next()){
                 treatmentCount = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return treatmentCount == 0;
     }
     
@@ -92,6 +93,7 @@ public class TreatmentDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
          
         return success;
@@ -105,6 +107,7 @@ public class TreatmentDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
          
         return success;
@@ -118,6 +121,7 @@ public class TreatmentDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
          
         return success;
@@ -139,6 +143,7 @@ public class TreatmentDao {
                 break;
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return newlyAddedTreatment;
     }

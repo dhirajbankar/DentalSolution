@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -19,6 +20,7 @@ import javax.swing.JComboBox;
  */
 public class ReferedByDao {
     ConnectionPool connection;
+    final static Logger logger = Logger.getLogger(ReferedByDao.class);
     
     public ReferedByDao(){
         connection = ConnectionPool.getInstance();
@@ -38,7 +40,7 @@ public class ReferedByDao {
                 referedBy.add(refered);
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
         return referedBy;
     }
@@ -61,7 +63,7 @@ public class ReferedByDao {
                 referedBy.add(refered);
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
         return referedBy;
     }
@@ -73,7 +75,7 @@ public class ReferedByDao {
             while(rs.next()){
                 referedByCount = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return referedByCount == 0;
     }
     
@@ -85,7 +87,7 @@ public class ReferedByDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
          
         return success;
@@ -99,7 +101,7 @@ public class ReferedByDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
          
         return success;
@@ -113,7 +115,7 @@ public class ReferedByDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
          
         return success;
@@ -134,7 +136,7 @@ public class ReferedByDao {
                 newlyAddedReferedBy = rs.getString("NAME");
                 break;
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return newlyAddedReferedBy;
     }
     

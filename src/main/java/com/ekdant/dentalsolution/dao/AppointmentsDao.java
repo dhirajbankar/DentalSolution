@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -27,6 +28,7 @@ public class AppointmentsDao {
     
     ConnectionPool connection;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(AppointmentsDao.class);
     
     public AppointmentsDao(){
         connection = ConnectionPool.getInstance();
@@ -45,7 +47,7 @@ public class AppointmentsDao {
                 timeslot.setEndTime(rs.getString("END_TIME").substring(0, 5));
                 timeslots.add(timeslot);
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return timeslots;
     }
     
@@ -56,7 +58,7 @@ public class AppointmentsDao {
             while(rs.next()){
                 startDate = rs.getString(1);
             }
-        } catch (SQLException ex) { }
+        } catch (SQLException ex) { logger.error(ex);}
         return startDate;
     }
     
@@ -67,7 +69,7 @@ public class AppointmentsDao {
             while(rs.next()){
                 status = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return status;
     }
     
@@ -75,7 +77,10 @@ public class AppointmentsDao {
         boolean success = true;
         try {
             connection.stmt.execute("INSERT INTO APPOINTMENTS( DATE, SLOTID, PATIENTID, DOCTORID, TREATMENTID, COMMENTS, STATUS, ACTIVEIND) VALUES (  '"+databaseDateFormat.format(appointment.getAppointmentDate())+"', "+appointment.getSlotId()+", "+appointment.getPatient().getPatientId()+", "+appointment.getDoctor().getDoctorId()+", "+appointment.getTreatment().getTreatmentId()+", '"+appointment.getComment()+"', 1, 1)");
-        } catch (SQLException ex) {success = false;}
+        } catch (SQLException ex) {
+            success = false;
+            logger.error(ex);
+        }
         return success;
     }
     
@@ -120,7 +125,7 @@ public class AppointmentsDao {
                appointment.setPatient(patient);
                appointments.add(appointment);
             }
-        } catch (Exception ex) {System.out.println(ex.getMessage());}
+        } catch (Exception ex) {logger.error(ex);}
         
         return appointments;
     }
@@ -131,7 +136,10 @@ public class AppointmentsDao {
         
         try {
             connection.stmt.executeUpdate(sql);
-        }catch(Exception e){ success = false; }
+        }catch(Exception e){ 
+            success = false; 
+            logger.error(e);
+        }
         
         return success;
     }
@@ -143,7 +151,7 @@ public class AppointmentsDao {
             while(rs.next()){
                count = rs.getInt(1);
             }
-        } catch (SQLException ex) { }
+        } catch (SQLException ex) { logger.error(ex);}
         return count;
     }
 }

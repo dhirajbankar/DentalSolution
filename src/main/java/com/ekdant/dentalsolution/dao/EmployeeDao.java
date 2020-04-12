@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -21,6 +22,7 @@ import java.util.List;
 public class EmployeeDao {
     ConnectionPool connection;
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(EmployeeDao.class);
     
     public EmployeeDao(){
         connection = ConnectionPool.getInstance();
@@ -34,6 +36,7 @@ public class EmployeeDao {
                 employeeCount = rs.getInt(1);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return employeeCount;
     }
@@ -44,7 +47,7 @@ public class EmployeeDao {
         String birthDateStr = null;
         try{
             birthDateStr = "'"+databaseDateFormat.format(employee.getBirthDate())+"'";
-        }catch(Exception e){ }
+        }catch(Exception e){ logger.error(e);}
         
         
         String patientInsertQuery = "INSERT INTO EMPLOYEES (NAME,BIRTHDAY,GENDER,PHOTO,ADDRESS,CITY,TELEPHONE,MOBILE,EMAIL,AGE,ACTIVEIND) VALUES ('"+employee.getName()+"',"+birthDateStr+",'"+employee.getGender()+"', NULL,'"+employee.getAddress()+"','"+employee.getCity()+"','"+employee.getTelephone()+"','"+employee.getMobile()+"','"+employee.getEmail()+"',"+employee.getAge()+",1)";
@@ -55,7 +58,7 @@ public class EmployeeDao {
             if (rs.next()) {
                 patientId = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
 
         return patientId;
     }
@@ -65,7 +68,7 @@ public class EmployeeDao {
         String birthDateStr = null;
         try{
             birthDateStr = "'"+databaseDateFormat.format(employee.getBirthDate())+"'";        
-        }catch(Exception e){ }
+        }catch(Exception e){ logger.error(e);}
         String employeeUpdateQuery = "UPDATE EMPLOYEES SET NAME = '"+employee.getName()+"', BIRTHDAY = "+birthDateStr+"," +
                                         "GENDER  = '"+employee.getGender()+"', PHOTO = NULL, ADDRESS = '"+employee.getAddress()+"', " +
                                         "CITY = '"+employee.getCity()+"', TELEPHONE = '"+employee.getTelephone()+"',  EMAIL = '"+employee.getEmail()+"'," +
@@ -74,6 +77,7 @@ public class EmployeeDao {
         try {
             connection.stmt.executeUpdate(employeeUpdateQuery);
         } catch (SQLException ex) {
+            logger.error(ex);
             return false;
         }
         return true;
@@ -86,6 +90,7 @@ public class EmployeeDao {
             connection.stmt.executeUpdate(deleteEmployeeQuery);
         } catch (SQLException ex) {
             deleteSuccess = false;
+            logger.error(ex);
         }
         return deleteSuccess;
     }
@@ -112,7 +117,7 @@ public class EmployeeDao {
                     employee.setBirthDate(databaseDateFormat.parse(rs.getString("BIRTHDAY")));
                 employees.add(employee);
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return employees;
     }
 }

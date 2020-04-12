@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -18,6 +19,7 @@ import java.util.List;
  */
 public class ClinicDao {
     ConnectionPool connection;
+    final static Logger logger = Logger.getLogger(ClinicDao.class);
     
     public ClinicDao(){
         connection = ConnectionPool.getInstance();
@@ -31,7 +33,7 @@ public class ClinicDao {
             while(result.next()){
                 count = result.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return count == 0;
     }
 
@@ -43,6 +45,7 @@ public class ClinicDao {
             connection.stmt.execute(insertCitySQL);
         } catch (SQLException ex) { 
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -57,6 +60,7 @@ public class ClinicDao {
         try {
             connection.stmt.executeUpdate(clinicUpdateQuery);
         } catch (SQLException ex) {
+            logger.error(ex);
             return false;
         }
         return true;
@@ -80,7 +84,7 @@ public class ClinicDao {
                 clinics.add(clinic);
             }
         }
-        catch(SQLException erroSQL){System.out.println(erroSQL.getStackTrace());}
+        catch(SQLException erroSQL){logger.error(erroSQL);}
         return clinics;
     }
 }

@@ -16,8 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
@@ -25,6 +23,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreeSelectionModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -36,12 +35,15 @@ public class DocumentsDao {
     String caseId;
     JTree jTree1;
     String baseLocation = "";
+    final static Logger logger = Logger.getLogger(DocumentsDao.class);
     public DocumentsDao(){
         connection = ConnectionPool.getInstance();
         try {
             String path = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
             baseLocation = path.substring(0, path.lastIndexOf("/")+1) + "Uploads\\";
-        } catch (UnsupportedEncodingException ex) {}
+        } catch (UnsupportedEncodingException ex) {
+            logger.error(ex);
+        }
     }
     
     public List<String> fetchDocumentTypes(){
@@ -51,7 +53,9 @@ public class DocumentsDao {
             while (rs.next()) {                
                 documentTypes.add(rs.getString("DOCUMENTTYPE"));
             }
-        } catch (SQLException e) {} 
+        } catch (SQLException e) {
+            logger.error(e);
+        } 
         return documentTypes;
     }
     
@@ -62,7 +66,7 @@ public class DocumentsDao {
             while(rs.next()){
                 documentTypeCount = rs.getInt(1);
             }
-        } catch (SQLException ex) { }
+        } catch (SQLException ex) { logger.error(ex);}
         return documentTypeCount == 0;
     }
     
@@ -80,7 +84,7 @@ public class DocumentsDao {
                 documentType.setName(rs.getString("DOCUMENTTYPE"));
                 documentTypes.add(documentType);
             }
-        } catch (SQLException e) {} 
+        } catch (SQLException e) {logger.error(e);} 
         return documentTypes;
     }
     
@@ -88,7 +92,10 @@ public class DocumentsDao {
         boolean success = true;
         try {
             connection.stmt.execute("INSERT INTO DOCUMENTTYPE ( DOCUMENTTYPE, ACTIVEIND) VALUES( '" + documentType.getName() + "', 1)");
-        } catch (SQLException ex) { success = false;}
+        } catch (SQLException ex) { 
+            success = false;
+            logger.error(ex);
+        }
         return success;
     }
     
@@ -99,6 +106,7 @@ public class DocumentsDao {
             connection.stmt.execute(updateDocumentTypeSQL);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -110,6 +118,7 @@ public class DocumentsDao {
             connection.stmt.execute(updateDocumentTypeSQL);
         } catch (SQLException ex) {
             success = false;
+            logger.error(ex);
         }
         return success;
     }
@@ -123,6 +132,7 @@ public class DocumentsDao {
                 break;
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return newlyAddedDocumentType;
     }
@@ -155,7 +165,7 @@ public class DocumentsDao {
         if(files != null){
             for (File file : files) {
                 if (file == null) {
-                    System.out.println("NUll directory found ");
+                    logger.debug("NUll directory found ");
                     continue;
                 }
                 if (file.isDirectory()) {
@@ -194,7 +204,7 @@ public class DocumentsDao {
             }else{
                 try {
                     java.awt.Desktop.getDesktop().open(file);
-                } catch (IOException ex) {}
+                } catch (IOException ex) {logger.error(ex);}
             }
         }
     }

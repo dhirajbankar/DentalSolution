@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -19,6 +20,7 @@ import java.util.List;
 public class PreMedicalHistoryDao {
     
     ConnectionPool connection;
+    final static Logger logger = Logger.getLogger(PreMedicalHistoryDao.class);
     public PreMedicalHistoryDao(){
         connection = ConnectionPool.getInstance();
     }
@@ -33,7 +35,7 @@ public class PreMedicalHistoryDao {
                 preMedicalHistory.setDiscription(rs.getString("DISCRIPTION"));
                 preMedicalHistorys.add(preMedicalHistory);
             }
-        }catch(SQLException ex){System.out.println(ex.getMessage());}
+        }catch(SQLException ex){logger.error(ex);}
         return preMedicalHistorys;
     }
     
@@ -54,7 +56,7 @@ public class PreMedicalHistoryDao {
                 preMedicalHistory.setDiscription(rs.getString("DISCRIPTION"));
                 preMedicalHistorys.add(preMedicalHistory);
             }
-        }catch(SQLException ex){System.out.println(ex.getMessage());}
+        }catch(SQLException ex){logger.error(ex);}
         return preMedicalHistorys;
     }
     
@@ -65,7 +67,7 @@ public class PreMedicalHistoryDao {
             while(rs.next()){
                 preMedicalHistoryCount = rs.getInt(1);
             }
-        } catch (SQLException ex) {System.out.println(ex.getMessage());}
+        } catch (SQLException ex) {logger.error(ex);}
         return preMedicalHistoryCount == 0;
     }
     
@@ -77,7 +79,7 @@ public class PreMedicalHistoryDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
          
         return success;
@@ -91,7 +93,7 @@ public class PreMedicalHistoryDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
          
         return success;
@@ -105,7 +107,7 @@ public class PreMedicalHistoryDao {
             connection.stmt.execute(sql);
         } catch (SQLException ex) {
             success = false;
-            System.out.println(ex.getMessage());
+            logger.error(ex);
         }
          
         return success;

@@ -26,11 +26,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ButtonModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import org.apache.log4j.Logger;
+
 
 /**
  *
@@ -50,7 +50,8 @@ public class Reports extends javax.swing.JFrame {
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
     String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-
+    final static Logger logger = Logger.getLogger(Reports.class);
+    
     public Reports() {
         patientsDao = new PatientsDao();
         checkUpDao = new CheckUpDao();
@@ -223,7 +224,7 @@ public class Reports extends javax.swing.JFrame {
                     retriveMap.get(treatment.getTreatmentName() + "_" + "December"),
                     retriveMap.get(treatment.getTreatmentName() + "_Total")});
             }
-        } catch (ParseException ex) {}
+        } catch (ParseException ex) {logger.error(ex);}
 
         treatmentReportModel.addRow(new Object[]{"TOTAL",
             retriveMap.get("January_Total"),
@@ -311,7 +312,7 @@ public class Reports extends javax.swing.JFrame {
                     retriveMap.get(referedByName + "_" + "December"),
                     retriveMap.get(referedByName + "_Total")});
             }
-        } catch (ParseException ex) {}
+        } catch (ParseException ex) {logger.error(ex);}
 
         refferedByReportModel.addRow(new Object[]{"TOTAL",
             retriveMap.get("January_Total"),
@@ -389,7 +390,7 @@ public class Reports extends javax.swing.JFrame {
             }
             monthlyReportModel.addRow(new Object[]{"<html><b>Total</b></html>", "", "", totalAmount, totalConsultaionDoctorAmount});
         } catch (ParseException ex) {
-            Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(ex);
         }
     }
 
@@ -428,7 +429,7 @@ public class Reports extends javax.swing.JFrame {
                 }
             }
             yearlyReportModel.addRow(new Object[]{"<html><b>Total</b></html>", "", "", totalAmount, totalConsultationDoctorAmount});
-        } catch (ParseException ex) {}
+        } catch (ParseException ex) {logger.error(ex);}
         loadPIChart();
     }
 
@@ -458,6 +459,7 @@ public class Reports extends javax.swing.JFrame {
             try {
                 dateReport();
             } catch (HeadlessException e) {
+                logger.error(e);
             }
             this.dailyReportPanel.setVisible(true);
             //this.reportBtn.doClick();

@@ -29,6 +29,7 @@ import java.util.List;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -49,6 +50,7 @@ public class ViewPatient extends javax.swing.JFrame {
     PreMedicalHistoryDao preMedicalHistoryDao;
     private boolean newCityAdded;
     DocumentsDao documentsDao;
+    final static Logger logger = Logger.getLogger(ViewPatient.class);
 
     /**
      * Creates new form JF_AlterPatient
@@ -259,6 +261,7 @@ public class ViewPatient extends javax.swing.JFrame {
         boolean success = odontogramDao.updateOdontogram(odontogram);
         if (!success) {
             JOptionPane.showMessageDialog(null, "Could not save data odontogram!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.error("Could not save data odontogram!");
         }
     }
 
@@ -304,10 +307,13 @@ public class ViewPatient extends javax.swing.JFrame {
     private void updatePatientDetails() throws HeadlessException {
         if (nameTxt.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "Please enter patients name!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter patients name!");
         } else if (ageTxt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter age!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter age!");
         } else if (casePaperNumberTxt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter Case Paper Number!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter Case Paper Number!");
         }
 
         PatientBean patient = new PatientBean();
@@ -339,8 +345,10 @@ public class ViewPatient extends javax.swing.JFrame {
 
         if (patientDao.updatePatient(patient)) {
             JOptionPane.showMessageDialog(null, "Patient successfully changed!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+            logger.debug("Patient successfully changed!");
         } else {
             JOptionPane.showMessageDialog(null, "Unable to change patient data!" , "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.error("Unable to change patient data!");
         }
     }
 
@@ -368,6 +376,7 @@ public class ViewPatient extends javax.swing.JFrame {
             if (patient.getPatientId() > 0) {
                 JOptionPane.showMessageDialog(null, "There is already a registered patient with this Case Paper Number!", "Attention", JOptionPane.WARNING_MESSAGE);
                 this.casePaperNumberTxt.requestFocus();
+                logger.debug("There is already a registered patient with this Case Paper Number!");
             }
         }        
     }
@@ -473,11 +482,13 @@ public class ViewPatient extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Please enter valid age!", "Attention", JOptionPane.WARNING_MESSAGE);
                 ageTxt.requestFocus();
+                logger.debug("Please enter valid age!");
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "Please enter age!", "Attention", JOptionPane.WARNING_MESSAGE);
             ageTxt.requestFocus();
+            logger.debug("Please enter age!");
         }
     }
     
@@ -485,6 +496,7 @@ public class ViewPatient extends javax.swing.JFrame {
         int selectedTreatmentRow = treatmentHistoryTbl.getSelectedRow();
         if (selectedTreatmentRow == -1) {
             JOptionPane.showMessageDialog(null, "Please Select Treatment to print priscription !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Treatment to print priscription !!");
             return;
         }
         String selectedTreatmentId = treatmentHistoryTbl.getValueAt(selectedTreatmentRow, 6).toString();

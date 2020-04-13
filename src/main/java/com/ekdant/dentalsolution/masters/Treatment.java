@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Treatment extends javax.swing.JDialog {
     TreatmentDao treatmentDao;
     List<TreatmentBean> treatmentList;
     boolean fromOtherFlow;
+    final static Logger logger = Logger.getLogger(Treatment.class);
     /**
      * Creates new form Treatment
      */
@@ -80,6 +82,7 @@ public class Treatment extends javax.swing.JDialog {
                 if (treatmentDao.addTreatment(treatment)) {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("Treatment added successfully!");
+                    logger.debug("Treatment added successfully!");
                     messagePanel.setVisible(true);
                     newTreatmentPanel.setVisible(false);
                     searchTxt.setText("");
@@ -87,6 +90,7 @@ public class Treatment extends javax.swing.JDialog {
                 } else {
                     messageLbl.setForeground(Color.red);
                     messageLbl.setText("Error occored while adding treatment!");
+                    logger.error("Error occored while adding treatment!");
                     messagePanel.setVisible(true);
                     newTreatmentPanel.setVisible(false);
                 }                
@@ -94,12 +98,14 @@ public class Treatment extends javax.swing.JDialog {
             else{
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Treatment already present!");
+                logger.debug("Treatment already present!");
                 messagePanel.setVisible(true);
                 newTreatmentPanel.setVisible(false);
             }
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Treatment Name Should not Be Blank!");
+            logger.debug("Treatment Name Should not Be Blank!");
             messagePanel.setVisible(true);
             newTreatmentPanel.setVisible(false);
         }
@@ -128,12 +134,14 @@ public class Treatment extends javax.swing.JDialog {
         if (treatmentDao.updateTreatment(treatment)) {
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Records updated Sucessfully!");
+            logger.debug("Records updated Sucessfully!");
             messagePanel.setVisible(true);
             newTreatmentPanel.setVisible(false);
             populateTreatmentTable(searchTxt.getText());
         } else {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Error while updating ReferedBy");
+            logger.error("Error while updating ReferedBy");
             messagePanel.setVisible(true);
             newTreatmentPanel.setVisible(false);
         }        
@@ -144,6 +152,7 @@ public class Treatment extends javax.swing.JDialog {
         if (selectedRow == -1) {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Please Select Patient to Delete !!");
+            logger.debug("Please Select Patient to Delete !!");
             messagePanel.setVisible(true);
             newTreatmentPanel.setVisible(false);
         } else {
@@ -153,10 +162,12 @@ public class Treatment extends javax.swing.JDialog {
             if (treatmentDao.deleteTreatment(treatment)) {
                 messageLbl.setForeground(Color.blue);
                 messageLbl.setText("Record Deleted Successfully!");
+                logger.debug("Record Deleted Successfully!");
                 populateTreatmentTable(searchTxt.getText());
             } else {
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Error in Deletion!");
+                logger.error("Error in Deletion!");
             }
 
             messagePanel.setVisible(true);

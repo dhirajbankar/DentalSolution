@@ -51,6 +51,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -76,6 +77,7 @@ public class PatientTreatment extends javax.swing.JFrame {
     ClinicDao clinicDao;
     DocumentsDao documentsDao;
     private boolean newReferedByAdded;
+    final static Logger logger = Logger.getLogger(PatientTreatment.class);
     
     /**
      * Creates new form PatientTreatment
@@ -118,7 +120,6 @@ public class PatientTreatment extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(priscriptionNewTbl.columnAtPoint(e.getPoint()) == 5 && priscriptionNewTbl.rowAtPoint(e.getPoint()) >= 0){
                     int row = priscriptionNewTbl.rowAtPoint(e.getPoint());
-                    System.out.print(row);
                     ((DefaultTableModel)priscriptionNewTbl.getModel()).removeRow(row);
                 }
             }
@@ -381,6 +382,7 @@ public class PatientTreatment extends javax.swing.JFrame {
         int selectedTreatmentRow = treatmentHistoryTbl.getSelectedRow();
         if (selectedTreatmentRow == -1) {
             JOptionPane.showMessageDialog(null, "Please Select Treatment to Delete !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Treatment to Delete !!");
             return;
         }
         String selectedTreatmentId = treatmentHistoryTbl.getValueAt(selectedTreatmentRow, 6).toString();
@@ -394,13 +396,16 @@ public class PatientTreatment extends javax.swing.JFrame {
                 checkup.setCheckupId(Integer.parseInt(selectedTreatmentId));
                 if (checkUpDao.deleteCheckup(checkup)) {
                     JOptionPane.showMessageDialog(null, "Treatment deleted successfully!", "Delete!", JOptionPane.INFORMATION_MESSAGE);
+                    logger.debug("Treatment deleted successfully!");
                 }
                 loadHistory();
             }
         } catch (HeadlessException errorSQL) {
             JOptionPane.showMessageDialog(null, "Error in deletion", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.error("Error in deletion");
         } catch (NumberFormatException errorSQL) {
             JOptionPane.showMessageDialog(null, "Error in deletion", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.error("Error in deletion");
         }
     }
 
@@ -408,6 +413,7 @@ public class PatientTreatment extends javax.swing.JFrame {
         int checkupId = 0;
         if(!labWorkCB.getSelectedItem().toString().equalsIgnoreCase("Select") && labCB.getSelectedItem().toString().equalsIgnoreCase("Select")){
             JOptionPane.showMessageDialog(null, "Please select Lab", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please select Lab");
         }else{
             CheckupBean checkup = populateCheckup();
             checkupId = checkUpDao.addCheckup(checkup);
@@ -476,6 +482,7 @@ public class PatientTreatment extends javax.swing.JFrame {
         if (selectedTreatmentRow == -1) {
             patientTreatmentId = 0;
             JOptionPane.showMessageDialog(null, "Please Select Treatment to print priscription !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Treatment to print priscription !!");
             return;
         }
         String selectedTreatmentId = treatmentHistoryTbl.getValueAt(selectedTreatmentRow, 6).toString();

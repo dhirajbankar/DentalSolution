@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -24,6 +25,7 @@ public class ExpenseCategories extends javax.swing.JDialog {
 
     ExpenseDao expenseDao;
     HashMap<Integer,String> expenseCategoriesMap;
+    final static Logger logger = Logger.getLogger(ExpenseCategories.class);
     /**
      * Creates new form ExpenseCategories
      */
@@ -47,16 +49,19 @@ public class ExpenseCategories extends javax.swing.JDialog {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("Expense catagory added successfully!");
                     messagePanel.setVisible(true); 
+                    logger.debug("Expense catagory added successfully!");
                 }
             } else{
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Expense catagory already present!");
                 messagePanel.setVisible(true); 
+                logger.debug("Expense catagory already present!");
             }
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Expense Catagory Should Not Be Empty!");
             messagePanel.setVisible(true); 
+            logger.debug("Expense Catagory Should Not Be Empty!");
         }
         searchTxt.setText("");
         populateExpenseCategoriesTable("");
@@ -105,6 +110,7 @@ public class ExpenseCategories extends javax.swing.JDialog {
                         messageLbl.setForeground(Color.red);
                         messageLbl.setText("Error updating Expense Category!!");
                         messagePanel.setVisible(true);
+                        logger.debug("Error updating Expense Category!!");
                     }
                 }
             }
@@ -113,10 +119,12 @@ public class ExpenseCategories extends javax.swing.JDialog {
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Expense Categories updated successfully!");
             messagePanel.setVisible(true);
+            logger.debug("Expense Categories updated successfully!");
         }else{
              messageLbl.setForeground(Color.blue);
             messageLbl.setText("Nothing to Update!");
             messagePanel.setVisible(true);
+            logger.debug("Nothing to Update!");
         }
         searchTxt.setText("");
         populateExpenseCategoriesTable("");
@@ -131,15 +139,18 @@ public class ExpenseCategories extends javax.swing.JDialog {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("Expense Category Deleted Successfully !");
                     messagePanel.setVisible(true);
+                    logger.debug("Expense Category Deleted Successfully !");
                 } else {
                     messageLbl.setForeground(Color.red);
                     messageLbl.setText("Error Deleting Expense Category!!");
                     messagePanel.setVisible(true);
+                    logger.error("Error Deleting Expense Category!!");
                 }
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("No Category Selected to Delete!");
             messagePanel.setVisible(true);
+            logger.debug("No Category Selected to Delete!");
         }
         searchTxt.setText("");
         populateExpenseCategoriesTable("");

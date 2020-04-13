@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class Settings extends javax.swing.JDialog {
 
     SettingsDao settingsDao;
+    final static Logger logger = Logger.getLogger(Settings.class);
     /**
      * Creates new form Settings
      */
@@ -54,6 +56,7 @@ public class Settings extends javax.swing.JDialog {
                 updateSettings(key, value);
             }
         }
+        logger.debug("Settings updated succesfully");
         JOptionPane.showMessageDialog(null,"Settings updated succesfully","INFO", JOptionPane.INFORMATION_MESSAGE);
     }
 

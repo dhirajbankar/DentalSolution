@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Lab extends javax.swing.JDialog {
     CityDao cityDao;
     LabDao labDao;
     List<LabBean> labList = null;
+    final static Logger logger = Logger.getLogger(Lab.class);
 
     /**
      * Creates new form Lab
@@ -69,6 +71,7 @@ public class Lab extends javax.swing.JDialog {
                 if (labDao.addLab(lab)) {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("Lab added successfully!");
+                    logger.debug("Lab added successfully!");
                     newLabPanel.setVisible(false);
                     messagePanel.setVisible(true);
                     newLabPanel.setVisible(false);
@@ -77,6 +80,7 @@ public class Lab extends javax.swing.JDialog {
                 } else {
                     messageLbl.setForeground(Color.red);
                     messageLbl.setText("Error occored while adding lab!");
+                    logger.error("Error occored while adding lab!");
                     messagePanel.setVisible(true);
                     newLabPanel.setVisible(false);
                 }
@@ -85,12 +89,14 @@ public class Lab extends javax.swing.JDialog {
                 messageLbl.setText("Lab already present!");
                 messagePanel.setVisible(true);
                 newLabPanel.setVisible(false);
+                logger.debug("Lab already present!");
             }
         } else {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Lab Name Should Not Be Empty!");
             messagePanel.setVisible(true);
             newLabPanel.setVisible(false);
+            logger.debug("Lab Name Should Not Be Empty!");
         }
     }
 
@@ -124,12 +130,14 @@ public class Lab extends javax.swing.JDialog {
         if (labDao.updateLab(lab)) {
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Records updated Sucessfully!");
+            logger.debug("Records updated Sucessfully!");
             messagePanel.setVisible(true);
             newLabPanel.setVisible(false);
             populateLabTable(searchTxt.getText());
         } else {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Error while updating lab");
+            logger.error("Error while updating lab");
             messagePanel.setVisible(true);
             newLabPanel.setVisible(false);
         }        
@@ -142,6 +150,7 @@ public class Lab extends javax.swing.JDialog {
             messageLbl.setText("Please Select Lab to Delete !!");
             messagePanel.setVisible(true);
             newLabPanel.setVisible(false);
+            logger.debug("Please Select Lab to Delete !!");
         } else {
             String selectedId = labTbl.getValueAt(selectedRow, 0).toString();
             LabBean lab = new LabBean();
@@ -149,10 +158,12 @@ public class Lab extends javax.swing.JDialog {
             if (labDao.deleteLab(lab)) {
                 messageLbl.setForeground(Color.blue);
                 messageLbl.setText("Record deleted successfully!");
+                logger.debug("Record deleted successfully!");
                 populateLabTable(searchTxt.getText());
             } else {
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Error in deletion!");
+                logger.error("Error in deletion!");
             }
             messagePanel.setVisible(true);
             newLabPanel.setVisible(false);

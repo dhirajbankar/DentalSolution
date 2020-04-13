@@ -25,10 +25,8 @@ import com.ekdant.dentalsolution.masters.Treatment;
 import com.ekdant.dentalsolution.reports.Reports;
 import com.ekdant.dentalsolution.utilities.*;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -49,6 +47,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
+import org.apache.log4j.Logger;
 /**
  *
  * @author Sushant
@@ -74,6 +73,7 @@ public class Principal extends javax.swing.JFrame {
     private static final String databaseFile = "ConvertedEkdant.sqlite";
     
     private final int renewalNotificationDays = 15;
+    final static Logger logger = Logger.getLogger(Principal.class);
     
     /** Creates new form JF_Principal
      * @param loginUser
@@ -96,7 +96,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             String path = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
             baseLocation = path.substring(0, path.lastIndexOf("/")+1);
-        } catch (UnsupportedEncodingException ex) {}
+        } catch (UnsupportedEncodingException ex) {logger.error(ex);}
     }
     
     private void exit() throws HeadlessException {
@@ -117,12 +117,16 @@ public class Principal extends javax.swing.JFrame {
         }
         catch(ClassNotFoundException error) {
             JOptionPane.showMessageDialog(null,"Error matching downloads theme : "+error);
+            logger.error(error);
         } catch (IllegalAccessException error) {
             JOptionPane.showMessageDialog(null,"Error matching downloads theme : "+error);
+            logger.error(error);
         } catch (InstantiationException error) {
             JOptionPane.showMessageDialog(null,"Error matching downloads theme : "+error);
+            logger.error(error);
         } catch (UnsupportedLookAndFeelException error) {
             JOptionPane.showMessageDialog(null,"Error matching downloads theme : "+error);
+            logger.error(error);
         }    
     }
 
@@ -230,13 +234,13 @@ public class Principal extends javax.swing.JFrame {
                     os.write(buffer, 0, length);
                 }
             } catch(Exception e){
-                System.out.println(e);
+                logger.error(e);
             }finally {
                 is.close();
                 os.close();
             }
         }catch(IOException ioe){
-            
+            logger.error(ioe);
         }
     }
 

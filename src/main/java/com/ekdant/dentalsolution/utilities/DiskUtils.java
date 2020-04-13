@@ -17,8 +17,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import org.apache.log4j.Logger;
 
 public class DiskUtils {
+    final static Logger logger = Logger.getLogger(DiskUtils.class);
   private DiskUtils() {  }
 
   public static String getSerialNumber(String drive) {
@@ -45,7 +47,7 @@ public class DiskUtils {
       input.close();
     }
     catch(Exception e){
-        e.printStackTrace();
+        logger.error(e);
     }
     return result.trim().isEmpty() ? getSerialNumber() : result.trim();
   }
@@ -61,6 +63,7 @@ public class DiskUtils {
 		try {
 			process = runtime.exec(new String[] { "/usr/sbin/system_profiler", "SPHardwareDataType" });
 		} catch (IOException e) {
+                        logger.error(e);
 			throw new RuntimeException(e);
 		}
 
@@ -68,9 +71,10 @@ public class DiskUtils {
 		is = process.getInputStream();
 
 		try {
-			os.close();
+                    os.close();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+                    logger.error(e);
+                    throw new RuntimeException(e);
 		}
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -84,27 +88,34 @@ public class DiskUtils {
 				}
 			}
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+                    logger.error(e);
+                    throw new RuntimeException(e);
 		} finally {
 			try {
-				is.close();
+                            is.close();
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+                            logger.error(e);
+                            throw new RuntimeException(e);
 			}
 		}
 
 		if (sn == null) {
-			throw new RuntimeException("Cannot find computer SN");
+                    logger.error("Cannot find computer SN");
+                    throw new RuntimeException("Cannot find computer SN");
 		}
 
 		return sn;
 	}
 
   public static void main(String[] args){
-    String sn = DiskUtils.getSerialNumber("D");
-    System.out.println("Sr Number : "+sn);
-    javax.swing.JOptionPane.showConfirmDialog((java.awt.Component)
-         null, sn, "Serial Number of C:",
-         javax.swing.JOptionPane.DEFAULT_OPTION);
+//    String sn = DiskUtils.getSerialNumber("D");
+//    logger.error("Sr Number : "+sn);
+//    javax.swing.JOptionPane.showConfirmDialog((java.awt.Component)
+//         null, sn, "Serial Number of C:",
+//         javax.swing.JOptionPane.DEFAULT_OPTION);
+
+        logger.debug(PropertiesCache.getInstance().getProperty("db.driver"));
+
+        logger.debug(PropertiesCache.getInstance().getAllPropertyNames());
   }
 }

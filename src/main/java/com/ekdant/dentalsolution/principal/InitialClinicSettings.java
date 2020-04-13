@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -27,6 +28,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
     CityDao cityDao;
     int clinicId = 0;
     int staffId = 0;
+    final static Logger logger = Logger.getLogger(InitialClinicSettings.class);
 
     /**
      * Creates new form initialSettings
@@ -107,22 +109,27 @@ public class InitialClinicSettings extends javax.swing.JFrame {
         if(clinicNameTxt.getText().isEmpty()){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter Doctor Name","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter Doctor Name");
         }
         else if(clinicContactTxt.getText().isEmpty() || clinicContactTxt.getText().length() < 10){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter Doctor Mobile Number","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter Doctor Mobile Number");
         }
         else if(loginIdTxt.getText().isEmpty()){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter valid Login Id","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter valid Login Id");
         }
         else if(passwordPwd.getText().isEmpty()){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter valid Password","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter valid Password");
         }
         else if(!passwordPwd.getText().equalsIgnoreCase(rePasswordPwd.getText())){
             valid = false;
             JOptionPane.showMessageDialog(null,"Password and Re-Entered Password should be same","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Password and Re-Entered Password should be same");
         }
         return valid;
     }

@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -26,6 +27,7 @@ public class ExpenseTracking extends javax.swing.JFrame {
     DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
     ExpenseDao expenseDao;
     Date today = new Date();
+    final static Logger logger = Logger.getLogger(ExpenseTracking.class);
     
     /**
      * Creates new form ExpenseTracking
@@ -61,6 +63,7 @@ public class ExpenseTracking extends javax.swing.JFrame {
             }
             loadExpenseHistory(null);
         } catch (ParseException ex) {
+            logger.error(ex);
             JOptionPane.showMessageDialog(null, "Error while adding expense", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }

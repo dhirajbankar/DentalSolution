@@ -21,6 +21,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -35,7 +36,8 @@ public class LabWorkTracking extends javax.swing.JFrame {
     JMenuItem labWorkSubmittedOption;
     JMenuItem labWorkReceivedOption;
     int rightClickedLabWorkId;
-    LabDao labDao;    
+    LabDao labDao;
+    final static Logger logger = Logger.getLogger(LabWorkTracking.class);    
     
     /**
      * Creates new form ExpenseTracking

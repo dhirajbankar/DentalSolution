@@ -12,6 +12,7 @@ import com.ekdant.dentalsolution.domain.UserBean;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -21,6 +22,7 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     DoctorDao doctorDao;
     UserDao userDao;
+    final static Logger logger = Logger.getLogger(ForgotPassword.class);
     /**
      * Creates new form ForgotPassword
      */

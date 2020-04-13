@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Employees extends javax.swing.JFrame {
     DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
+    final static Logger logger = Logger.getLogger(Employees.class);
     
     /** Creates new form JF_Employees */
     public Employees() {     
@@ -250,6 +252,7 @@ public class Employees extends javax.swing.JFrame {
         int selectedEmployee = this.jTableEmployees.getSelectedRow();
         if(selectedEmployee == -1) {
             JOptionPane.showMessageDialog(null,"Please Select employee to Update !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select employee to Update !!");
             return;
         }
         String employeeId   = this.jTableEmployees.getValueAt(selectedEmployee, 0).toString();
@@ -271,6 +274,7 @@ public class Employees extends javax.swing.JFrame {
         int selectedEmployee = this.jTableEmployees.getSelectedRow();
         if(selectedEmployee == -1) {
             JOptionPane.showMessageDialog(null,"Please Select Employee to Delete !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Employee to Delete !!");
             return;
         }
 
@@ -281,9 +285,11 @@ public class Employees extends javax.swing.JFrame {
             String selectedEmployeeId = this.jTableEmployees.getValueAt(selectedEmployee, 0).toString();
             if (employeeDao.deleteEmployeeById(selectedEmployee)) {
                 JOptionPane.showMessageDialog(null, "Employee deleted successfully!", "Delete!", JOptionPane.INFORMATION_MESSAGE);
+                logger.debug("Employee deleted successfully!");
                 searchEmployee(null);
             } else {
                 JOptionPane.showMessageDialog(null, "Error in deletion", "Error!", JOptionPane.ERROR_MESSAGE);
+                logger.error("Error in deletion");
             }            
         }         
     }//GEN-LAST:event_deleteBtnActionPerformed

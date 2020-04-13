@@ -10,6 +10,7 @@ import javax.swing.*;
 import com.ekdant.dentalsolution.principal.Employees;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 /**
  *
  * @author Sushant
@@ -23,6 +24,7 @@ public class ViewEmployee extends javax.swing.JFrame {
     DateFormat inputDateFormat = new SimpleDateFormat("d MMM, yyyy");
     List<JCheckBox> checkBoxList = new ArrayList<JCheckBox>();
     boolean newCityAdded;
+    final static Logger logger = Logger.getLogger(ViewEmployee.class);
     
     /** Creates new form JF_AlterEmployee
      * @param employeeFrm
@@ -44,7 +46,7 @@ public class ViewEmployee extends javax.swing.JFrame {
         if(!"".equalsIgnoreCase(birthDay)){
             try {
                 birthdayDC.setDate(displayDateFormat.parse(birthDay));
-            } catch (ParseException ex) {System.out.println(ex.getMessage());}
+            } catch (ParseException ex) {logger.error(ex);}
         }
         employeeIdTxt.setText(employeeId);
         nameTxt.setText(name);
@@ -335,8 +337,10 @@ public class ViewEmployee extends javax.swing.JFrame {
         String age = ageTxt.getText();
         if (name.length() < 3) {
             JOptionPane.showMessageDialog(null, "Please enter Employee name!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter Employee name!");
         } else if (age.length() < 1) {
             JOptionPane.showMessageDialog(null, "Please enter age!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter age!");
         } else {
 
             String city = cityCB.getSelectedItem().toString().equalsIgnoreCase("select") ? "" : cityCB.getSelectedItem().toString();
@@ -354,8 +358,10 @@ public class ViewEmployee extends javax.swing.JFrame {
 
             if (employeeDao.updateEmployee(employeeBean)) {
                 JOptionPane.showMessageDialog(null, "Employee successfully changed!", "Joined!", JOptionPane.INFORMATION_MESSAGE);
+                logger.debug("Employee successfully changed!");
             } else {
                 JOptionPane.showMessageDialog(null, "Unable to change employee data!", "Error!", JOptionPane.ERROR_MESSAGE);
+                logger.error("Unable to change employee data!");
             }
 
             this.dispose();

@@ -14,8 +14,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import org.apache.log4j.Logger;
 
 public class DiskUtils {
+    
+  final static Logger logger = Logger.getLogger(DiskUtils.class);
   private DiskUtils() {  }
 
   public static String getSerialNumber(String drive) {
@@ -42,7 +45,7 @@ public class DiskUtils {
       input.close();
     }
     catch(Exception e){
-        e.printStackTrace();
+        logger.error(e);
     }
     return result.trim();
   }

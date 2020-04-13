@@ -10,6 +10,7 @@ import com.ekdant.dentalsolution.dao.SettingsDao;
 import com.ekdant.dentalsolution.domain.SettingsBean;
 import java.io.File;
 import java.net.URLDecoder;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -19,6 +20,7 @@ public class BackupDirectory extends javax.swing.JFrame {
 
     String baseLocation = "";
     SettingsDao settingsDao;
+    final static Logger logger = Logger.getLogger(BackupDirectory.class);
 
     public BackupDirectory() {
         settingsDao = new SettingsDao();
@@ -97,6 +99,7 @@ public class BackupDirectory extends javax.swing.JFrame {
             databaseBackupPath = URLDecoder.decode(file.getPath(), "UTF-8");
             settingsDao.updateSettings(new SettingsBean("DB_PATH", databaseBackupPath));
         } catch (Exception e) {
+            logger.error(e);
         }
         this.dispose();
     }//GEN-LAST:event_documentUploaderFCActionPerformed

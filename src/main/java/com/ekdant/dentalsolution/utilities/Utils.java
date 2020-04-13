@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -27,6 +28,7 @@ import java.util.GregorianCalendar;
 public class Utils {
     static TokensDao tokensDao = new TokensDao();
     private static final DateFormat displayDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+    final static Logger logger = Logger.getLogger(Utils.class);
 
     public static byte[] getByteArray(String string) {
         String str[] = string.split(" ");
@@ -52,6 +54,7 @@ public class Utils {
             String databaseSecret = AES.decrypt(decryptedBytArr);
             demoVersion = !motherboardSN.contains(databaseSecret.trim());
         } catch (Exception ex) {
+            logger.error(ex);
             demoVersion = true;
         }
         return demoVersion;
@@ -67,6 +70,7 @@ public class Utils {
                 activationExpired = true;
             }
         } catch (Exception ex) {
+            logger.error(ex);
             activationExpired = true;
         }
         return activationExpired;
@@ -87,6 +91,7 @@ public class Utils {
                 activationExpiring = true;
             }
         } catch (Exception ex) {
+            logger.error(ex);
             activationExpiring = true;
         }
         return activationExpiring;
@@ -99,7 +104,7 @@ public class Utils {
             String databaseSecret = AES.decrypt(decryptedBytArr);
             Date activationExpirationDate = displayDateFormat.parse(databaseSecret);
             activationRemaining = (int)((activationExpirationDate.getTime() - new Date().getTime()) / (1000*60*60*24));
-        } catch (Exception ex) {}
+        } catch (Exception ex) {logger.error(ex);}
         return activationRemaining;
     }
 
@@ -130,6 +135,7 @@ public class Utils {
             }
             input.close();
         } catch (Exception e) {
+            logger.error(e);
         }
         result = result.trim().isEmpty() ? getSerialNumberForMac().trim() : result.trim();
         return getValidString(formatFileName(result)).trim();
@@ -144,18 +150,20 @@ public class Utils {
 		Runtime runtime = Runtime.getRuntime();
 		Process process = null;
 		try {
-			process = runtime.exec(new String[] { "/usr/sbin/system_profiler", "SPHardwareDataType" });
+                    process = runtime.exec(new String[] { "/usr/sbin/system_profiler", "SPHardwareDataType" });
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+                    logger.error(e);
+                    throw new RuntimeException(e);
 		}
 
 		os = process.getOutputStream();
 		is = process.getInputStream();
 
 		try {
-			os.close();
+                    os.close();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+                    logger.error(e);
+                    throw new RuntimeException(e);
 		}
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -169,17 +177,20 @@ public class Utils {
 				}
 			}
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+                    logger.error(e);
+                    throw new RuntimeException(e);
 		} finally {
 			try {
 				is.close();
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+                            logger.error(e);
+                            throw new RuntimeException(e);
 			}
 		}
 
 		if (sn == null) {
-			throw new RuntimeException("Cannot find computer SN");
+                    logger.error("Cannot find computer SN");
+                    throw new RuntimeException("Cannot find computer SN");
 		}
 
 		return sn;
@@ -192,9 +203,9 @@ public class Utils {
     }
     
     public static void main(String args []) throws Exception{
-        System.out.println("K1:" +  AES.decrypt(tokensDao.getTokenByte("K1")));
-        System.out.println("K2:" +  AES.decrypt(tokensDao.getTokenByte("K2")));
-        System.out.println("K3:" +  AES.decrypt(tokensDao.getTokenByte("K3")));
-        System.out.println("K4:" +  AES.decrypt(tokensDao.getTokenByte("K4")));
+        logger.debug("K1:" +  AES.decrypt(tokensDao.getTokenByte("K1")));
+        logger.debug("K2:" +  AES.decrypt(tokensDao.getTokenByte("K2")));
+        logger.debug("K3:" +  AES.decrypt(tokensDao.getTokenByte("K3")));
+        logger.debug("K4:" +  AES.decrypt(tokensDao.getTokenByte("K4")));
     }
 }

@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -28,6 +29,7 @@ public class UploadDocument extends javax.swing.JFrame {
     DocumentsDao documentsDao;
     PatientsDao patientsDao;
     String baseLocation = "";
+    final static Logger logger = Logger.getLogger(UploadDocument.class);
     
     public UploadDocument(int patientId) {
         try {
@@ -157,7 +159,7 @@ public class UploadDocument extends javax.swing.JFrame {
             }
             in.close();
             out.close();
-        } catch(Exception e){ }
+        } catch(Exception e){ logger.error(e);}
         this.dispose();
     }//GEN-LAST:event_documentUploaderFCActionPerformed
 

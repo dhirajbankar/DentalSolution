@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -24,6 +25,7 @@ public class DocumentType extends javax.swing.JDialog {
     HashMap<Integer,String> documentTypeMap;
     DocumentsDao documentsDao;
     boolean fromOtherFlow = false;
+    final static Logger logger = Logger.getLogger(DocumentType.class);
     /**
      * Creates new form Cities
      */
@@ -54,16 +56,19 @@ public class DocumentType extends javax.swing.JDialog {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("Document Type added successfully!");
                     messagePanel.setVisible(true);
+                    logger.debug("Document Type added successfully!");
                 }
             } else{
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Document Type already present!");
                 messagePanel.setVisible(true);
+                logger.debug("Document Type already present!");
             }
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Document Type Should Not Be Empty!");
             messagePanel.setVisible(true);
+            logger.debug("Document Type Should Not Be Empty!");
         }
         searchTxt.setText("");
         populateDocumentTypeTable("");
@@ -94,8 +99,9 @@ public class DocumentType extends javax.swing.JDialog {
                     documentType.setName(documentTypeTbl.getValueAt(row, 1).toString());
                     if (!documentsDao.updateDocumentType(documentType)) {
                         messageLbl.setForeground(Color.red);
-                        messageLbl.setText("Error updating Cities!!");
+                        messageLbl.setText("Error updating Document Type!!");
                         messagePanel.setVisible(true);
+                        logger.error("Error updating Document Type!!");
                     }else{
                         updateFlag = true;
                     }
@@ -106,10 +112,12 @@ public class DocumentType extends javax.swing.JDialog {
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Document Type updated successfully!");
             messagePanel.setVisible(true);
+            logger.debug("Document Type updated successfully!");
         }else{
              messageLbl.setForeground(Color.blue);
             messageLbl.setText("Nothing to Update!");
             messagePanel.setVisible(true);
+            logger.debug("Nothing to Update!");
         }
         searchTxt.setText("");
         populateDocumentTypeTable("");
@@ -125,15 +133,18 @@ public class DocumentType extends javax.swing.JDialog {
                     messageLbl.setForeground(Color.red);
                     messageLbl.setText("Error Deleting Document Type!!");
                     messagePanel.setVisible(true);
+                    logger.error("Error Deleting Document Type!!");
                 } else {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("Document Type Deleted Successfully !");
                     messagePanel.setVisible(true);
+                    logger.debug("Document Type Deleted Successfully !");
                 }
         }else{
             messageLbl.setForeground(Color.red);
-            messageLbl.setText("No City Selected to Delete!");
+            messageLbl.setText("No Document type Selected to Delete!");
             messagePanel.setVisible(true);
+            logger.debug("No Document type Selected to Delete!");
         }
         searchTxt.setText("");
         populateDocumentTypeTable("");

@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Login extends javax.swing.JFrame {
     UserDao userDao;
     URL iconURL = getClass().getResource("/EkDant/icones/ApplicationIcon.ico");
     ImageIcon icon = new ImageIcon(iconURL);
+    final static Logger logger = Logger.getLogger(Login.class);
 
     /**
      * Creates new form JF_Login
@@ -31,12 +33,16 @@ public class Login extends javax.swing.JFrame {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
             SwingUtilities.updateComponentTreeUI(this);
         } catch (ClassNotFoundException error) {
+            logger.error(error);
             JOptionPane.showMessageDialog(null, "Error matching downloads theme : " + error);
         } catch (IllegalAccessException error) {
+            logger.error(error);
             JOptionPane.showMessageDialog(null, "Error matching downloads theme : " + error);
         } catch (InstantiationException error) {
+            logger.error(error);
             JOptionPane.showMessageDialog(null, "Error matching downloads theme : " + error);
         } catch (UnsupportedLookAndFeelException error) {
+            logger.error(error);
             JOptionPane.showMessageDialog(null, "Error matching downloads theme : " + error);
         }
         initComponents();
@@ -196,8 +202,10 @@ public class Login extends javax.swing.JFrame {
         String user = txtUserId.getText();
         String pass = txtPassword.getText();
         if (user.equals("")) {
+            logger.debug("The user field is blank");
             JOptionPane.showMessageDialog(null, "The user field is blank", "Attention", JOptionPane.WARNING_MESSAGE);
         } else if (pass.equals("")) {
+            logger.debug("The password field is blank");
             JOptionPane.showMessageDialog(null, "The password field is blank", "Attention", JOptionPane.WARNING_MESSAGE);
         } else {
             UserBean loggedinUser = userDao.fetchUser(user, pass);
@@ -205,6 +213,7 @@ public class Login extends javax.swing.JFrame {
                 new Principal(loggedinUser.getName(), loggedinUser.getUserType()).setVisible(true);
                 this.dispose();
             } else {
+                logger.error("User or password invalid. Type it again.");
                 JOptionPane.showMessageDialog(null, "User or password invalid. Type it again.");
             }
         }

@@ -13,6 +13,7 @@ import com.ekdant.dentalsolution.domain.UserBean;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -24,6 +25,7 @@ public class InitialDoctorSettings extends javax.swing.JFrame {
     UserDao userDao;
     int doctorId = 0;
     int userId = 0;
+    final static Logger logger = Logger.getLogger(InitialDoctorSettings.class);
 
     /**
      * Creates new form initialSettings
@@ -93,6 +95,7 @@ public class InitialDoctorSettings extends javax.swing.JFrame {
                 userDao.updateUser(user);
             }
             msgLbl.setText("Data Saved Succefully");
+            logger.debug("Data Saved Succefully");
             msgLbl.setFont(new Font("Vardhana", Font.PLAIN, 12));
             msgLbl.setForeground(new Color(51, 51, 255));
         }
@@ -103,34 +106,42 @@ public class InitialDoctorSettings extends javax.swing.JFrame {
         if(doctorNameTxt.getText().isEmpty()){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter Doctor Name","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter Doctor Name");
         }
         else if(doctorMobileTxt.getText().isEmpty() || doctorMobileTxt.getText().length() < 10){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter Doctor Mobile Number","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter Doctor Mobile Number");
         }
         else if(doctorEmailTxt.getText().isEmpty()){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter Doctor Email ID","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter Doctor Email ID");
         }
         else if(profDegreeTxt.getText().isEmpty()){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter Profetional Degree(s) of Doctor","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter Profetional Degree(s) of Doctor");
         }
         else if(medRegNoTxt.getText().isEmpty()){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter Medical Registration number of Doctor","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter Medical Registration number of Doctor");
         }
         else if(loginIdTxt.getText().isEmpty()){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter valid Login Id","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter valid Login Id");
         }
         else if(passwordPwd.getText().isEmpty()){
             valid = false;
             JOptionPane.showMessageDialog(null,"Please Enter valid Password","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter valid Password");
         }
         else if(!passwordPwd.getText().equalsIgnoreCase(rePasswordPwd.getText())){
             valid = false;
             JOptionPane.showMessageDialog(null,"Password and Re-Entered Password should be same","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Password and Re-Entered Password should be same");
         }
         return valid;
     }

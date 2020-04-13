@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Cities extends javax.swing.JDialog {
     HashMap<Integer,String> cityMap;
     CityDao cityDao;
     boolean fromOtherFlow = false;
+    final static Logger logger = Logger.getLogger(Cities.class);
     /**
      * Creates new form Cities
      */
@@ -54,16 +56,19 @@ public class Cities extends javax.swing.JDialog {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("City added successfully!");
                     messagePanel.setVisible(true);
+                    logger.debug("City added successfully!");
                 }
             } else{
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("City already present!");
                 messagePanel.setVisible(true);
+                logger.debug("City already present!");
             }
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("City Should Not Be Empty!");
             messagePanel.setVisible(true);
+            logger.debug("City Should Not Be Empty!");
         }
         searchTxt.setText("");
         populateCityTable("");
@@ -97,6 +102,7 @@ public class Cities extends javax.swing.JDialog {
                         messageLbl.setForeground(Color.red);
                         messageLbl.setText("Error updating Cities!!");
                         messagePanel.setVisible(true);
+                        logger.error("Error updating Cities!!");
                     }else{
                         updateFlag = true;
                     }
@@ -107,10 +113,12 @@ public class Cities extends javax.swing.JDialog {
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Cities updated successfully!");
             messagePanel.setVisible(true);
+            logger.debug("Cities updated successfully!");
         }else{
-             messageLbl.setForeground(Color.blue);
+            messageLbl.setForeground(Color.blue);
             messageLbl.setText("Nothing to Update!");
             messagePanel.setVisible(true);
+            logger.debug("Nothing to Update!");
         }
         searchTxt.setText("");
         populateCityTable("");
@@ -126,15 +134,18 @@ public class Cities extends javax.swing.JDialog {
                     messageLbl.setForeground(Color.red);
                     messageLbl.setText("Error Deleting City!!");
                     messagePanel.setVisible(true);
+                    logger.error("Error Deleting City!!");
                 } else {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("City Deleted Successfully !");
                     messagePanel.setVisible(true);
+                    logger.debug("City Deleted Successfully !");
                 }
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("No City Selected to Delete!");
             messagePanel.setVisible(true);
+            logger.debug("No City Selected to Delete!!");
         }
         searchTxt.setText("");
         populateCityTable("");

@@ -3,6 +3,7 @@ import com.ekdant.dentalsolution.dao.UserDao;
 import com.ekdant.dentalsolution.domain.UserBean;
 import javax.swing.JOptionPane;
 import java.util.List;
+import org.apache.log4j.Logger;
 /**
  *
  * @author Sushant
@@ -11,6 +12,8 @@ public class RegisterUser extends javax.swing.JFrame {
     UserDao userDao;
     List<UserBean> users;
     int selectedUserIndex;
+    final static Logger logger = Logger.getLogger(RegisterUser.class);
+    
     /** Creates new form RegisterUser */
     public RegisterUser() {  
         userDao = new UserDao();
@@ -32,6 +35,7 @@ public class RegisterUser extends javax.swing.JFrame {
             displayUser(users.get(selectedUserIndex));
         }else{
              JOptionPane.showMessageDialog(null,"Could not update records", "Error!", JOptionPane.ERROR_MESSAGE);
+             logger.debug("Could not update records");
         }
     }
 
@@ -273,17 +277,22 @@ public class RegisterUser extends javax.swing.JFrame {
 
         if (name.length() < 3) {
             JOptionPane.showMessageDialog(null, "Please enter your name!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter your name!");
         } else if (userId.length() < 3) {
             JOptionPane.showMessageDialog(null, "Please enter your username!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter your username!");
         } else if (userId.length() > 16) {
             JOptionPane.showMessageDialog(null, "Your username can not be more than 16 characters!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Your username can not be more than 16 characters!");
         } else if (duplicateUser(userId)) {
             JOptionPane.showMessageDialog(null, "The desired username is already taken!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("The desired username is already taken!");
         } else if (password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter your password!", "Attention", JOptionPane.WARNING_MESSAGE);
-
+            logger.debug("Please enter your password!");
         } else if (password.length() > 8) {
             JOptionPane.showMessageDialog(null, "Your password can not be more than 8 characters", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Your password can not be more than 8 characters");
         } else {
 
             UserBean user = new UserBean();
@@ -294,9 +303,11 @@ public class RegisterUser extends javax.swing.JFrame {
 
             if (userDao.addUser(user)) {
                 JOptionPane.showMessageDialog(null, "User registered successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                logger.debug("User registered successfully!");
                 populateUser();
             } else {
                 JOptionPane.showMessageDialog(null, "Could not register the user!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                logger.debug("Could not register the user!");
             }
         }
     }//GEN-LAST:event_saveBtnActionPerformed
@@ -311,6 +322,7 @@ public class RegisterUser extends javax.swing.JFrame {
         }
         else{
              JOptionPane.showMessageDialog(null,"Oops! this is the last record!", "Erro!", JOptionPane.ERROR_MESSAGE);
+             logger.debug("Oops! this is the last record!");
         }
     }//GEN-LAST:event_nextBtnActionPerformed
 
@@ -320,6 +332,7 @@ public class RegisterUser extends javax.swing.JFrame {
         }
         else{
              JOptionPane.showMessageDialog(null,"Oops! This is the first record!", "Erro!", JOptionPane.ERROR_MESSAGE);
+             logger.debug("Oops! This is the first record!");
         }
     }//GEN-LAST:event_previousBtnActionPerformed
 
@@ -341,14 +354,19 @@ public class RegisterUser extends javax.swing.JFrame {
 
         if (name.length() < 3) {
             JOptionPane.showMessageDialog(null, "Please enter your name!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter your name!");
         } else if (userName.length() < 3) {
             JOptionPane.showMessageDialog(null, "Please enter your username!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter your username!");
         } else if (userName.length() > 16) {
             JOptionPane.showMessageDialog(null, "Your username can not be more than 16 characters!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Your username can not be more than 16 characters!");
         } else if (password.equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter your password!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter your password!");
         } else if (password.length() > 8) {
             JOptionPane.showMessageDialog(null, "Your password can not be more than 8 characters", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Your password can not be more than 8 characters");
         } else {
             UserBean user = new UserBean();
             user.setLoginId(userId);
@@ -358,9 +376,11 @@ public class RegisterUser extends javax.swing.JFrame {
 
             if (userDao.updateUser(user)) {
                 JOptionPane.showMessageDialog(null, "User successfully updated!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                logger.debug("User successfully updated!");
                 populateUser();
             } else {
                 JOptionPane.showMessageDialog(null, "Could not update user data! , ", "Error!", JOptionPane.ERROR_MESSAGE);
+                logger.error("Could not update user data! , ");
             }
         }        
     }//GEN-LAST:event_updateBtnActionPerformed
@@ -376,9 +396,11 @@ public class RegisterUser extends javax.swing.JFrame {
             user.setUserId(Integer.parseInt(userId));
             if (userDao.deleteUser(user)) {
                 JOptionPane.showMessageDialog(null, "User successfully deleted!", "Delete!", JOptionPane.INFORMATION_MESSAGE);
+                logger.debug("User successfully deleted!");
                 populateUser();
             } else {
                 JOptionPane.showMessageDialog(null, "Unable to delete user!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                logger.error("Unable to delete user!");
             }
         }
     }//GEN-LAST:event_deleteBtnActionPerformed

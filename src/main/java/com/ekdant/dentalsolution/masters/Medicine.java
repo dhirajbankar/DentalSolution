@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Medicine extends javax.swing.JDialog {
 
     MedicineDao medicineDao;
     List<MedicineBean> medicineList;
+    final static Logger logger = Logger.getLogger(Medicine.class);
     /**
      * Creates new form Medicine
      */
@@ -70,10 +72,12 @@ public class Medicine extends javax.swing.JDialog {
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Medicine already present!");
                 messagePanel.setVisible(true);
+                logger.debug("Medicine already present!");
                 newMedicinePanel.setVisible(false);
             } else if (medicineDao.addMedicineIfNotPresent(medicine)) {
                 messageLbl.setForeground(Color.blue);
                 messageLbl.setText("Medicine added successfully!");
+                logger.debug("Medicine added successfully!");
                 messagePanel.setVisible(true);
                 newMedicinePanel.setVisible(false);
                 searchTxt.setText("");
@@ -83,12 +87,14 @@ public class Medicine extends javax.swing.JDialog {
                 messageLbl.setText("Error occored while adding medicine!");
                 messagePanel.setVisible(true);
                 newMedicinePanel.setVisible(false);
+                logger.error("Error occored while adding medicine!");
             }
         } else {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Medicine Name Should Not Be Empty!");
             messagePanel.setVisible(true);
             newMedicinePanel.setVisible(false);
+            logger.debug("Medicine Name Should Not Be Empty!");
         }
     }
         
@@ -112,12 +118,14 @@ public class Medicine extends javax.swing.JDialog {
         if (medicineDao.updateMedicine(medicine)) {
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Records updated Sucessfully!");
+            logger.debug("Records updated Sucessfully!");
             messagePanel.setVisible(true);
             newMedicinePanel.setVisible(false);
             populateMedicineTable(searchTxt.getText());
         } else {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Error while updating Medicine");
+            logger.error("Error while updating Medicine");
             messagePanel.setVisible(true);
             newMedicinePanel.setVisible(false);
         }
@@ -128,6 +136,7 @@ public class Medicine extends javax.swing.JDialog {
         if (selectedRow == -1) {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Please Select Patient to Delete !!");
+            logger.debug("Please Select Patient to Delete !!");
             messagePanel.setVisible(true);
             newMedicinePanel.setVisible(false);
         } else {
@@ -137,10 +146,12 @@ public class Medicine extends javax.swing.JDialog {
             if (medicineDao.deleteMedicine(medicine)) {
                 messageLbl.setForeground(Color.blue);
                 messageLbl.setText("Record Deleted Successfully!");
+                logger.debug("Record Deleted Successfully!");
                 populateMedicineTable(searchTxt.getText());
             } else {
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Error in Deletion!");
+                logger.error("Error in Deletion!");
             }
             messagePanel.setVisible(true);
             newMedicinePanel.setVisible(false);

@@ -16,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -26,6 +27,7 @@ public class Activation extends javax.swing.JFrame {
     ActivationDao activationDao;
     DateFormat displayDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    final static Logger logger = Logger.getLogger(Activation.class);
 
     /**
      * Creates new form activation
@@ -108,7 +110,7 @@ public class Activation extends javax.swing.JFrame {
                     Date startDate = null;
                     try{
                         startDate = displayDateFormat.parse(tokensDao.fetchCurrentExpirationDate());
-                    }catch(Exception e){System.out.println(e.getMessage());}
+                    }catch(Exception e){logger.error(e);}
                     activation.setStartDate(startDate);
                 }
                 
@@ -117,6 +119,7 @@ public class Activation extends javax.swing.JFrame {
                         validActivation = true;
                     }else{
                         JOptionPane.showMessageDialog(null,"Please provide correct activation file","Error", JOptionPane.ERROR_MESSAGE);
+                        logger.error("Please provide correct activation file");
                         break;
                     }
                 }
@@ -125,7 +128,7 @@ public class Activation extends javax.swing.JFrame {
                     int activationDays = 0;
                     try{
                         activationDays = Integer.parseInt(AES.decrypt(Utils.getByteArray(line)).trim());
-                    }catch(Exception e){System.out.println(e.getMessage());}
+                    }catch(Exception e){logger.error(e);}
                     activation.setActivationDays(activationDays);
                     line = updateActivationDate(line);
                 }
@@ -135,12 +138,12 @@ public class Activation extends javax.swing.JFrame {
                 }
                 lineCount++;
             }
-        } catch(Exception e){ }
+        } catch(Exception e){ logger.error(e);}
         if(validActivation){
             Date currentExpirationDate = null;
             try{
                 currentExpirationDate = displayDateFormat.parse(tokensDao.fetchCurrentExpirationDate());
-            }catch(Exception e){System.out.println(e.getMessage());}
+            }catch(Exception e){logger.error(e);}
             activation.setEndDate(currentExpirationDate);
             activationDao.addActivation(activation);
             JOptionPane.showMessageDialog(null,"Activation successful","Info", JOptionPane.INFORMATION_MESSAGE);
@@ -157,7 +160,7 @@ public class Activation extends javax.swing.JFrame {
         String currentActivationDate = tokensDao.getTokenValue("K4");
         try {
             activationDays = Integer.parseInt(AES.decrypt(Utils.getByteArray(str)).trim());
-        } catch (Exception ex) {System.out.println(ex.getMessage());}
+        } catch (Exception ex) {logger.error(ex);}
         try {
             Date today = new Date();
             java.util.Date activationDate = null;
@@ -172,7 +175,7 @@ public class Activation extends javax.swing.JFrame {
             }            
             activationExpirationCal.add(Calendar.DATE, activationDays); 
             currentActivationDate = AES.getEncriptionString(Utils.getValidString(displayDateFormat.format(new Date(activationExpirationCal.getTimeInMillis()))));
-        } catch (Exception ex) {System.out.println(ex.getMessage());}
+        } catch (Exception ex) {logger.error(ex);}
         
         return currentActivationDate;
     }
@@ -183,7 +186,7 @@ public class Activation extends javax.swing.JFrame {
             if(Utils.getMotherboardSN().equals(AES.decrypt(Utils.getByteArray(token)).trim())){
                 success = true;
             }
-        }catch(Exception e){System.out.println(e.getMessage());}
+        }catch(Exception e){logger.error(e);}
         return success;
     }
 

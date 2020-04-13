@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -24,6 +25,7 @@ public class LabWorkName extends javax.swing.JDialog {
 
     LabDao labDao;
     HashMap<Integer,String> labWorkNameMap;
+    final static Logger logger = Logger.getLogger(LabWorkName.class);
     /**
      * Creates new form Cities
      */
@@ -47,15 +49,18 @@ public class LabWorkName extends javax.swing.JDialog {
                 messageLbl.setForeground(Color.blue);
                 messageLbl.setText( "Lab Work Name added successfully!");
                 messagePanel.setVisible(true);
+                logger.debug("Lab Work Name added successfully!");
             } else{
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Lab Work Name already present!");
                 messagePanel.setVisible(true);
+                logger.debug("Lab Work Name already present!");
             }
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Lab Work Name Should Not Be Empty!");
             messagePanel.setVisible(true);
+            logger.debug("Lab Work Name Should Not Be Empty!");
         }
         searchTxt.setText("");
         populateLabWorkNameTable("");
@@ -97,6 +102,7 @@ public class LabWorkName extends javax.swing.JDialog {
                         messageLbl.setForeground(Color.red);
                         messageLbl.setText("Error updating Lab Work Name!!");
                         messagePanel.setVisible(true);
+                        logger.error("Error updating Lab Work Name!!");
                     }
                 }
             }
@@ -105,10 +111,12 @@ public class LabWorkName extends javax.swing.JDialog {
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Lab Work Name updated successfully!");
             messagePanel.setVisible(true);
+            logger.debug("Lab Work Name updated successfully!");
         }else{
              messageLbl.setForeground(Color.blue);
             messageLbl.setText("Nothing to Update!");
             messagePanel.setVisible(true);
+            logger.debug("Nothing to Update!");
         }
         searchTxt.setText("");
         populateLabWorkNameTable("");
@@ -123,16 +131,19 @@ public class LabWorkName extends javax.swing.JDialog {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("Lab Work Name Deleted Successfully !");
                     messagePanel.setVisible(true);
+                    logger.debug("Lab Work Name Deleted Successfully !");
                 } else {
                     messageLbl.setForeground(Color.red);
                     messageLbl.setText("Error Deleting Lab Work Name!!");
                     messagePanel.setVisible(true);
+                    logger.error("Error Deleting Lab Work Name!!");
                 }
    
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("No Lab Work Name Selected to Delete!");
             messagePanel.setVisible(true);
+            logger.debug("No Lab Work Name Selected to Delete!");
         }
         searchTxt.setText("");
         populateLabWorkNameTable("");

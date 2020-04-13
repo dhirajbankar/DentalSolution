@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
+import org.apache.log4j.Logger;
 /**
  *
  * @author Sushant
@@ -26,6 +27,7 @@ public class RegisterDoctor extends javax.swing.JFrame {
     CityDao cityDao;
     DoctorDao doctorDao;
     private boolean newCityAdded;
+    final static Logger logger = Logger.getLogger(RegisterDoctor.class);
     
     /** Creates new form JF_RegisterDoctor
      * @param doctorFrm */
@@ -360,9 +362,11 @@ public class RegisterDoctor extends javax.swing.JFrame {
            
             if(Name.length() < 3){
                 JOptionPane.showMessageDialog(null,"Please enter name!","Attention", JOptionPane.WARNING_MESSAGE);
+                logger.debug("Please enter name!");
             }
             else if(age.length() < 1){
                 JOptionPane.showMessageDialog(null,"Please enter age!","Attention", JOptionPane.WARNING_MESSAGE);
+                logger.debug("Please enter age!");
             }
             else{
                 String city     = citiesCB.getSelectedItem().toString().equalsIgnoreCase("select") ? "" : citiesCB.getSelectedItem().toString();
@@ -414,11 +418,13 @@ public class RegisterDoctor extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Please enter valid age!", "Attention", JOptionPane.WARNING_MESSAGE);
                 ageTxt.requestFocus();
+                logger.debug("Please enter valid age!");
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "Please enter age!", "Attention", JOptionPane.WARNING_MESSAGE);
             ageTxt.requestFocus();
+            logger.debug("Please enter age!");
         }
     }
     

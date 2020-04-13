@@ -13,9 +13,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import org.apache.log4j.Logger;
 /**
  *
  * @author dinesh.mali
@@ -34,6 +32,7 @@ public class PatientBean {
     Date birthDate;
     Date createdDate;
     String preMedicalHistory;
+    final static Logger logger = Logger.getLogger(PatientBean.class);
         
     public int getPatientId() {
         return patientId;
@@ -163,12 +162,12 @@ public class PatientBean {
                     patient.setBirthDate(rs.getDate("BIRTHDAY") != null ? displayDateFormat.parse(displayDateFormat.format(rs.getDate("BIRTHDAY"))) : null);
                     patient.setCreatedDate(rs.getDate("CREATEDTM") != null ? displayDateFormat.parse(displayDateFormat.format(rs.getDate("CREATEDTM"))) : null);
                 } catch (ParseException ex) {
-                    Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.error(ex);
                 }               
             }
         }
         catch(SQLException ex){
-            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(ex);
         }
         return patient;
     }

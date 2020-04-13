@@ -16,6 +16,7 @@ import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Patients extends javax.swing.JFrame {
     public static String logedInUser = null;
     public static String logedInUserType = null;
     PatientsDao patientsDao;
+    final static Logger logger = Logger.getLogger(Patients.class);
 
     /**
      * Creates new form JF_Patients
@@ -93,6 +95,7 @@ public class Patients extends javax.swing.JFrame {
         int selectedPatient = this.jTablePatients.getSelectedRow();
         if (selectedPatient == -1) {
             JOptionPane.showMessageDialog(null, "Please Select Patient to Update !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Patient to Update !!");
         } else {
             String patientId = this.jTablePatients.getValueAt(selectedPatient, 0).toString();
             new ViewPatient(patientId, logedInUserType).setVisible(true);
@@ -103,6 +106,7 @@ public class Patients extends javax.swing.JFrame {
         int selectedPatient = this.jTablePatients.getSelectedRow();
         if (selectedPatient == -1) {
             JOptionPane.showMessageDialog(null, "Please Select Patient to Delete !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Patient to Delete !!");
         } else {
             String selectedPatientId = this.jTablePatients.getValueAt(selectedPatient, 0).toString();
             try {
@@ -115,12 +119,14 @@ public class Patients extends javax.swing.JFrame {
 
                     if (deleteSuccess == 1) {
                         JOptionPane.showMessageDialog(null, "Patient deleted successfully!", "Delete!", JOptionPane.INFORMATION_MESSAGE);
+                        logger.debug("Patient deleted successfully!");
                     }
                     displayPatientCountLabel(patientsDao.getTotalPatientCount());
                     populatePatientJtable(null);
                 }
             } catch (HeadlessException errorSQL) {
                 JOptionPane.showMessageDialog(null, "Error in deletion", "Error!", JOptionPane.ERROR_MESSAGE);
+                logger.error("Error in deletion");
             }
         }
     }
@@ -129,6 +135,7 @@ public class Patients extends javax.swing.JFrame {
         int SelectedRow = this.jTablePatients.getSelectedRow();
         if (SelectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Please Select Patient!!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Patient!!");
         } else {
             String patientId = this.jTablePatients.getValueAt(SelectedRow, 0).toString();
             new PatientTreatment(Integer.parseInt(patientId)).setVisible(true);
@@ -139,6 +146,7 @@ public class Patients extends javax.swing.JFrame {
         int SelectedRow = this.jTablePatients.getSelectedRow();
         if (SelectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Please Select Patient!!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Patient!!");
         } else {
             String patientId = this.jTablePatients.getValueAt(SelectedRow, 0).toString();
             Appointments appointment = Appointments.getInstance(Integer.parseInt(patientId));
@@ -151,6 +159,7 @@ public class Patients extends javax.swing.JFrame {
         int SelectedRow = this.jTablePatients.getSelectedRow();
         if (SelectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Please Select Patient!!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Patient!!");
         } else {
             String patientId = this.jTablePatients.getValueAt(SelectedRow, 0).toString();
             Documents document = Documents.getInstance(Integer.parseInt(patientId));

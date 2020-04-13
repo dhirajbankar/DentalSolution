@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -18,6 +19,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 class Login extends JFrame {
 
+    final static Logger logger = Logger.getLogger(Login.class);
     public Login() {
         
         try {
@@ -25,12 +27,16 @@ class Login extends JFrame {
             SwingUtilities.updateComponentTreeUI(this);
         } catch (ClassNotFoundException error) {
             JOptionPane.showMessageDialog(null, "Error matching downloads theme : " + error);
+            logger.error(error);
         } catch (IllegalAccessException error) {
             JOptionPane.showMessageDialog(null, "Error matching downloads theme : " + error);
+            logger.error(error);
         } catch (InstantiationException error) {
             JOptionPane.showMessageDialog(null, "Error matching downloads theme : " + error);
+            logger.error(error);
         } catch (UnsupportedLookAndFeelException error) {
             JOptionPane.showMessageDialog(null, "Error matching downloads theme : " + error);
+            logger.error(error);
         }
         
     }

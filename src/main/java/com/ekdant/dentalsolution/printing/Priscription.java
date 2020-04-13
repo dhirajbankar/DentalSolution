@@ -23,6 +23,7 @@ import java.awt.print.PrinterJob;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -33,6 +34,7 @@ public class Priscription extends Canvas implements Printable{
     CheckUpDao checkUpDao;
     ClinicDao clinicDao;
     DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
+    final static Logger logger = Logger.getLogger(Priscription.class);
     
     public Priscription(int treatmentId){
         patientTreatmentId = treatmentId;
@@ -120,7 +122,7 @@ public class Priscription extends Canvas implements Printable{
         if (job.printDialog() == true) { 
             try {
                 job.print();
-            } catch (PrinterException ex) {System.out.println(ex.getMessage());}
+            } catch (PrinterException ex) {logger.error(ex);}
         }
     }
     

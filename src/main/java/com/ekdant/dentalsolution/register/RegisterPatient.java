@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import org.apache.log4j.Logger;
 /**
  *
  * @author Sushant
@@ -34,6 +35,7 @@ public class RegisterPatient extends javax.swing.JFrame {
     CityDao cityDao;
     OdontogramDao odontogramDao;
     boolean newCityAdded;
+    final static Logger logger = Logger.getLogger(RegisterPatient.class);
     
     /** Creates new form JF_RegisterPatient
      * @param pacientFrm */
@@ -55,6 +57,7 @@ public class RegisterPatient extends javax.swing.JFrame {
         if(activationRequired()){
             message = "Please Activate License for using this software. Please refer Help";
             saveBtn.setVisible(false);
+            logger.debug("Please Activate License for using this software. Please refer Help");
         }
         licenseMessageLbl.setText(message);
     }
@@ -103,10 +106,13 @@ public class RegisterPatient extends javax.swing.JFrame {
      private void savePatient() throws HeadlessException {
         if (nameTxt.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "Please enter your name!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter your name!");
         } else if (casePaperNumberTxt.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter your Case Paper Number!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter your Case Paper Number!");
         } else if (ageTxt.getText().length() < 1) {
             JOptionPane.showMessageDialog(null, "Please enter age!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter age!");
         }
         
         PatientBean patient = populatePatient();
@@ -192,6 +198,7 @@ public class RegisterPatient extends javax.swing.JFrame {
     private void insertOdontogram(OdontogramBean odontogram) throws HeadlessException {
         if (!odontogramDao.insertOdontogram(odontogram)) {
             JOptionPane.showMessageDialog(null, "Could not save data odontogram!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.error("Could not save data odontogram!");
         }
     }
     
@@ -202,6 +209,7 @@ public class RegisterPatient extends javax.swing.JFrame {
             if (patient.getPatientId() != 0) {
                 JOptionPane.showMessageDialog(null, "There is already a registered patient with this Case Paper Number!", "Attention", JOptionPane.WARNING_MESSAGE);
                 this.casePaperNumberTxt.requestFocus();
+                logger.debug("There is already a registered patient with this Case Paper Number!");
             }
         }
     }
@@ -215,11 +223,13 @@ public class RegisterPatient extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Please enter valid age!", "Attention", JOptionPane.WARNING_MESSAGE);
                 ageTxt.requestFocus();
+                logger.debug("Please enter valid age!");
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "Please enter age!", "Attention", JOptionPane.WARNING_MESSAGE);
             ageTxt.requestFocus();
+            logger.debug("Please enter age!");
         }
     }
     

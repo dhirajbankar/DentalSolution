@@ -7,6 +7,7 @@ package com.ekdant.dentalsolution.principal;
 import com.ekdant.dentalsolution.dao.TokensDao;
 import com.ekdant.dentalsolution.utilities.Activation;
 import com.ekdant.dentalsolution.utilities.Utils;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -15,6 +16,7 @@ import com.ekdant.dentalsolution.utilities.Utils;
 public class About extends javax.swing.JFrame {
 
     TokensDao tokensDao; 
+    final static Logger logger = Logger.getLogger(About.class);
     
     public About() {
         tokensDao = new TokensDao();

@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -26,6 +27,7 @@ public class ReferedBy extends javax.swing.JDialog {
     CityDao cityDao;
     ReferedByDao referedByDao;
     boolean fromOtherFlow;
+    final static Logger logger = Logger.getLogger(ReferedBy.class);
     
     public ReferedBy() {
         referedByDao = new ReferedByDao();
@@ -80,6 +82,7 @@ public class ReferedBy extends javax.swing.JDialog {
                 if (referedByDao.addReferedBy(referedBy)) {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("Refered by added successfully!");
+                    logger.debug("Refered by added successfully!");
                     newReferedByPanel.setVisible(false);
                     messagePanel.setVisible(true);
                     newReferedByPanel.setVisible(false);
@@ -88,18 +91,21 @@ public class ReferedBy extends javax.swing.JDialog {
                 } else {
                     messageLbl.setForeground(Color.red);
                     messageLbl.setText("Error occored while adding refered by!");
+                    logger.error("Error occored while adding refered by!");
                     messagePanel.setVisible(true);
                     newReferedByPanel.setVisible(false);
                 }
             } else {
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Refered by already present!");
+                logger.debug("Refered by already present!");
                 messagePanel.setVisible(true);
                 newReferedByPanel.setVisible(false);
             }
         } else {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Refered by Name Should Not Be Empty!");
+            logger.debug("Refered by Name Should Not Be Empty!");
             messagePanel.setVisible(true);
             newReferedByPanel.setVisible(false);
         }
@@ -138,12 +144,14 @@ public class ReferedBy extends javax.swing.JDialog {
         if (referedByDao.updateReferedBy(refredBy)) {
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Records updated Sucessfully!");
+            logger.debug("Records updated Sucessfully!");
             messagePanel.setVisible(true);
             newReferedByPanel.setVisible(false);
             populateReferedByTable(searchTxt.getText());
         } else {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Error while updating ReferedBy");
+            logger.debug("Error while updating ReferedBy");
             messagePanel.setVisible(true);
             newReferedByPanel.setVisible(false);
         }        
@@ -154,6 +162,7 @@ public class ReferedBy extends javax.swing.JDialog {
         if(selectedRow == -1) {
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Please Select Patient to Delete !!");
+            logger.debug("Please Select Patient to Delete !!");
             messagePanel.setVisible(true);
             newReferedByPanel.setVisible(false);
         }else{
@@ -163,10 +172,12 @@ public class ReferedBy extends javax.swing.JDialog {
             if (referedByDao.deleteReferedBy(referedBy)) {
                 messageLbl.setForeground(Color.blue);
                 messageLbl.setText("Record deleted successfully!");
+                logger.debug("Record deleted successfully!");
                 populateReferedByTable(searchTxt.getText());
             } else {
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Error in deletion!");
+                logger.error("Error in deletion!");
             }
             messagePanel.setVisible(true);
             newReferedByPanel.setVisible(false);          

@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -25,6 +26,7 @@ public class Documents extends javax.swing.JFrame {
     PatientsDao patientsDao;
     DocumentsDao documentsDao;
     private static Documents document = null;
+    final static Logger logger = Logger.getLogger(Documents.class);
     
 
     /**

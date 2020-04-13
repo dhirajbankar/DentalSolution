@@ -8,9 +8,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import com.ekdant.dentalsolution.principal.Doctors;
-import java.awt.Dimension;
 import java.awt.HeadlessException;
-import java.awt.Toolkit;
+import org.apache.log4j.Logger;
 /**
  *
  * @author Sushant
@@ -23,6 +22,7 @@ public class ViewDoctor extends javax.swing.JFrame {
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat inputDateFormat = new SimpleDateFormat("d MMM, yyyy");    
     private boolean newCityAdded;
+    final static Logger logger = Logger.getLogger(ViewDoctor.class);
     
     /** Creates new form JF_AlterDoctor
      * @param doctorFrm 
@@ -433,8 +433,10 @@ public class ViewDoctor extends javax.swing.JFrame {
 
         if (name.length() < 3) {
             JOptionPane.showMessageDialog(null, "Please enter Doctors name!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter Doctors name!");
         } else if (age.length() < 1) {
             JOptionPane.showMessageDialog(null, "Please enter age!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter age!");
         } else {
 
             DoctorBean doctor = new DoctorBean();
@@ -455,6 +457,7 @@ public class ViewDoctor extends javax.swing.JFrame {
 
             if (doctorDao.updateDoctor(doctor)) {
                 JOptionPane.showMessageDialog(null, "Doctor successfully changed!", "Joined!", JOptionPane.INFORMATION_MESSAGE);
+                logger.debug("Doctor successfully changed!");
             }
 
             insertNewCity(city);
@@ -489,11 +492,13 @@ public class ViewDoctor extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Please enter valid age!", "Attention", JOptionPane.WARNING_MESSAGE);
                 ageTxt.requestFocus();
+                logger.debug("Please enter valid age!");
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "Please enter age!", "Attention", JOptionPane.WARNING_MESSAGE);
             ageTxt.requestFocus();
+            logger.debug("Please enter age!");
         }
     }
     

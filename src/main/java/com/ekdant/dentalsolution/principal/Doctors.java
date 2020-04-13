@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Doctors extends javax.swing.JFrame {
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
     int totalDoctorsCount = 0;
+    final static Logger logger = Logger.getLogger(Doctors.class);
     /** Creates new form JF_Doctors */
     public Doctors() {  
         doctorDao = new DoctorDao();
@@ -256,6 +258,7 @@ public class Doctors extends javax.swing.JFrame {
         int selectedDoctor = this.jTableDoctors.getSelectedRow();
         if(selectedDoctor == -1) {
             JOptionPane.showMessageDialog(null,"Please Select Doctor to Update !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Doctor to Update !!");
             return;
         }
         String doctorId    = this.jTableDoctors.getValueAt(selectedDoctor, 0).toString();
@@ -269,6 +272,7 @@ public class Doctors extends javax.swing.JFrame {
         int selectedDoctor = this.jTableDoctors.getSelectedRow();
         if(selectedDoctor == -1) {
             JOptionPane.showMessageDialog(null,"Please Select Doctor to Delete !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select Doctor to Delete !!");
             return;
         }
         String selectedDoctorId = this.jTableDoctors.getValueAt(selectedDoctor, 0).toString();

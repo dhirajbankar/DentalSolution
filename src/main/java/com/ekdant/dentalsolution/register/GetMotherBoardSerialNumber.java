@@ -15,8 +15,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import org.apache.log4j.Logger;
 
 public class GetMotherBoardSerialNumber {
+  final static Logger logger = Logger.getLogger(GetMotherBoardSerialNumber.class);
   private GetMotherBoardSerialNumber() {  }
 
   public static String getMotherboardSN() {
@@ -48,7 +50,7 @@ public class GetMotherBoardSerialNumber {
       input.close();
     }
     catch(Exception e){
-        e.printStackTrace();
+        logger.error(e);
     }
     return result.trim();
   }

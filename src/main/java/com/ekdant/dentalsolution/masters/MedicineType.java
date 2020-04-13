@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -22,6 +23,7 @@ public class MedicineType extends javax.swing.JDialog {
 
     MedicineDao medicineDao;
     List<String> medicineTypeList;
+    final static Logger logger = Logger.getLogger(MedicineType.class);
     /**
      * Creates new form Medicine Type
      */
@@ -56,16 +58,19 @@ public class MedicineType extends javax.swing.JDialog {
                     messageLbl.setForeground(Color.blue);
                     messageLbl.setText("Medicine Type added successfully!!");
                     messagePanel.setVisible(true);
+                    logger.debug("Medicine Type added successfully!!");
                 }
             }
             else{
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Medicine Type already present!");
+                logger.debug("Medicine Type already present!");
                 messagePanel.setVisible(true);
             }
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Medicine Type Should Not Be Empty!");
+            logger.debug("Medicine Type Should Not Be Empty!");
             messagePanel.setVisible(true);
         }
         searchTxt.setText("");
@@ -89,6 +94,7 @@ public class MedicineType extends javax.swing.JDialog {
                         messageLbl.setForeground(Color.red);
                         messageLbl.setText("Error updating Medicine Type!!");
                         messagePanel.setVisible(true);
+                        logger.error("Error updating Medicine Type!!");
                     }
                 }
             }
@@ -96,10 +102,12 @@ public class MedicineType extends javax.swing.JDialog {
         if(updateFlag){
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Medicine Type updated successfully!");
+            logger.debug("Medicine Type updated successfully!");
             messagePanel.setVisible(true);
         }else{
              messageLbl.setForeground(Color.blue);
             messageLbl.setText("Nothing to Update!");
+            logger.debug("Nothing to Update!");
             messagePanel.setVisible(true);
         }
         searchTxt.setText("");
@@ -113,16 +121,19 @@ public class MedicineType extends javax.swing.JDialog {
              if (medicineDao.deleteMedicineType(medicineType)) {
                  messageLbl.setForeground(Color.blue);
                  messageLbl.setText("Medicine Type Deleted Successfully !");
+                 logger.debug("Medicine Type Deleted Successfully !");
                  messagePanel.setVisible(true);
              } else {
                  messageLbl.setForeground(Color.red);
                  messageLbl.setText("Error Deleting Medicine Type!!");
+                 logger.error("Error Deleting Medicine Type!!");
                  messagePanel.setVisible(true);
              }
 
          } else {
              messageLbl.setForeground(Color.red);
              messageLbl.setText("No Medicine Type Selected to Delete!");
+             logger.debug("No Medicine Type Selected to Delete!");
              messagePanel.setVisible(true);
          }
          searchTxt.setText("");

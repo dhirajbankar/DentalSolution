@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -23,6 +24,7 @@ public class PreMedicalHistory extends javax.swing.JDialog {
 
     PreMedicalHistoryDao premedicalHistoryDao;
     HashMap<Integer, String> preMedicalHistoryMap;
+    final static Logger logger = Logger.getLogger(PreMedicalHistory.class);
     /**
      * Creates new form Pre Medical History
      */
@@ -57,16 +59,19 @@ public class PreMedicalHistory extends javax.swing.JDialog {
                 premedicalHistoryDao.addPreMedicalHistory(preMedicalHistory);
                 messageLbl.setForeground(Color.blue);
                 messageLbl.setText("Pre Medical History added successfully!");
+                logger.debug("Pre Medical History added successfully!");
                 messagePanel.setVisible(true);
             }
             else{
                 messageLbl.setForeground(Color.red);
                 messageLbl.setText("Pre Medical History already present!");
+                logger.debug("Pre Medical History already present!");
                 messagePanel.setVisible(true);
             }
         }else{
             messageLbl.setForeground(Color.red);
             messageLbl.setText("Pre Medical History Should not be Empty!");
+            logger.debug("Pre Medical History Should not be Empty!");
             messagePanel.setVisible(true);
         }
         searchTxt.setText("");
@@ -94,6 +99,7 @@ public class PreMedicalHistory extends javax.swing.JDialog {
                     } else {
                         messageLbl.setForeground(Color.red);
                         messageLbl.setText("Error updating Pre Medical History!!");
+                        logger.error("Error updating Pre Medical History!!");
                         messagePanel.setVisible(true);
                     }
                 }
@@ -102,10 +108,12 @@ public class PreMedicalHistory extends javax.swing.JDialog {
         if(updateFlag){
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Pre Medical History updated successfully!");
+            logger.debug("Pre Medical History updated successfully!");
             messagePanel.setVisible(true);
         }else{
             messageLbl.setForeground(Color.blue);
             messageLbl.setText("Nothing to Update!");
+            logger.debug("Nothing to Update!");
             messagePanel.setVisible(true);
         }
         searchTxt.setText("");
@@ -120,16 +128,19 @@ public class PreMedicalHistory extends javax.swing.JDialog {
              if (premedicalHistoryDao.deletePreMedicalHistory(preMedicalHistory)) {
                  messageLbl.setForeground(Color.blue);
                  messageLbl.setText("Pre Medical History Deleted Successfully !");
+                 logger.debug("Pre Medical History Deleted Successfully !");
                  messagePanel.setVisible(true);
              } else {
                  messageLbl.setForeground(Color.red);
                  messageLbl.setText("Error Deleting Pre Medical History!!");
+                 logger.error("Error Deleting Pre Medical History!!");
                  messagePanel.setVisible(true);
              }
 
          } else {
              messageLbl.setForeground(Color.red);
              messageLbl.setText("No Category Selected to Delete!");
+             logger.debug("No Category Selected to Delete!");
              messagePanel.setVisible(true);
          }
          searchTxt.setText("");

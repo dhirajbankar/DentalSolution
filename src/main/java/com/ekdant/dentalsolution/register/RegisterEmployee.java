@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
+import org.apache.log4j.Logger;
 /**
  *
  * @author Sushant
@@ -25,6 +26,7 @@ public class RegisterEmployee extends javax.swing.JFrame {
     List<JCheckBox> checkBoxList = new ArrayList<JCheckBox>();
     CityDao cityDao;
     private boolean newCityAdded;
+    final static Logger logger = Logger.getLogger(RegisterEmployee.class);
     
     /** Creates new form JF_RegisterEmployee
      * @param employeeFrm */
@@ -295,8 +297,10 @@ public class RegisterEmployee extends javax.swing.JFrame {
 
         if (name.length() < 3) {
             JOptionPane.showMessageDialog(null, "Please enter name!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter name!");
         } else if (age.length() < 1) {
             JOptionPane.showMessageDialog(null, "Please enter age!", "Attention", JOptionPane.WARNING_MESSAGE);
+            logger.debug("Please enter age!");
         } else {
 
             EmployeeBean employeeBean = new EmployeeBean();

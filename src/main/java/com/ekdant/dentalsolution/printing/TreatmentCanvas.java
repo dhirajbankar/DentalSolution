@@ -15,6 +15,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -23,6 +24,7 @@ import javax.swing.JPanel;
 public class TreatmentCanvas extends Canvas implements Printable{
     int height;
     int width;
+    final static Logger logger = Logger.getLogger(TreatmentCanvas.class);
        
     public void paint(Graphics g){
         JPanel parent =(JPanel)this.getParent();
@@ -43,7 +45,7 @@ public class TreatmentCanvas extends Canvas implements Printable{
             try{
                 printJob.print();
             }catch(Exception e){
-                System.out.println("Error Printing Treatement Page");
+                logger.error(e);
             }    
         }
         printFrame.dispose();

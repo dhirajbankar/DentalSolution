@@ -11,6 +11,7 @@ import com.ekdant.dentalsolution.dao.ClinicDao;
 import com.ekdant.dentalsolution.domain.CheckupBean;
 import com.ekdant.dentalsolution.domain.ClinicBean;
 import com.ekdant.dentalsolution.domain.PriscriptionBean;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -33,7 +34,7 @@ public class Priscription extends Canvas implements Printable{
     int patientTreatmentId = 0;
     CheckUpDao checkUpDao;
     ClinicDao clinicDao;
-    DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
     final static Logger logger = Logger.getLogger(Priscription.class);
     
     public Priscription(int treatmentId){

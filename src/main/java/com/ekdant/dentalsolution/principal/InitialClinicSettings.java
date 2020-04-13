@@ -11,6 +11,7 @@ import com.ekdant.dentalsolution.dao.ClinicDao;
 import com.ekdant.dentalsolution.dao.UserDao;
 import com.ekdant.dentalsolution.domain.ClinicBean;
 import com.ekdant.dentalsolution.domain.UserBean;
+import com.ekdant.dentalsolution.masters.Cities;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
@@ -28,6 +29,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
     CityDao cityDao;
     int clinicId = 0;
     int staffId = 0;
+    boolean newCityAdded;
     final static Logger logger = Logger.getLogger(InitialClinicSettings.class);
 
     /**
@@ -40,6 +42,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
         initComponents();
         cityDao.getCities(cityCB); 
         populateClinic();
+        newCityAdded = false;
     }
     
     private void populateClinic(){
@@ -103,7 +106,13 @@ public class InitialClinicSettings extends javax.swing.JFrame {
             msgLbl.setForeground(new Color(51, 51, 255));
         }
     }
-    
+    private void loadCities(boolean prePopulateWithLatestCity) {
+        cityDao.getCities(cityCB);
+        if(newCityAdded && prePopulateWithLatestCity){
+            String newlyAddedCity = cityDao.fetchLatestCity();
+            cityCB.setSelectedItem(newlyAddedCity);
+        }
+    }
     private boolean validateForm() {
         boolean valid = true;
         if(clinicNameTxt.getText().isEmpty()){
@@ -197,6 +206,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
         morningEndTimeCB = new javax.swing.JComboBox();
         eveningStartTimeCB = new javax.swing.JComboBox();
         eveningEndTimeCB = new javax.swing.JComboBox();
+        addCityBtn = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         loginIdTxt = new javax.swing.JTextField();
         loginIdLbl = new javax.swing.JLabel();
@@ -213,6 +223,13 @@ public class InitialClinicSettings extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Clinic Details");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         clinicNameLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         clinicNameLbl.setForeground(new java.awt.Color(51, 51, 255));
@@ -251,6 +268,13 @@ public class InitialClinicSettings extends javax.swing.JFrame {
 
         eveningEndTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06:00:00", "06:30:00", "07:00:00", "07:30:00", "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00", "18:00:00", "18:30:00", "19:00:00", "19:30:00", "20:00:00", "20:30:00", "21:00:00", "21:30:00", "22:00:00", "22:30:00", "23:00:00", "23:30:00" }));
 
+        addCityBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/plus-icon.png"))); // NOI18N
+        addCityBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCityBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout doctorDetailsPanelLayout = new javax.swing.GroupLayout(doctorDetailsPanel);
         doctorDetailsPanel.setLayout(doctorDetailsPanelLayout);
         doctorDetailsPanelLayout.setHorizontalGroup(
@@ -274,12 +298,16 @@ public class InitialClinicSettings extends javax.swing.JFrame {
                                 .addGroup(doctorDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(doctorDetailsPanelLayout.createSequentialGroup()
                                         .addGap(20, 20, 20)
-                                        .addGroup(doctorDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(cityCB, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(doctorDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(doctorDetailsPanelLayout.createSequentialGroup()
                                                 .addComponent(morningStartTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(morningEndTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(morningEndTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(doctorDetailsPanelLayout.createSequentialGroup()
+                                                .addComponent(cityCB, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(addCityBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))))
                                     .addGroup(doctorDetailsPanelLayout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(eveningStartTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,7 +321,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
                                 .addGroup(doctorDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(clinicNameTxt)
                                     .addComponent(clinicAddressTxt))))
-                        .addContainerGap(41, Short.MAX_VALUE))))
+                        .addContainerGap(34, Short.MAX_VALUE))))
         );
 
         doctorDetailsPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {clinicAddressLbl, clinicCityLbl, clinicContactLbl, clinicNameLbl, eveningTimeLbl, morningTimeLbl});
@@ -318,9 +346,11 @@ public class InitialClinicSettings extends javax.swing.JFrame {
                     .addComponent(clinicContactLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clinicContactTxt))
                 .addGap(18, 18, 18)
-                .addGroup(doctorDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clinicCityLbl)
-                    .addComponent(cityCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(doctorDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(doctorDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(clinicCityLbl)
+                        .addComponent(cityCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addCityBtn))
                 .addGap(18, 18, 18)
                 .addGroup(doctorDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(doctorDetailsPanelLayout.createSequentialGroup()
@@ -394,7 +424,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staffNameLbl)
-                    .addComponent(staffNameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                    .addComponent(staffNameTxt))
                 .addGap(18, 18, 18)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(loginIdLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -499,8 +529,18 @@ public class InitialClinicSettings extends javax.swing.JFrame {
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         validateAndSaveInformation();
     }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void addCityBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCityBtnActionPerformed
+        newCityAdded = true;
+        new Cities(true).setVisible(true);
+    }//GEN-LAST:event_addCityBtnActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        loadCities(true);
+    }//GEN-LAST:event_formWindowGainedFocus
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCityBtn;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JComboBox cityCB;

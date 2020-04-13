@@ -15,6 +15,7 @@ import com.ekdant.dentalsolution.domain.PreMedicalHistoryBean;
 import com.ekdant.dentalsolution.domain.PriscriptionBean;
 import com.ekdant.dentalsolution.masters.Cities;
 import com.ekdant.dentalsolution.printing.Priscription;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
@@ -37,9 +38,9 @@ import org.apache.log4j.Logger;
  */
 public class ViewPatient extends javax.swing.JFrame {
 
-    DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
+    DateFormat inputDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.inputdate"));
     List<JCheckBox> checkBoxList = new ArrayList<JCheckBox>();
     public String logedInUserType = null;
     PatientsDao patientDao;

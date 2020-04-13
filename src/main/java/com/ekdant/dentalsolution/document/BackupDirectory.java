@@ -8,6 +8,7 @@ package com.ekdant.dentalsolution.document;
 
 import com.ekdant.dentalsolution.dao.SettingsDao;
 import com.ekdant.dentalsolution.domain.SettingsBean;
+import com.ekdant.dentalsolution.principal.EkDant;
 import java.io.File;
 import java.net.URLDecoder;
 import org.apache.log4j.Logger;
@@ -98,6 +99,7 @@ public class BackupDirectory extends javax.swing.JFrame {
             File file = documentUploaderFC.getSelectedFile();
             databaseBackupPath = URLDecoder.decode(file.getPath(), "UTF-8");
             settingsDao.updateSettings(new SettingsBean("DB_PATH", databaseBackupPath));
+            new EkDant();
         } catch (Exception e) {
             logger.error(e);
         }

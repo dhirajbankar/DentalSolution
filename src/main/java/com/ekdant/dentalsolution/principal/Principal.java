@@ -66,9 +66,9 @@ public class Principal extends javax.swing.JFrame {
     Date today = new Date();
     
     Date yesterday = new Date();
-    DateFormat dateFormat = new SimpleDateFormat("E, d MMM yyyy");
-    DateFormat displayDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat dateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.simpledate"));
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
     String baseLocation;
     private static final String databaseFile = PropertiesCache.getInstance().getProperty("db.dbname");
     

@@ -16,7 +16,7 @@ import com.ekdant.dentalsolution.domain.PatientBean;
 import com.ekdant.dentalsolution.domain.TimeslotBean;
 import com.ekdant.dentalsolution.domain.TreatmentBean;
 import com.ekdant.dentalsolution.register.RegisterPatient;
-//import com.sun.java.swing.plaf.windows.WindowsBorders;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -53,8 +53,8 @@ public class Appointments extends javax.swing.JFrame {
 
     Map<String, AppointmentBean> appointmentMap = new HashMap<String, AppointmentBean>();
     Date startDateForAppointment;
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat displayDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
     int selectedSlotId = -1;
     int rightClickedSlotId = -1;
     String rightClickedDate = "";

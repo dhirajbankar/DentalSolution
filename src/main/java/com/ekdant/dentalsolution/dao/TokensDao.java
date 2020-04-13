@@ -7,6 +7,7 @@ package com.ekdant.dentalsolution.dao;
 
 import com.ekdant.dentalsolution.utilities.AES;
 import com.ekdant.dentalsolution.utilities.ConnectionPool;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import com.ekdant.dentalsolution.utilities.Utils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +24,7 @@ import javax.swing.JOptionPane;
 public class TokensDao {
 
     ConnectionPool connection;
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
     final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(TokensDao.class);
     
     public TokensDao(){

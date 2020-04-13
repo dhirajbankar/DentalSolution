@@ -16,6 +16,7 @@ import com.ekdant.dentalsolution.domain.ReferedByBean;
 import com.ekdant.dentalsolution.domain.ReferedByReportBean;
 import com.ekdant.dentalsolution.domain.TreatmentBean;
 import com.ekdant.dentalsolution.domain.TreatmentReportBean;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
@@ -46,9 +47,9 @@ public class Reports extends javax.swing.JFrame {
     TreatmentDao treatmentDao;
     ReportsDao reportsDao;
     ReferedByDao referedByDao;
-    DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
+    DateFormat inputDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.inputdate"));
     String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     final static Logger logger = Logger.getLogger(Reports.class);
     

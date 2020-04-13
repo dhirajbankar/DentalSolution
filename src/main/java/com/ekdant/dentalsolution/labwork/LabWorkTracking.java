@@ -8,6 +8,7 @@ package com.ekdant.dentalsolution.labwork;
 
 import com.ekdant.dentalsolution.dao.LabDao;
 import com.ekdant.dentalsolution.domain.LabWorkBean;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.Color;
@@ -28,9 +29,9 @@ import org.apache.log4j.Logger;
  * @author Sushant
  */
 public class LabWorkTracking extends javax.swing.JFrame {
-    DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
+    DateFormat inputDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.inputdate"));
     JPopupMenu rightClickPopupMenu;
     JMenuItem closeOption;
     JMenuItem labWorkSubmittedOption;

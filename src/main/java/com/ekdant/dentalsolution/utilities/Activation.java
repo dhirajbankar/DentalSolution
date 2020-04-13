@@ -26,7 +26,6 @@ public class Activation extends javax.swing.JFrame {
     TokensDao tokensDao;
     ActivationDao activationDao;
     DateFormat displayDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     final static Logger logger = Logger.getLogger(Activation.class);
 
     /**

@@ -11,6 +11,7 @@ import com.ekdant.dentalsolution.domain.PatientBean;
 import com.ekdant.dentalsolution.domain.TimeslotBean;
 import com.ekdant.dentalsolution.domain.TreatmentBean;
 import com.ekdant.dentalsolution.utilities.ConnectionPool;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -27,7 +28,7 @@ import org.apache.log4j.Logger;
 public class AppointmentsDao {
     
     ConnectionPool connection;
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
     final static Logger logger = Logger.getLogger(AppointmentsDao.class);
     
     public AppointmentsDao(){

@@ -26,9 +26,9 @@ import org.apache.log4j.Logger;
  */
 public class RegisterPatient extends javax.swing.JFrame {
     Patients patient;
-    DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
+    DateFormat inputDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.inputdate"));
     List<JCheckBox> checkBoxList = new ArrayList<JCheckBox>();
     PatientsDao patientsDao;
     PreMedicalHistoryDao preMedicalHistoryDao;

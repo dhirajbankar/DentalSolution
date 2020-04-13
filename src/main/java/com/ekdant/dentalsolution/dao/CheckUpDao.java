@@ -7,6 +7,7 @@ package com.ekdant.dentalsolution.dao;
 
 import com.ekdant.dentalsolution.domain.CheckupBean;
 import com.ekdant.dentalsolution.utilities.ConnectionPool;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -23,7 +24,7 @@ import org.apache.log4j.Logger;
 public class CheckUpDao {
     ConnectionPool connection;
     PatientsDao patientsDao;
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
     final static Logger logger = Logger.getLogger(CheckUpDao.class);
     
     public CheckUpDao(){

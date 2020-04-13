@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import com.ekdant.dentalsolution.principal.Employees;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -19,8 +20,8 @@ public class ViewEmployee extends javax.swing.JFrame {
     Employees employee;
     CityDao cityDao;
     EmployeeDao employeeDao;
-    DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
     DateFormat inputDateFormat = new SimpleDateFormat("d MMM, yyyy");
     List<JCheckBox> checkBoxList = new ArrayList<JCheckBox>();
     boolean newCityAdded;

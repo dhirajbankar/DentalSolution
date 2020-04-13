@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import com.ekdant.dentalsolution.principal.Doctors;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.awt.HeadlessException;
 import org.apache.log4j.Logger;
 /**
@@ -18,8 +19,8 @@ public class ViewDoctor extends javax.swing.JFrame {
     DoctorDao doctorDao;
     Doctors doctorFrm;
     CityDao cityDao;
-    DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
     DateFormat inputDateFormat = new SimpleDateFormat("d MMM, yyyy");    
     private boolean newCityAdded;
     final static Logger logger = Logger.getLogger(ViewDoctor.class);

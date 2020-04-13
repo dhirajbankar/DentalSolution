@@ -7,6 +7,7 @@ package com.ekdant.dentalsolution.dao;
 
 import com.ekdant.dentalsolution.domain.ActivationBean;
 import com.ekdant.dentalsolution.utilities.ConnectionPool;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ import org.apache.log4j.Logger;
  */
 public class ActivationDao {
     ConnectionPool connection;
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
     final static Logger logger = Logger.getLogger(ActivationDao.class);
     
     public ActivationDao(){

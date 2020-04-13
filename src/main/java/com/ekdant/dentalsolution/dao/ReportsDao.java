@@ -9,6 +9,7 @@ import com.ekdant.dentalsolution.domain.MonthlyReportBean;
 import com.ekdant.dentalsolution.domain.ReferedByReportBean;
 import com.ekdant.dentalsolution.domain.TreatmentReportBean;
 import com.ekdant.dentalsolution.utilities.ConnectionPool;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 public class ReportsDao {
     ConnectionPool connection;
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
     final static Logger logger = Logger.getLogger(ReportsDao.class);
     public ReportsDao(){
         connection = ConnectionPool.getInstance();

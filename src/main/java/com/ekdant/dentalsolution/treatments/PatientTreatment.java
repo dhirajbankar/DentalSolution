@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import com.ekdant.dentalsolution.utilities.Java2sAutoTextField;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
@@ -60,7 +61,7 @@ import org.apache.log4j.Logger;
 public class PatientTreatment extends javax.swing.JFrame {
 
     final int patientId;
-    DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
     
     List<String> medicineType = new ArrayList<String>();
     List<String> medicines = new ArrayList<String>();
@@ -298,6 +299,7 @@ public class PatientTreatment extends javax.swing.JFrame {
     private void loadReferedBy() {
         List<ReferedByBean> referedBy = referedByDao.fetchReferedBy();
         reffByCB.removeAllItems();
+        reffByCB.addItem("Select");
         for (ReferedByBean refered : referedBy) {
             reffByCB.addItem(refered.getName());
         }

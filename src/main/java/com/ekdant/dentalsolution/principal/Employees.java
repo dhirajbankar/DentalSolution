@@ -2,6 +2,7 @@ package com.ekdant.dentalsolution.principal;
 import com.ekdant.dentalsolution.dao.EmployeeDao;
 import com.ekdant.dentalsolution.domain.EmployeeBean;
 import com.ekdant.dentalsolution.register.RegisterEmployee;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import com.ekdant.dentalsolution.view.ViewEmployee;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -18,9 +19,9 @@ import org.apache.log4j.Logger;
  */
 public class Employees extends javax.swing.JFrame {
     EmployeeDao employeeDao;
-    DateFormat displayDateFormat = new SimpleDateFormat("d MMM yyyy");
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    DateFormat inputDateFormat = new SimpleDateFormat("MMM d, yyyy");
+    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
+    DateFormat inputDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.inputdate"));
     final static Logger logger = Logger.getLogger(Employees.class);
     
     /** Creates new form JF_Employees */

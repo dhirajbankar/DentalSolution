@@ -8,6 +8,7 @@ package com.ekdant.dentalsolution.dao;
 import com.ekdant.dentalsolution.domain.PatientBean;
 import com.ekdant.dentalsolution.domain.PriscriptionBean;
 import com.ekdant.dentalsolution.utilities.ConnectionPool;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ import org.apache.log4j.Logger;
 public class PatientsDao {
 
     static ConnectionPool connection;
-    DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
     final static Logger logger = Logger.getLogger(PatientsDao.class);
 
     public PatientsDao() {
@@ -152,7 +153,7 @@ public class PatientsDao {
                 patient.setTelephone(rs.getString("TELEPHONE"));
                 patient.setMobile(rs.getString("MOBILE"));
                 patient.setEmail(rs.getString("EMAIL"));
-                if(rs.getString("BIRTHDAY").isEmpty())
+                if(rs.getString("BIRTHDAY") != null && !rs.getString("BIRTHDAY").isEmpty())
                     patient.setBirthDate(databaseDateFormat.parse(rs.getString("BIRTHDAY")));
                 patient.setPreMedicalHistory(rs.getString("PREMEDICALHISTORY"));
             }
@@ -177,7 +178,7 @@ public class PatientsDao {
                 patient.setCity(rs.getString("CITY"));
                 patient.setTelephone(rs.getString("TELEPHONE"));
                 patient.setEmail(rs.getString("EMAIL"));
-                if(rs.getString("BIRTHDAY").isEmpty())
+                if(rs.getString("BIRTHDAY") != null && !rs.getString("BIRTHDAY").isEmpty())
                     patient.setBirthDate(databaseDateFormat.parse(rs.getString("BIRTHDAY")));
                 patient.setPreMedicalHistory(rs.getString("PREMEDICALHISTORY"));
             }

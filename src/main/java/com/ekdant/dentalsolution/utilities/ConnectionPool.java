@@ -7,10 +7,6 @@ import org.apache.log4j.Logger;
  * @author Sushant
  */
 public class ConnectionPool {
-    final private static String DRIVER = "org.sqlite.JDBC"; 
-    final private static String URL = "jdbc:sqlite:DentalSolution.sqlite";
-    final private static String USERNAME = "root";
-    final private static String PASSWORD = "root";
     private static ConnectionPool connection;
     private static Connection conn = null;
     public Statement stmt = null;
@@ -19,10 +15,10 @@ public class ConnectionPool {
     public static ConnectionPool getInstance(){
         if(connection == null){
             try {
-                Class.forName(DRIVER);
+                Class.forName(PropertiesCache.getInstance().getProperty("db.driver"));
                 connection = new ConnectionPool();
                 
-                connection.conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                connection.conn = DriverManager.getConnection(PropertiesCache.getInstance().getProperty("db.url")+PropertiesCache.getInstance().getProperty("db.dbname"), PropertiesCache.getInstance().getProperty("db.username"), PropertiesCache.getInstance().getProperty("db.password"));
             } catch (ClassNotFoundException ex) {
                 logger.error(ex);
             } 

@@ -70,7 +70,7 @@ public class Principal extends javax.swing.JFrame {
     DateFormat displayDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
     DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     String baseLocation;
-    private static final String databaseFile = "ConvertedEkdant.sqlite";
+    private static final String databaseFile = PropertiesCache.getInstance().getProperty("db.dbname");
     
     private final int renewalNotificationDays = 15;
     final static Logger logger = Logger.getLogger(Principal.class);

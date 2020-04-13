@@ -22,23 +22,18 @@ import org.apache.log4j.Logger;
  * @author raut.sushant
  */
 public class DatabaseUtility {
-    final private static String DRIVER = "org.sqlite.JDBC"; 
-    final private static String URL = "jdbc:sqlite:DentalSolution.sqlite";
-    final private static String USERNAME = "root";
-    final private static String PASSWORD = "root";
-    final private static String DBTEMPLATEPATH = "/Users/raut.sushant/Downloads/DentalSolution-master/DentalSolution/src/main/java/com/ekdant/dentalsolution/utilities/newSQLTemplate.sql";
     final static Logger logger = Logger.getLogger(DatabaseUtility.class);
     
     public DatabaseUtility() {
         
         try {
-            Class.forName(DRIVER);
-            Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Class.forName(PropertiesCache.getInstance().getProperty("db.driver"));
+            Connection con = DriverManager.getConnection(PropertiesCache.getInstance().getProperty("db.url")+PropertiesCache.getInstance().getProperty("db.dbname"), PropertiesCache.getInstance().getProperty("db.username"), PropertiesCache.getInstance().getProperty("db.password"));
             Statement st = con.createStatement();
             ScriptRunner sr = new ScriptRunner(con);
             Reader reader;
         
-            reader = new BufferedReader(new FileReader(DBTEMPLATEPATH));
+            reader = new BufferedReader(new FileReader(PropertiesCache.getInstance().getProperty("db.dbtemplatepath")));
             sr.runScript(reader);
             logger.debug("Database Creation completed");
         }catch (FileNotFoundException ex) {

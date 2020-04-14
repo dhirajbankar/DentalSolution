@@ -207,18 +207,18 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="addBtn" linkSize="2" min="-2" pref="133" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="updateBtn" linkSize="2" min="-2" pref="125" max="-2" attributes="0"/>
+                  <Component id="updateBtn" min="-2" pref="133" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="deleteBtn" linkSize="2" min="-2" pref="125" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="treatmentBtn" linkSize="2" min="-2" pref="125" max="-2" attributes="0"/>
+                  <Component id="treatmentBtn" min="-2" pref="133" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="appointmentBtn" linkSize="2" min="-2" pref="125" max="-2" attributes="0"/>
+                  <Component id="appointmentBtn" min="-2" pref="151" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="documentBtn" min="-2" pref="125" max="-2" attributes="0"/>
+                  <Component id="documentBtn" pref="142" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="cancelBtn" linkSize="2" min="-2" pref="125" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

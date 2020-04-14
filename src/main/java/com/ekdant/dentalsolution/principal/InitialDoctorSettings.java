@@ -7,8 +7,10 @@
 package com.ekdant.dentalsolution.principal;
 
 import com.ekdant.dentalsolution.dao.DoctorDao;
+import com.ekdant.dentalsolution.dao.SettingsDao;
 import com.ekdant.dentalsolution.dao.UserDao;
 import com.ekdant.dentalsolution.domain.DoctorBean;
+import com.ekdant.dentalsolution.domain.SettingsBean;
 import com.ekdant.dentalsolution.domain.UserBean;
 import java.awt.Color;
 import java.awt.Font;
@@ -23,6 +25,7 @@ public class InitialDoctorSettings extends javax.swing.JFrame {
     
     DoctorDao doctorDao;
     UserDao userDao;
+    SettingsDao settingsDao;
     int doctorId = 0;
     int userId = 0;
     final static Logger logger = Logger.getLogger(InitialDoctorSettings.class);
@@ -33,6 +36,7 @@ public class InitialDoctorSettings extends javax.swing.JFrame {
     public InitialDoctorSettings() {
         doctorDao = new DoctorDao();
         userDao = new UserDao();
+        settingsDao = new SettingsDao();
         initComponents();
         populateDoctorProfile();
     }
@@ -94,6 +98,12 @@ public class InitialDoctorSettings extends javax.swing.JFrame {
             }else{
                 userDao.updateUser(user);
             }
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_NAME", doctor.getName()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_MOBILE", doctor.getMobile()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_EMAIL", doctor.getEmail()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_PRACTICE", practiceCB.getSelectedItem().toString()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_REGISTRATION_NO", medRegNoTxt.getText()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_DEGREES", profDegreeTxt.getText()));
             msgLbl.setText("Data Saved Succefully");
             logger.debug("Data Saved Succefully");
             msgLbl.setFont(new Font("Vardhana", Font.PLAIN, 12));

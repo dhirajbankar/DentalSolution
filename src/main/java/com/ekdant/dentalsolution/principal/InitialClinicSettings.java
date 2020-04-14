@@ -8,8 +8,10 @@ package com.ekdant.dentalsolution.principal;
 
 import com.ekdant.dentalsolution.dao.CityDao;
 import com.ekdant.dentalsolution.dao.ClinicDao;
+import com.ekdant.dentalsolution.dao.SettingsDao;
 import com.ekdant.dentalsolution.dao.UserDao;
 import com.ekdant.dentalsolution.domain.ClinicBean;
+import com.ekdant.dentalsolution.domain.SettingsBean;
 import com.ekdant.dentalsolution.domain.UserBean;
 import com.ekdant.dentalsolution.masters.Cities;
 import java.awt.Color;
@@ -27,6 +29,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
     ClinicDao clinicDao;
     UserDao userDao;
     CityDao cityDao;
+    SettingsDao settingsDao;
     int clinicId = 0;
     int staffId = 0;
     boolean newCityAdded;
@@ -39,6 +42,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
         userDao = new UserDao();
         clinicDao = new ClinicDao();
         cityDao = new CityDao();
+        settingsDao = new SettingsDao();
         initComponents();
         cityDao.getCities(cityCB); 
         populateClinic();
@@ -100,6 +104,14 @@ public class InitialClinicSettings extends javax.swing.JFrame {
             }else{
                 userDao.updateUser(user);
             }
+            
+            settingsDao.updateSettings(new SettingsBean("CLINIC_NAME", clinicNameTxt.getText()));
+            settingsDao.updateSettings(new SettingsBean("CLINIC_START_TIME", morningStartTimeCB.getSelectedItem().toString()));
+            settingsDao.updateSettings(new SettingsBean("CLINIC_END_TIME", eveningEndTimeCB.getSelectedItem().toString()));
+            settingsDao.updateSettings(new SettingsBean("MORNING_START_TIME", morningStartTimeCB.getSelectedItem().toString()));
+            settingsDao.updateSettings(new SettingsBean("MORNING_END_TIME", morningEndTimeCB.getSelectedItem().toString()));
+            settingsDao.updateSettings(new SettingsBean("EVENING_START_TIME", eveningStartTimeCB.getSelectedItem().toString()));
+            settingsDao.updateSettings(new SettingsBean("EVENING_END_TIME", eveningEndTimeCB.getSelectedItem().toString()));
             
             msgLbl.setText("Data Saved Succefully");
             msgLbl.setFont(new Font("Vardhana", Font.PLAIN, 12));

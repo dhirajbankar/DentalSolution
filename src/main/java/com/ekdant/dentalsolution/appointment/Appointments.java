@@ -39,6 +39,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.plaf.metal.MetalBorders;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
@@ -54,7 +55,7 @@ public class Appointments extends javax.swing.JFrame {
     Map<String, AppointmentBean> appointmentMap = new HashMap<String, AppointmentBean>();
     Date startDateForAppointment;
     DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
-    DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
+    DateFormat displayDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
     int selectedSlotId = -1;
     int rightClickedSlotId = -1;
     String rightClickedDate = "";
@@ -212,7 +213,7 @@ public class Appointments extends javax.swing.JFrame {
                 if (column > 1) {
                     pastSlot = isPastSlot(dates[column - 2], Integer.parseInt(appointmentTbl.getValueAt(row, 0).toString()));
                 }
-                //appointmentLbl.setBorder(new WindowsBorders.ProgressBarBorder(Color.LIGHT_GRAY, Color.lightGray));
+                appointmentLbl.setBorder(new MetalBorders.ButtonBorder());
                 if (pastSlot) {
                     appointmentLbl.setBackground(new Color(225, 225, 225));
                     appointmentLbl.setOpaque(true);
@@ -221,7 +222,7 @@ public class Appointments extends javax.swing.JFrame {
                     appointmentLbl.setText(cellValue);
                     if (column == 1) {
                         appointmentLbl.setBackground(Color.LIGHT_GRAY);
-                        //sappointmentLbl.setBorder(new WindowsBorders.ProgressBarBorder(Color.GRAY, Color.GRAY));
+                        //sappointmentLbl.setBorder(new MetalBorders());
                     } else {
                         int slotId = Integer.parseInt(appointmentTbl.getValueAt(row, 0).toString());
                         String date = dates[column - 2];

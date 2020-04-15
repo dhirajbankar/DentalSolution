@@ -60,16 +60,16 @@ public class Priscription extends Canvas implements Printable{
         int rowXpoint = 0;
         int row = 0;
         for (PriscriptionBean priscription : checkup.getPriscriptions()) {
-            rowXpoint = priscriptionRowStart + 20 + (row++ * 40);
+            rowXpoint = priscriptionRowStart + 35 + (row++ * 35);
             String medicineTypeSelected = priscription.getMedicineType();
             String medicineName = priscription.getMedicineName();
             String medicineStrength = priscription.getMedicineStrength();
             String medicineFrequency = priscription.getFrequency();
             String medicineDuration = priscription.getDuration();
-            g.drawString(medicineTypeSelected == null ? "" : "(" + medicineTypeSelected + ")", 100, rowXpoint);
-            g.drawString(medicineName == null ? "N/A" : medicineName + " " + (medicineStrength == null ? "" : " - " + medicineStrength), 150, rowXpoint);
-            g.drawString(medicineDuration == null ? "N/A" : medicineDuration + " Days", 400, rowXpoint);
-            g.drawString(medicineFrequency == null ? "N/A" : "( " + medicineFrequency + ")", 180, rowXpoint + 15);
+            g.drawString(medicineTypeSelected == null ? "" : "(" + medicineTypeSelected + ")", 90, rowXpoint);
+            g.drawString(medicineName == null ? "N/A" : medicineName + " " + (medicineStrength == null || medicineStrength.isEmpty() ? "" : " - " + medicineStrength), 140, rowXpoint);
+            g.drawString(medicineFrequency == null ? "N/A" : "( " + medicineFrequency + ")", 250, rowXpoint);
+            g.drawString(medicineDuration == null ? "N/A" : medicineDuration + " Days", 440, rowXpoint);
         }
 
         g.drawLine(80, rowXpoint + 20, 500, rowXpoint + 20);

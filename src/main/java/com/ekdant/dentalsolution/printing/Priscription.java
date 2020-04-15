@@ -57,21 +57,23 @@ public class Priscription extends Canvas implements Printable{
 
         g.drawString("Rx - ", 80, priscriptionRowStart);
         g.drawLine(80, priscriptionRowStart + 5, 500, priscriptionRowStart + 5);
-        int rowXpoint = 0;
+        int rowXpoint = priscriptionRowStart + 35;
         int row = 0;
-        for (PriscriptionBean priscription : checkup.getPriscriptions()) {
-            rowXpoint = priscriptionRowStart + 35 + (row++ * 35);
-            String medicineTypeSelected = priscription.getMedicineType();
-            String medicineName = priscription.getMedicineName();
-            String medicineStrength = priscription.getMedicineStrength();
-            String medicineFrequency = priscription.getFrequency();
-            String medicineDuration = priscription.getDuration();
-            g.drawString(medicineTypeSelected == null ? "" : "(" + medicineTypeSelected + ")", 90, rowXpoint);
-            g.drawString(medicineName == null ? "N/A" : medicineName + " " + (medicineStrength == null || medicineStrength.isEmpty() ? "" : " - " + medicineStrength), 140, rowXpoint);
-            g.drawString(medicineFrequency == null ? "N/A" : "( " + medicineFrequency + ")", 250, rowXpoint);
-            g.drawString(medicineDuration == null ? "N/A" : medicineDuration + " Days", 440, rowXpoint);
+        if(checkup.getPriscriptions() != null && !checkup.getPriscriptions().isEmpty()) {
+            for (PriscriptionBean priscription : checkup.getPriscriptions()) {
+                rowXpoint = rowXpoint + (row++ * 35);
+                String medicineTypeSelected = priscription.getMedicineType();
+                String medicineName = priscription.getMedicineName();
+                String medicineStrength = priscription.getMedicineStrength();
+                String medicineFrequency = priscription.getFrequency();
+                String medicineDuration = priscription.getDuration();
+                g.drawString(medicineTypeSelected == null ? "" : "(" + medicineTypeSelected + ")", 90, rowXpoint);
+                g.drawString(medicineName == null ? "N/A" : medicineName + " " + (medicineStrength == null || medicineStrength.isEmpty() ? "" : " - " + medicineStrength), 140, rowXpoint);
+                g.drawString(medicineFrequency == null ? "N/A" : "( " + medicineFrequency + ")", 250, rowXpoint);
+                g.drawString(medicineDuration == null ? "N/A" : medicineDuration + " Days", 440, rowXpoint);
+            }
         }
-
+        
         g.drawLine(80, rowXpoint + 20, 500, rowXpoint + 20);
 
         return PAGE_EXISTS; 

@@ -93,9 +93,19 @@ public class Principal extends javax.swing.JFrame {
         this.logedInUserType = loginUserType;
         initMainPage();        
         LookAndFeel();
+        
         try {
             String path = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
-            baseLocation = path.substring(0, path.lastIndexOf("/")+1);
+            String str = ""; 
+            if(path.contains(".jar"))
+                str = path.substring(0, path.lastIndexOf(".jar"));
+            else
+                str = path.substring(0, path.lastIndexOf("target/classes"));
+            baseLocation = str.substring(0, str.lastIndexOf(File.separator));
+            if(baseLocation.startsWith("file:")){
+                baseLocation = baseLocation.substring(5);
+            }
+            logger.debug("BaseLocation" + baseLocation);
         } catch (UnsupportedEncodingException ex) {logger.error(ex);}
     }
     
@@ -218,16 +228,18 @@ public class Principal extends javax.swing.JFrame {
     }
     
     private void backUp(){
-        String fileName = "ekDantBackup_"+displayDateFormat.format(today)+".sqlite";
+        String fileName = "ekDantBackup_"+databaseDateFormat.format(today)+".sqlite";
         File sourceFile = new File(baseLocation + File.separatorChar + databaseFile);
-        File backupFile1 = new File(settingsDao.getMySQLPath() + File.separatorChar + fileName);
-        
+        File backupFile1 = new File(settingsDao.getMySQLPath() + File.separatorChar + PropertiesCache.getInstance().getProperty("folder.backup"));
+        if(!backupFile1.exists()){
+                backupFile1.mkdirs();
+            }
         InputStream is = null;
         OutputStream os = null;
         try{
             try {
                 is = new FileInputStream(sourceFile);
-                os = new FileOutputStream(backupFile1);
+                os = new FileOutputStream(backupFile1 + File.separator + fileName);
                 byte[] buffer = new byte[1024];
                 int length;
                 while ((length = is.read(buffer)) > 0) {

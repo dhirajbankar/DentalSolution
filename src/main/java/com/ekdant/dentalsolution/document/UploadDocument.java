@@ -7,15 +7,15 @@ package com.ekdant.dentalsolution.document;
 
 import com.ekdant.dentalsolution.dao.DocumentsDao;
 import com.ekdant.dentalsolution.dao.PatientsDao;
+import com.ekdant.dentalsolution.dao.SettingsDao;
 import com.ekdant.dentalsolution.domain.PatientBean;
 import com.ekdant.dentalsolution.masters.DocumentType;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 import org.apache.log4j.Logger;
 
@@ -28,14 +28,14 @@ public class UploadDocument extends javax.swing.JFrame {
     private int patientId; 
     DocumentsDao documentsDao;
     PatientsDao patientsDao;
+    SettingsDao settingsDao;
     String baseLocation = "";
     final static Logger logger = Logger.getLogger(UploadDocument.class);
     
     public UploadDocument(int patientId) {
-        try {
-            String path = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
-            baseLocation = path.substring(0, path.lastIndexOf("/")+1) + "Uploads\\";
-        } catch (UnsupportedEncodingException ex) {}
+        settingsDao = new SettingsDao();
+        baseLocation = settingsDao.getMySQLPath() + File.separator + PropertiesCache.getInstance().getProperty("folder.document");
+        
         this.patientId = patientId;        
         documentsDao = new DocumentsDao();
         patientsDao = new PatientsDao();
@@ -141,7 +141,7 @@ public class UploadDocument extends javax.swing.JFrame {
     private void documentUploaderFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documentUploaderFCActionPerformed
         String documentType = documentTypeCB.getSelectedItem().toString();
         PatientBean patient = patientsDao.fetchPatientById(patientId);
-        String newFileDirLocation = baseLocation + patient.getCaseId() + "\\" + documentType;
+        String newFileDirLocation = baseLocation + File.separator+ patient.getCaseId() + File.separator + documentType;
         try{
             File file = documentUploaderFC.getSelectedFile();
             File newFileDir = new File(newFileDirLocation);
@@ -150,7 +150,7 @@ public class UploadDocument extends javax.swing.JFrame {
             }
             
             InputStream in = new FileInputStream(file);
-            OutputStream out = new FileOutputStream(newFileDirLocation + "\\" +file.getName());
+            OutputStream out = new FileOutputStream(newFileDirLocation + File.separator +file.getName());
             
             byte[] buff = new byte[1024];
             int len;

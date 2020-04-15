@@ -8,6 +8,7 @@ package com.ekdant.dentalsolution.dao;
 import com.ekdant.dentalsolution.domain.DocumentTypeBean;
 import com.ekdant.dentalsolution.domain.PatientBean;
 import com.ekdant.dentalsolution.utilities.ConnectionPool;
+import com.ekdant.dentalsolution.utilities.PropertiesCache;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -35,15 +36,11 @@ public class DocumentsDao {
     String caseId;
     JTree jTree1;
     String baseLocation = "";
+    SettingsDao settingsDao;
     final static Logger logger = Logger.getLogger(DocumentsDao.class);
     public DocumentsDao(){
         connection = ConnectionPool.getInstance();
-        try {
-            String path = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
-            baseLocation = path.substring(0, path.lastIndexOf("/")+1) + "Uploads\\";
-        } catch (UnsupportedEncodingException ex) {
-            logger.error(ex);
-        }
+        settingsDao = new SettingsDao();
     }
     
     public List<String> fetchDocumentTypes(){
@@ -147,8 +144,8 @@ public class DocumentsDao {
     public void displayTree(PatientBean patient, JTree jTree){
         this.caseId = patient.getCaseId();
         this.jTree1 = jTree;
-        String location = baseLocation + patient.getCaseId();
-        String rootDirName = patient.getName() + "  " + patient.getAge() + "/" + patient.getGender().charAt(0) + "  " + patient.getCaseId();
+        String location = settingsDao.getMySQLPath()+ File.separator + PropertiesCache.getInstance().getProperty("folder.document") + File.separator + patient.getCaseId();
+        String rootDirName = patient.getName() + "  " + patient.getAge() + File.separator + patient.getGender().charAt(0) + "  " + patient.getCaseId();
         File rootDir = new File(location);
         DefaultTreeModel model = (DefaultTreeModel) jTree.getModel();
         jTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -177,7 +174,7 @@ public class DocumentsDao {
                     root.add(newdir);
                     model.reload();
                     displayDirectoryContents(file, newdir, jTree);
-                } else {
+                } else if(!file.getName().startsWith(".")){
                     DefaultTreeModel model = (DefaultTreeModel) jTree.getModel();
                     DefaultMutableTreeNode selectednode = root;
                     DefaultMutableTreeNode newfile = new DefaultMutableTreeNode(file.getName());
@@ -191,16 +188,18 @@ public class DocumentsDao {
     public void downloadFile(){
         if(jTree1.getSelectionModel().isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Please Select file to download !!", "Error!", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Select file to download !!");
         }
         Object lastPathComponent = jTree1.getSelectionModel().getSelectionPath().getLastPathComponent();
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) lastPathComponent;
         if(!node.isLeaf()){
-            
+            logger.error("Please select file to download");
         }else{
             DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) node.getParent();
-            File file = new File(baseLocation + this.caseId + "\\" + parentNode.getUserObject()+"\\"+node.getUserObject());
+            File file = new File(settingsDao.getMySQLPath()+ File.separator + PropertiesCache.getInstance().getProperty("folder.document") + File.separator + this.caseId + File.separator + parentNode.getUserObject() + File.separator + node.getUserObject());
             if(file.isDirectory()){
                 JOptionPane.showMessageDialog(null, "Please Select file to download !!", "Error!", JOptionPane.ERROR_MESSAGE);
+                logger.debug("Please Select file to download !!");
             }else{
                 try {
                     java.awt.Desktop.getDesktop().open(file);
@@ -208,5 +207,5 @@ public class DocumentsDao {
             }
         }
     }
-    
+   
 }

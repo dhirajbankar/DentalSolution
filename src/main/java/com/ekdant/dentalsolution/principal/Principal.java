@@ -74,6 +74,7 @@ public class Principal extends javax.swing.JFrame {
     
     private final int renewalNotificationDays = 15;
     final static Logger logger = Logger.getLogger(Principal.class);
+    Utils utility;
     
     /** Creates new form JF_Principal
      * @param loginUser
@@ -93,20 +94,9 @@ public class Principal extends javax.swing.JFrame {
         this.logedInUserType = loginUserType;
         initMainPage();        
         LookAndFeel();
+        utility = new Utils();
+        baseLocation = utility.getPath();
         
-        try {
-            String path = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
-            String str = ""; 
-            if(path.contains(".jar"))
-                str = path.substring(0, path.lastIndexOf(".jar"));
-            else
-                str = path.substring(0, path.lastIndexOf("target/classes"));
-            baseLocation = str.substring(0, str.lastIndexOf(File.separator));
-            if(baseLocation.startsWith("file:")){
-                baseLocation = baseLocation.substring(5);
-            }
-            logger.debug("BaseLocation" + baseLocation);
-        } catch (UnsupportedEncodingException ex) {logger.error(ex);}
     }
     
     private void exit() throws HeadlessException {
@@ -116,7 +106,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
-     private void LookAndFeel(){
+
+    
+    private void LookAndFeel(){
         //Look And Feel
         System.setProperty(
             "Quaqua.tabLayoutPolicy","wrap"

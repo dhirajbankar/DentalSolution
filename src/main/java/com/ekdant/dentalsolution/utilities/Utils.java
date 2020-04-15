@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
@@ -201,6 +203,25 @@ public class Utils {
         String result = normalized.replaceAll("[^A-Za-z0-9]", "");
         return result;
     }
+    
+    public String getPath(){
+        
+        String path = ""; 
+        try {
+            path = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+            
+            if(path.contains(".jar"))
+                path = path.substring(0, path.lastIndexOf(".jar"));
+            else
+                path = path.substring(0, path.lastIndexOf("target/classes"));
+            path = path.substring(0, path.lastIndexOf(File.separator));
+            if(path.startsWith("file:")){
+                path = path.substring(5);
+            }
+            logger.debug("BaseLocation" + path);
+        } catch (UnsupportedEncodingException ex) {logger.error(ex);}
+        return path;
+    } 
     
     public static void main(String args []) throws Exception{
         logger.debug("K1:" +  AES.decrypt(tokensDao.getTokenByte("K1")));

@@ -137,7 +137,7 @@ public class Utils {
             }
             input.close();
         } catch (Exception e) {
-            logger.error(e);
+            logger.debug(e);
         }
         result = result.trim().isEmpty() ? getSerialNumberForMac().trim() : result.trim();
         return getValidString(formatFileName(result)).trim();

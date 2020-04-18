@@ -1287,11 +1287,17 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="startDateDC">
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="startDateDCPropertyChange"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Principal_startDateDC"/>
           </AuxValues>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="endDateDC">
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="endDateDCPropertyChange"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

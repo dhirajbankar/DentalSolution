@@ -33,8 +33,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -88,7 +86,11 @@ public class Principal extends javax.swing.JFrame {
         clinicDao = new ClinicDao();
         settingsDao = new SettingsDao();
         
-        startDateDC.setDate(today);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+        
+        startDateDC.setDate(cal.getTime());
         endDateDC.setDate(today);
         this.logedInUser = loginUser;
         this.logedInUserType = loginUserType;
@@ -760,6 +762,18 @@ public class Principal extends javax.swing.JFrame {
         endDateLbl.setForeground(new java.awt.Color(51, 51, 255));
         endDateLbl.setText("End Date");
 
+        startDateDC.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                startDateDCPropertyChange(evt);
+            }
+        });
+
+        endDateDC.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                endDateDCPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout customInfoPanelLayout = new javax.swing.GroupLayout(customInfoPanel);
         customInfoPanel.setLayout(customInfoPanelLayout);
         customInfoPanelLayout.setHorizontalGroup(
@@ -1345,7 +1359,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_expenseCategoryItemActionPerformed
 
     private void appointmentItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentItemActionPerformed
-       Appointments appointment = Appointments.getInstance(0);
+        Appointments appointment = Appointments.getInstance(0);
         appointment.setVisible(true);
         appointment.setState(JFrame.NORMAL);
     }//GEN-LAST:event_appointmentItemActionPerformed
@@ -1357,10 +1371,6 @@ public class Principal extends javax.swing.JFrame {
     private void labWorkNameItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labWorkNameItemActionPerformed
         new LabWorkName().setVisible(true);
     }//GEN-LAST:event_labWorkNameItemActionPerformed
-
-    private void startDateDCInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_startDateDCInputMethodTextChanged
-        statasticsForPeriod();
-    }//GEN-LAST:event_startDateDCInputMethodTextChanged
 
     private void myProfileItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileItemActionPerformed
         new InitialDoctorSettings().setVisible(true);
@@ -1377,6 +1387,14 @@ public class Principal extends javax.swing.JFrame {
     private void backupDirectoryItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupDirectoryItemActionPerformed
         new BackupDirectory().setVisible(true);
     }//GEN-LAST:event_backupDirectoryItemActionPerformed
+
+    private void endDateDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_endDateDCPropertyChange
+        statasticsForPeriod();
+    }//GEN-LAST:event_endDateDCPropertyChange
+
+    private void startDateDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_startDateDCPropertyChange
+        statasticsForPeriod();
+    }//GEN-LAST:event_startDateDCPropertyChange
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton appointmentBtn;

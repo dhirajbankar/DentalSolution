@@ -6,9 +6,7 @@
 package com.ekdant.dentalsolution.utilities;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,14 +28,9 @@ public class DatabaseUtility {
             Class.forName(PropertiesCache.getInstance().getProperty("db.driver"));
             Connection con = DriverManager.getConnection(PropertiesCache.getInstance().getProperty("db.url")+PropertiesCache.getInstance().getProperty("db.dbname"), PropertiesCache.getInstance().getProperty("db.username"), PropertiesCache.getInstance().getProperty("db.password"));
             Statement st = con.createStatement();
-            ScriptRunner sr = new ScriptRunner(con);
-            Reader reader;
-        
-            reader = new BufferedReader(new FileReader(PropertiesCache.getInstance().getProperty("db.dbtemplatepath")));
-            sr.runScript(reader);
+            ScriptRunner sr = new ScriptRunner(con);           
+            sr.runScript(new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/"+PropertiesCache.getInstance().getProperty("db.dbtemplatepath")))));
             logger.debug("Database Creation completed");
-        }catch (FileNotFoundException ex) {
-            logger.error(ex);
         } catch (ClassNotFoundException ex) {
             logger.error(ex);
         } catch (SQLException ex) {

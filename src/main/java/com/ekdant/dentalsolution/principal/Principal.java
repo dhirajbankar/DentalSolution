@@ -237,6 +237,7 @@ public class Principal extends javax.swing.JFrame {
                 while ((length = is.read(buffer)) > 0) {
                     os.write(buffer, 0, length);
                 }
+                JOptionPane.showMessageDialog(null,"Backup Completed : " + backupFile1 + File.separator + fileName);
             } catch(Exception e){
                 logger.error(e);
             }finally {

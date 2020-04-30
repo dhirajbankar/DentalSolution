@@ -25,8 +25,10 @@ import com.ekdant.dentalsolution.masters.Treatment;
 import com.ekdant.dentalsolution.reports.Reports;
 import com.ekdant.dentalsolution.utilities.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -60,14 +62,13 @@ public class Principal extends javax.swing.JFrame {
     DoctorDao doctorDao;
     ClinicDao clinicDao;
     SettingsDao settingsDao;
-
-    Date today = new Date();
     
+    Date today = new Date();
+    String title;
     Date yesterday = new Date();
     DateFormat dateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.simpledate"));
     DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
     DateFormat databaseDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.dbdate"));
-    String baseLocation;
     private static final String databaseFile = PropertiesCache.getInstance().getProperty("db.dbname");
     
     private final int renewalNotificationDays = 15;
@@ -97,7 +98,7 @@ public class Principal extends javax.swing.JFrame {
         initMainPage();        
         LookAndFeel();
         utility = new Utils();
-        baseLocation = utility.getPath();
+        
         
     }
     
@@ -203,6 +204,7 @@ public class Principal extends javax.swing.JFrame {
         setTitle(clinics.get(0).getName());
         clinicHeaderLbl.setText(clinics.get(0).getName());
         dateLbl.setText(dateFormat.format(today));
+        title = clinics.get(0).getName();
     }
     
     private void loadLicenseDetails(){
@@ -223,7 +225,7 @@ public class Principal extends javax.swing.JFrame {
     
     private void backUp(){
         String fileName = "ekDantBackup_"+databaseDateFormat.format(today)+".sqlite";
-        File sourceFile = new File(baseLocation + File.separatorChar + databaseFile);
+        File sourceFile = new File(utility.getPath() + File.separatorChar + databaseFile);
         File backupFile1 = new File(settingsDao.getMySQLPath() + File.separatorChar + PropertiesCache.getInstance().getProperty("folder.backup"));
         if(!backupFile1.exists()){
                 backupFile1.mkdirs();
@@ -348,11 +350,12 @@ public class Principal extends javax.swing.JFrame {
         exitMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Shree Ram Dental");
+        setTitle(getTitle());
         setBackground(new java.awt.Color(226, 225, 225));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage(getIconImage());
         setName("framePrincipal"); // NOI18N
-        setResizable(false);
+        setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height-Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom));
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);

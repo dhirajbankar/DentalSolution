@@ -233,12 +233,7 @@ public class Priscription extends Canvas implements Printable{
         
         g.drawLine(80, rowXpoint + 20, 500, rowXpoint + 20);
     }
-    
-    public static void main(String args []){
-        Priscription canvas = new Priscription(22432);
-        canvas.printPriscription();
-    }
-
+  
     private String getFrequency(String frequency) {
         String frq = frequency;
         if(frequency.endsWith("BM")){

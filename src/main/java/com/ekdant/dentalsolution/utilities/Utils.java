@@ -209,16 +209,14 @@ public class Utils {
         String path = ""; 
         try {
             path = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
-            
             if(path.contains(".jar"))
                 path = path.substring(0, path.lastIndexOf(".jar"));
             else if(path.contains("target/classes"))
                 path = path.substring(0, path.lastIndexOf("target/classes"));
-            path = path.substring(0, path.lastIndexOf(File.separator));
+            path = path.substring(0, path.lastIndexOf("/"));
             if(path.startsWith("file:")){
                 path = path.substring(5);
             }
-            logger.debug("BaseLocation" + path);
         } catch (UnsupportedEncodingException ex) {logger.error(ex);}
         return path;
     } 

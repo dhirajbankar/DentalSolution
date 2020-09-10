@@ -63,11 +63,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
         morningEndTimeCB.setSelectedItem(clinic.getMorningEndTime());
         eveningStartTimeCB.setSelectedItem(clinic.getEveningStartTime());
         eveningEndTimeCB.setSelectedItem(clinic.getEveningEndTime());
-        if(clinicId > 0){
-            staffNameTxt.setText(staff.getName());
-            loginIdTxt.setText(staff.getLoginId());
-            loginIdTxt.setEditable(false);
-        }
+       
     }
     
     private void validateAndSaveInformation(){
@@ -82,29 +78,7 @@ public class InitialClinicSettings extends javax.swing.JFrame {
             clinic.setMorningEndTime(morningEndTimeCB.getSelectedItem().toString());
             clinic.setEveningStartTime(eveningStartTimeCB.getSelectedItem().toString());
             clinic.setEveningEndTime(eveningEndTimeCB.getSelectedItem().toString());
-            
-            UserBean user = new UserBean();
-            user.setUserId(staffId);
-            user.setName(staffNameTxt.getText());
-            user.setLoginId(loginIdTxt.getText());
-            user.setPassword(passwordPwd.getText());
-            user.setUserType("Staff");
-     
-            if(clinicId == 0){
-                clinicDao.addClinic(clinic);
-            }
-            else{
-                clinicDao.updateClinic(clinic);
-            }
-            
-            if(staffId == 0){
-                userDao.addUser(user);
-                new EkDant();
-                this.dispose();
-            }else{
-                userDao.updateUser(user);
-            }
-            
+        
             settingsDao.updateSettings(new SettingsBean("CLINIC_NAME", clinicNameTxt.getText()));
             settingsDao.updateSettings(new SettingsBean("CLINIC_START_TIME", morningStartTimeCB.getSelectedItem().toString()));
             settingsDao.updateSettings(new SettingsBean("CLINIC_END_TIME", eveningEndTimeCB.getSelectedItem().toString()));
@@ -112,6 +86,16 @@ public class InitialClinicSettings extends javax.swing.JFrame {
             settingsDao.updateSettings(new SettingsBean("MORNING_END_TIME", morningEndTimeCB.getSelectedItem().toString()));
             settingsDao.updateSettings(new SettingsBean("EVENING_START_TIME", eveningStartTimeCB.getSelectedItem().toString()));
             settingsDao.updateSettings(new SettingsBean("EVENING_END_TIME", eveningEndTimeCB.getSelectedItem().toString()));
+            
+            if(clinicId == 0){
+                clinicDao.addClinic(clinic);
+                new EkDant();
+                this.dispose();
+            }
+            else{
+                clinicDao.updateClinic(clinic);
+            }
+            
             
             msgLbl.setText("Data Saved Succefully");
             msgLbl.setFont(new Font("Vardhana", Font.PLAIN, 12));
@@ -129,29 +113,15 @@ public class InitialClinicSettings extends javax.swing.JFrame {
         boolean valid = true;
         if(clinicNameTxt.getText().isEmpty()){
             valid = false;
-            JOptionPane.showMessageDialog(null,"Please Enter Doctor Name","ERROR", JOptionPane.ERROR_MESSAGE);
-            logger.debug("Please Enter Doctor Name");
+            JOptionPane.showMessageDialog(null,"Please Enter Clinic Name","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter Clinic Name");
         }
-        else if(clinicContactTxt.getText().isEmpty() || clinicContactTxt.getText().length() < 10){
+        else if(clinicContactTxt.getText().isEmpty()){
             valid = false;
-            JOptionPane.showMessageDialog(null,"Please Enter Doctor Mobile Number","ERROR", JOptionPane.ERROR_MESSAGE);
-            logger.debug("Please Enter Doctor Mobile Number");
+            JOptionPane.showMessageDialog(null,"Please Enter Contact","ERROR", JOptionPane.ERROR_MESSAGE);
+            logger.debug("Please Enter contact");
         }
-        else if(loginIdTxt.getText().isEmpty()){
-            valid = false;
-            JOptionPane.showMessageDialog(null,"Please Enter valid Login Id","ERROR", JOptionPane.ERROR_MESSAGE);
-            logger.debug("Please Enter valid Login Id");
-        }
-        else if(passwordPwd.getText().isEmpty()){
-            valid = false;
-            JOptionPane.showMessageDialog(null,"Please Enter valid Password","ERROR", JOptionPane.ERROR_MESSAGE);
-            logger.debug("Please Enter valid Password");
-        }
-        else if(!passwordPwd.getText().equalsIgnoreCase(rePasswordPwd.getText())){
-            valid = false;
-            JOptionPane.showMessageDialog(null,"Password and Re-Entered Password should be same","ERROR", JOptionPane.ERROR_MESSAGE);
-            logger.debug("Password and Re-Entered Password should be same");
-        }
+        
         return valid;
     }
     
@@ -219,15 +189,6 @@ public class InitialClinicSettings extends javax.swing.JFrame {
         eveningStartTimeCB = new javax.swing.JComboBox();
         eveningEndTimeCB = new javax.swing.JComboBox();
         addCityBtn = new javax.swing.JButton();
-        loginPanel = new javax.swing.JPanel();
-        loginIdTxt = new javax.swing.JTextField();
-        loginIdLbl = new javax.swing.JLabel();
-        passwordLbl = new javax.swing.JLabel();
-        rePasswordLbl = new javax.swing.JLabel();
-        passwordPwd = new javax.swing.JPasswordField();
-        rePasswordPwd = new javax.swing.JPasswordField();
-        staffNameLbl = new javax.swing.JLabel();
-        staffNameTxt = new javax.swing.JTextField();
         buttonPanel = new javax.swing.JPanel();
         saveBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
@@ -382,78 +343,6 @@ public class InitialClinicSettings extends javax.swing.JFrame {
 
         doctorDetailsPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cityCB, clinicAddressLbl, clinicAddressTxt, clinicCityLbl, clinicContactLbl, clinicContactTxt, clinicNameLbl, clinicNameTxt, eveningEndTimeCB, eveningStartTimeCB, eveningTimeLbl, jLabel3, morningEndTimeCB, morningStartTimeCB, morningTimeLbl});
 
-        loginPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Staff Login Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 12), new java.awt.Color(51, 51, 255))); // NOI18N
-
-        loginIdLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        loginIdLbl.setForeground(new java.awt.Color(51, 51, 255));
-        loginIdLbl.setText("Staff Login Id:");
-
-        passwordLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        passwordLbl.setForeground(new java.awt.Color(51, 51, 255));
-        passwordLbl.setText("Staff Password:");
-
-        rePasswordLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        rePasswordLbl.setForeground(new java.awt.Color(51, 51, 255));
-        rePasswordLbl.setText("Re-Enter Staff Password:");
-
-        staffNameLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        staffNameLbl.setForeground(new java.awt.Color(51, 51, 255));
-        staffNameLbl.setText("Staff Name:");
-
-        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
-        loginPanel.setLayout(loginPanelLayout);
-        loginPanelLayout.setHorizontalGroup(
-            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loginPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(loginIdLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(loginIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(passwordLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(passwordPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(rePasswordLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rePasswordPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(staffNameLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(staffNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
-
-        loginPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {loginIdLbl, passwordLbl, rePasswordLbl, staffNameLbl});
-
-        loginPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {loginIdTxt, passwordPwd, rePasswordPwd});
-
-        loginPanelLayout.setVerticalGroup(
-            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loginPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(staffNameLbl)
-                    .addComponent(staffNameTxt))
-                .addGap(18, 18, 18)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(loginIdLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(loginIdTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rePasswordLbl)
-                    .addComponent(rePasswordPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-
-        loginPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {loginIdLbl, loginIdTxt, passwordLbl, passwordPwd, rePasswordLbl, rePasswordPwd, staffNameLbl});
-
         saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Chief of Staff 2b Add.png"))); // NOI18N
         saveBtn.setText("Save");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -512,20 +401,13 @@ public class InitialClinicSettings extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(doctorDetailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))))
+                        .addGap(444, 444, 444))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(doctorDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(doctorDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
@@ -568,19 +450,10 @@ public class InitialClinicSettings extends javax.swing.JFrame {
     private javax.swing.JComboBox eveningStartTimeCB;
     private javax.swing.JLabel eveningTimeLbl;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel loginIdLbl;
-    private javax.swing.JTextField loginIdTxt;
-    private javax.swing.JPanel loginPanel;
     private javax.swing.JComboBox morningEndTimeCB;
     private javax.swing.JComboBox morningStartTimeCB;
     private javax.swing.JLabel morningTimeLbl;
     private javax.swing.JLabel msgLbl;
-    private javax.swing.JLabel passwordLbl;
-    private javax.swing.JPasswordField passwordPwd;
-    private javax.swing.JLabel rePasswordLbl;
-    private javax.swing.JPasswordField rePasswordPwd;
     private javax.swing.JButton saveBtn;
-    private javax.swing.JLabel staffNameLbl;
-    private javax.swing.JTextField staffNameTxt;
     // End of variables declaration//GEN-END:variables
 }

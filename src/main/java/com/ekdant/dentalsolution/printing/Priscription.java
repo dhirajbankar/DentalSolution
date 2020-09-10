@@ -99,7 +99,7 @@ public class Priscription extends Canvas implements Printable{
         String doctorReg = settingsDao.getSettingValue("DOCTOR_REGISTRATION_NO");
         
         String contactNumber = clinic.getContact();
-        URL iconURL = getClass().getResource("/EkDant/icones/priscription.jpg");
+        URL iconURL = getClass().getResource("/EkDant/icones/ApplicationIcon.ico");
         Image img;
         if (iconURL == null) {
             logger.debug("Icon file not found for print.");
@@ -158,6 +158,11 @@ public class Priscription extends Canvas implements Printable{
         return (int) (g.getFontMetrics().getStringBounds(str, g).getWidth());
     }
 
+    public static void main(String [] args){
+    Priscription canvas = new Priscription(2);
+        canvas.printPriscription();
+    
+    }
     private void printPatientInfo(Graphics g, CheckupBean checkup) {
         String name = checkup.getPatient().getName() + "    ( " + checkup.getPatient().getAge() + " / " + checkup.getPatient().getGender() + " )";
         String date = displayDateFormat.format(checkup.getDate());

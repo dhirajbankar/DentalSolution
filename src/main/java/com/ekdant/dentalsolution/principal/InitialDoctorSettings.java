@@ -91,6 +91,13 @@ public class InitialDoctorSettings extends javax.swing.JFrame {
                 doctorDao.updateDoctor(doctor);
             }
             
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_NAME", doctor.getName()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_MOBILE", doctor.getMobile()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_EMAIL", doctor.getEmail()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_PRACTICE", practiceCB.getSelectedItem().toString()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_REGISTRATION_NO", medRegNoTxt.getText()));
+            settingsDao.updateSettings(new SettingsBean("DOCTOR_DEGREES", profDegreeTxt.getText()));
+            
             if(userId == 0){
                 userDao.addUser(user);
                 new EkDant();
@@ -98,12 +105,7 @@ public class InitialDoctorSettings extends javax.swing.JFrame {
             }else{
                 userDao.updateUser(user);
             }
-            settingsDao.updateSettings(new SettingsBean("DOCTOR_NAME", doctor.getName()));
-            settingsDao.updateSettings(new SettingsBean("DOCTOR_MOBILE", doctor.getMobile()));
-            settingsDao.updateSettings(new SettingsBean("DOCTOR_EMAIL", doctor.getEmail()));
-            settingsDao.updateSettings(new SettingsBean("DOCTOR_PRACTICE", practiceCB.getSelectedItem().toString()));
-            settingsDao.updateSettings(new SettingsBean("DOCTOR_REGISTRATION_NO", medRegNoTxt.getText()));
-            settingsDao.updateSettings(new SettingsBean("DOCTOR_DEGREES", profDegreeTxt.getText()));
+            
             msgLbl.setText("Data Saved Succefully");
             logger.debug("Data Saved Succefully");
             msgLbl.setFont(new Font("Vardhana", Font.PLAIN, 12));

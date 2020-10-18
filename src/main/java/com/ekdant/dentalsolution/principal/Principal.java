@@ -27,6 +27,7 @@ import com.ekdant.dentalsolution.utilities.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.io.File;
@@ -105,6 +106,7 @@ public class Principal extends javax.swing.JFrame {
     private void exit() throws HeadlessException {
         int exitMessageChosenOption = JOptionPane.showConfirmDialog(null,"Really want to quit?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Gnome-Application-Exit-48.png")));
         if(exitMessageChosenOption == JOptionPane.YES_OPTION){
+            backUp();
             System.exit(0);
         }
     }
@@ -349,13 +351,13 @@ public class Principal extends javax.swing.JFrame {
         helpItem = new javax.swing.JMenuItem();
         exitMenu = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(getTitle());
         setBackground(new java.awt.Color(226, 225, 225));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImage(getIconImage());
         setName("framePrincipal"); // NOI18N
-        setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height-Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom));
+        setPreferredSize(new Dimension(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width,GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height));
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);

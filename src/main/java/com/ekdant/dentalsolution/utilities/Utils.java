@@ -220,11 +220,5 @@ public class Utils {
         } catch (UnsupportedEncodingException ex) {logger.error(ex);}
         return path;
     } 
-    
-    public static void main(String args []) throws Exception{
-        logger.debug("K1:" +  AES.decrypt(tokensDao.getTokenByte("K1")));
-        logger.debug("K2:" +  AES.decrypt(tokensDao.getTokenByte("K2")));
-        logger.debug("K3:" +  AES.decrypt(tokensDao.getTokenByte("K3")));
-        logger.debug("K4:" +  AES.decrypt(tokensDao.getTokenByte("K4")));
-    }
+
 }

@@ -50,10 +50,4 @@ public class DiskUtils {
     return result.trim();
   }
 
-  public static void main(String[] args){
-    String sn = DiskUtils.getSerialNumber("D");
-    javax.swing.JOptionPane.showConfirmDialog((java.awt.Component)
-         null, sn, "Serial Number of C:",
-         javax.swing.JOptionPane.DEFAULT_OPTION);
-  }
 }

@@ -670,7 +670,6 @@ public class PatientTreatment extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Check Up");
         setName("Treatment"); // NOI18N
-        setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height-Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -1103,6 +1102,7 @@ public class PatientTreatment extends javax.swing.JFrame {
         addPriscriptionMedicineStrengthTxt.setNextFocusableComponent(addPriscriptionMedicineFrequencyCB);
 
         addPriscriptionMedicineFrequencyCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0   -   0   -   1", "1   -   0   -   0", "1   -   0   -   1", "1   -   1   -   1", "0   -   1   -   0", "0   -   1   -   1", "1   -   1   -   0" }));
+        addPriscriptionMedicineFrequencyCB.setSelectedIndex(2);
         addPriscriptionMedicineFrequencyCB.setNextFocusableComponent(addPriscriptionMedicineConditionBox);
 
         addPriscriptionMedicineConditionBox.setText("BM");
@@ -1238,10 +1238,10 @@ public class PatientTreatment extends javax.swing.JFrame {
                                     .addComponent(addPriscriptionTypeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(priscriptionLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(addPriscriptionMedicineStrengthTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addPriscriptionMedicineFrequencyCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(addPriscriptionMedicineConditionBox)
                                     .addComponent(addPriscriptionMedicineDurationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)))
+                                    .addComponent(jLabel2)
+                                    .addComponent(addPriscriptionMedicineFrequencyCB, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(addPriscriptionBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1264,7 +1264,7 @@ public class PatientTreatment extends javax.swing.JFrame {
 
         newTreatmentPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {consultingDocFeeLbl, dignosisSummaryLbl, doctorLbl, feesLbl, jLabel1, nextVisitDateLbl, priscriptionLbl, reffByLbl, treatmentLbl, weightLabel});
 
-        newTreatmentPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addPriscriptionBtn, addPriscriptionMedicineConditionBox, addPriscriptionMedicineDurationTxt, addPriscriptionMedicineFrequencyCB, addPriscriptionMedicineNameTxt, addPriscriptionMedicineStrengthTxt, addPriscriptionTypeCB, bpText, consultingDocFeeTxt, dignosisSummery, doctorCB, fees, jLabel2, newReferedByBtn, newTreatmentBtn, pulseText, reffByCB, treatmentList, weightText});
+        newTreatmentPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {addPriscriptionBtn, addPriscriptionMedicineConditionBox, addPriscriptionMedicineDurationTxt, addPriscriptionMedicineNameTxt, addPriscriptionMedicineStrengthTxt, addPriscriptionTypeCB, bpText, consultingDocFeeTxt, dignosisSummery, doctorCB, fees, jLabel2, newReferedByBtn, newTreatmentBtn, pulseText, reffByCB, treatmentList, weightText});
 
         patientTreatmentPanel.addTab("Treatment", new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Treatment Add.png")), newTreatmentPanel); // NOI18N
 

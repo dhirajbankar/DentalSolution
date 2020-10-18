@@ -158,11 +158,7 @@ public class Priscription extends Canvas implements Printable{
         return (int) (g.getFontMetrics().getStringBounds(str, g).getWidth());
     }
 
-    public static void main(String [] args){
-    Priscription canvas = new Priscription(2);
-        canvas.printPriscription();
-    
-    }
+
     private void printPatientInfo(Graphics g, CheckupBean checkup) {
         String name = checkup.getPatient().getName() + "    ( " + checkup.getPatient().getAge() + " / " + checkup.getPatient().getGender() + " )";
         String date = displayDateFormat.format(checkup.getDate());

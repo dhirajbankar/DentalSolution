@@ -107,15 +107,5 @@ public class DiskUtils {
 		return sn;
 	}
 
-  public static void main(String[] args){
-//    String sn = DiskUtils.getSerialNumber("D");
-//    logger.error("Sr Number : "+sn);
-//    javax.swing.JOptionPane.showConfirmDialog((java.awt.Component)
-//         null, sn, "Serial Number of C:",
-//         javax.swing.JOptionPane.DEFAULT_OPTION);
 
-        logger.debug(PropertiesCache.getInstance().getProperty("db.driver"));
-
-        logger.debug(PropertiesCache.getInstance().getAllPropertyNames());
-  }
 }

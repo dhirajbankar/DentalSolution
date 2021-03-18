@@ -202,7 +202,7 @@ public class PatientsDao {
     }
 
     public int getPatientVisit(java.util.Date startDate, java.util.Date endDate) {
-        ResultSet rs = connection.getResult("SELECT COUNT(*) FROM CHECKUP WHERE DATE  BETWEEN '" + databaseDateFormat.format(startDate) + "' AND '" + databaseDateFormat.format(endDate) + "' AND ACTIVEIND = 1");
+        ResultSet rs = connection.getResult("SELECT COUNT(distinct patientId) FROM CHECKUP WHERE DATE  BETWEEN '" + databaseDateFormat.format(startDate) + "' AND '" + databaseDateFormat.format(endDate) + "' AND ACTIVEIND = 1");
         int count = 0;
         try {
             while (rs.next()) {

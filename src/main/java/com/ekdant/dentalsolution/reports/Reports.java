@@ -411,7 +411,7 @@ public class Reports extends javax.swing.JFrame {
         int selectedYear = Integer.parseInt(this.y_year.getSelectedItem().toString());
         if (SelectedRow != 12) {
             this.month.setSelectedIndex(SelectedRow);
-            this.year.setSelectedItem("" + selectedYear);
+            this.year.setSelectedItem(selectedYear);
             this.jTabbedPane1.setSelectedComponent(this.monthlyReportPanel);
             this.monthlyReportPanel.setVisible(true);
             this.monthlyReportBtn.doClick();
@@ -444,10 +444,12 @@ public class Reports extends javax.swing.JFrame {
        y_year.removeAllItems();
        treatmentReportYearDropDown.removeAllItems();
        refferedByReportYearCB.removeAllItems();
-       for(Integer year : treatmentYears){
-           y_year.addItem(year);
-           treatmentReportYearDropDown.addItem(year);
-           refferedByReportYearCB.addItem(year);
+       year.removeAllItems();
+       for(Integer yr : treatmentYears){
+           y_year.addItem(yr);
+           year.addItem(yr);
+           treatmentReportYearDropDown.addItem(yr);
+           refferedByReportYearCB.addItem(yr);
        }
     }
 

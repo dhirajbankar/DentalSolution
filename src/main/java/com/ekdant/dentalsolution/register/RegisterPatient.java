@@ -207,9 +207,9 @@ public class RegisterPatient extends javax.swing.JFrame {
         if (!caseId.isEmpty()) {
             PatientBean patient = patientsDao.fetchPatientByCaseId(Integer.parseInt(caseId));
             if (patient.getPatientId() != 0) {
-                JOptionPane.showMessageDialog(null, "There is already a registered patient with this Case Paper Number!", "Attention", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "There is already a registered patient ( "+patient.getName()+" ) with this Case Paper Number!", "Attention", JOptionPane.WARNING_MESSAGE);
                 this.casePaperNumberTxt.requestFocus();
-                logger.debug("There is already a registered patient with this Case Paper Number!");
+                logger.debug("There is already a registered patient ( "+patient.getName()+" ) with this Case Paper Number!");
             }
         }
     }
@@ -257,12 +257,10 @@ public class RegisterPatient extends javax.swing.JFrame {
         detailsPanel = new javax.swing.JPanel();
         genderCB = new javax.swing.JComboBox();
         addressTxt = new javax.swing.JTextField();
-        casePaperNumberTxt = new javax.swing.JTextField();
         ageTxt = new javax.swing.JTextField();
         addCityBtn = new javax.swing.JButton();
         emailTxt = new javax.swing.JTextField();
         birthdayLbl = new javax.swing.JLabel();
-        casePaperNumberLbl = new javax.swing.JLabel();
         nameTxt = new javax.swing.JTextField();
         addressLbl = new javax.swing.JLabel();
         cityLbl = new javax.swing.JLabel();
@@ -274,6 +272,8 @@ public class RegisterPatient extends javax.swing.JFrame {
         nameLbl = new javax.swing.JLabel();
         genderLbl = new javax.swing.JLabel();
         birthdayDC = new com.toedter.calendar.JDateChooser();
+        casePaperNumberLbl = new javax.swing.JLabel();
+        casePaperNumberTxt = new javax.swing.JTextField();
         licenseMessageLbl = new javax.swing.JLabel();
         odontogramPanel = new javax.swing.JPanel();
         odontoLbl = new javax.swing.JLabel();
@@ -354,14 +354,7 @@ public class RegisterPatient extends javax.swing.JFrame {
 
         addressTxt.setNextFocusableComponent(genderCB);
 
-        casePaperNumberTxt.setNextFocusableComponent(addressTxt);
-        casePaperNumberTxt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                casePaperNumberTxtFocusLost(evt);
-            }
-        });
-
-        ageTxt.setNextFocusableComponent(casePaperNumberTxt);
+        ageTxt.setNextFocusableComponent(addressTxt);
         ageTxt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 ageTxtFocusLost(evt);
@@ -380,10 +373,6 @@ public class RegisterPatient extends javax.swing.JFrame {
         birthdayLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         birthdayLbl.setForeground(new java.awt.Color(51, 51, 255));
         birthdayLbl.setText("   Date of Birth:");
-
-        casePaperNumberLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        casePaperNumberLbl.setForeground(new java.awt.Color(51, 51, 255));
-        casePaperNumberLbl.setText("* Case Paper Number:");
 
         nameTxt.setNextFocusableComponent(ageTxt);
 
@@ -420,6 +409,17 @@ public class RegisterPatient extends javax.swing.JFrame {
         genderLbl.setForeground(new java.awt.Color(51, 51, 255));
         genderLbl.setText("* Gender:");
 
+        casePaperNumberLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        casePaperNumberLbl.setForeground(new java.awt.Color(51, 51, 255));
+        casePaperNumberLbl.setText("* Case Paper Number:");
+
+        casePaperNumberTxt.setNextFocusableComponent(nameTxt);
+        casePaperNumberTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                casePaperNumberTxtFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout detailsPanelLayout = new javax.swing.GroupLayout(detailsPanel);
         detailsPanel.setLayout(detailsPanelLayout);
         detailsPanelLayout.setHorizontalGroup(
@@ -427,15 +427,15 @@ public class RegisterPatient extends javax.swing.JFrame {
             .addGroup(detailsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(casePaperNumberLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(telephoneLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cityLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(casePaperNumberLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(birthdayLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ageLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nameLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addressLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(genderLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(citiesCB, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -443,34 +443,33 @@ public class RegisterPatient extends javax.swing.JFrame {
                         .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(genderCB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(telTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addressTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(casePaperNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(ageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(addCityBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(birthdayDC, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(birthdayDC, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(casePaperNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         detailsPanelLayout.setVerticalGroup(
             detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(detailsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(casePaperNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(casePaperNumberLbl))
+                .addGap(19, 19, 19)
+                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nameTxt))
                 .addGap(18, 18, 18)
                 .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ageLbl))
+                    .addComponent(ageLbl)
+                    .addComponent(ageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(birthdayLbl)
                     .addComponent(birthdayDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(casePaperNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(casePaperNumberLbl))
                 .addGap(18, 18, 18)
                 .addGroup(detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -505,32 +504,32 @@ public class RegisterPatient extends javax.swing.JFrame {
         patientDetailsPanelLayout.setHorizontalGroup(
             patientDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patientDetailsPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(patientDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(licenseMessageLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(patientDetailsPanelLayout.createSequentialGroup()
-                        .addGap(299, 299, 299)
-                        .addComponent(patientIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(patientDetailsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(detailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(historyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(patientDetailsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(licenseMessageLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(143, Short.MAX_VALUE))
+                        .addGroup(patientDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(patientDetailsPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(historyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patientDetailsPanelLayout.createSequentialGroup()
+                                .addGap(319, 319, 319)
+                                .addComponent(patientIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(32054, Short.MAX_VALUE))
         );
         patientDetailsPanelLayout.setVerticalGroup(
             patientDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patientDetailsPanelLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(patientIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(patientDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(historyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(detailsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(licenseMessageLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Patient Details", new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Patient Boy 1.png")), patientDetailsPanel); // NOI18N

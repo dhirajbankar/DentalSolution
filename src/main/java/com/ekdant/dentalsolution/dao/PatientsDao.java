@@ -164,7 +164,7 @@ public class PatientsDao {
     }
 
     public PatientBean fetchPatientByCaseId(int caseId) {
-        String sql = "SELECT * FROM PATIENTS WHERE CASEID = " + caseId + " AND ACTIVEIND = 1";
+        String sql = "SELECT * FROM PATIENTS WHERE CASEID = " + caseId + " OR CASEID = '0"+caseId+"' AND ACTIVEIND = 1";
         ResultSet rs = connection.getResult(sql);
         PatientBean patient = new PatientBean();
         try {

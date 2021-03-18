@@ -99,23 +99,24 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="299" max="-2" attributes="0"/>
-                              <Component id="patientIdTxt" min="-2" max="-2" attributes="1"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="detailsPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="historyPanel" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="licenseMessageLbl" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="licenseMessageLbl" max="32767" attributes="0"/>
+                              <Component id="detailsPanel" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="historyPanel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="319" max="-2" attributes="0"/>
+                                      <Component id="patientIdTxt" min="-2" max="-2" attributes="1"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="143" max="32767" attributes="0"/>
+                      <EmptySpace pref="32054" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -124,14 +125,14 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="patientIdTxt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="historyPanel" max="32767" attributes="0"/>
                           <Component id="detailsPanel" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="licenseMessageLbl" min="-2" pref="34" max="-2" attributes="0"/>
-                      <EmptySpace pref="69" max="32767" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -172,18 +173,18 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="casePaperNumberLbl" max="32767" attributes="0"/>
                               <Component id="telephoneLbl" alignment="0" max="32767" attributes="0"/>
                               <Component id="cityLbl" alignment="0" max="32767" attributes="0"/>
-                              <Component id="casePaperNumberLbl" alignment="0" max="32767" attributes="0"/>
                               <Component id="birthdayLbl" alignment="0" max="32767" attributes="0"/>
                               <Component id="ageLbl" alignment="0" max="32767" attributes="0"/>
                               <Component id="nameLbl" alignment="0" max="32767" attributes="0"/>
                               <Component id="addressLbl" alignment="0" max="32767" attributes="0"/>
                               <Component id="genderLbl" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblEmail" min="-2" pref="143" max="-2" attributes="0"/>
+                              <Component id="lblEmail" pref="143" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -192,17 +193,15 @@
                                   <Component id="emailTxt" alignment="0" min="-2" pref="200" max="-2" attributes="1"/>
                                   <Component id="genderCB" alignment="0" min="-2" pref="75" max="-2" attributes="1"/>
                                   <Component id="telTxt" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Component id="addressTxt" alignment="1" min="-2" pref="200" max="-2" attributes="1"/>
-                                      <Component id="casePaperNumberTxt" alignment="0" min="-2" pref="200" max="-2" attributes="1"/>
-                                  </Group>
+                                  <Component id="addressTxt" alignment="0" min="-2" pref="200" max="-2" attributes="1"/>
                                   <Component id="nameTxt" alignment="0" min="-2" pref="200" max="-2" attributes="1"/>
                                   <Component id="ageTxt" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                                   <Component id="addCityBtn" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <Component id="birthdayDC" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                              <Component id="casePaperNumberTxt" min="-2" pref="200" max="-2" attributes="1"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -210,24 +209,24 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="nameLbl" linkSize="1" max="32767" attributes="0"/>
-                              <Component id="nameTxt" linkSize="1" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="ageTxt" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="ageLbl" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="birthdayLbl" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="birthdayDC" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="casePaperNumberTxt" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="casePaperNumberLbl" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="nameLbl" linkSize="1" alignment="3" max="32767" attributes="0"/>
+                              <Component id="nameTxt" linkSize="1" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ageLbl" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ageTxt" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="birthdayLbl" linkSize="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="birthdayDC" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -281,20 +280,10 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="casePaperNumberTxt">
-                  <Properties>
-                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="addressTxt"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="casePaperNumberTxtFocusLost"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JTextField" name="ageTxt">
                   <Properties>
                     <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="casePaperNumberTxt"/>
+                      <ComponentRef name="addressTxt"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -327,17 +316,6 @@
                       <Color blue="ff" green="33" red="33" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="   Date of Birth:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="casePaperNumberLbl">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Verdana" size="12" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="33" red="33" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="* Case Paper Number:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="nameTxt">
@@ -444,6 +422,27 @@
                   </Properties>
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="birthdayDC">
+                </Component>
+                <Component class="javax.swing.JLabel" name="casePaperNumberLbl">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Verdana" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="33" red="33" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="* Case Paper Number:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="casePaperNumberTxt">
+                  <Properties>
+                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="nameTxt"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="casePaperNumberTxtFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -512,6 +512,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="addPriscriptionMedicineNameTxt" linkSize="11" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addPriscriptionMedicineFrequencyCB" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="addPriscriptionTypeCB" linkSize="11" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                                           <Component id="priscriptionLbl" linkSize="10" alignment="3" max="32767" attributes="0"/>
@@ -519,7 +520,6 @@
                                           <Component id="addPriscriptionMedicineConditionBox" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="addPriscriptionMedicineDurationTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel2" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addPriscriptionMedicineFrequencyCB" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="addPriscriptionBtn" linkSize="11" alignment="0" min="-2" max="-2" attributes="0"/>

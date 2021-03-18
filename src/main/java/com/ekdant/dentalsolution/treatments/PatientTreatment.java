@@ -62,7 +62,6 @@ public class PatientTreatment extends javax.swing.JFrame {
 
     final int patientId;
     DateFormat displayDateFormat = new SimpleDateFormat(PropertiesCache.getInstance().getProperty("format.displaydate"));
-    
     List<String> medicineType = new ArrayList<String>();
     List<String> medicines = new ArrayList<String>();
     Map<String, List<String>> medicineStrengthMap = new HashMap<String, List<String>>();
@@ -205,6 +204,7 @@ public class PatientTreatment extends javax.swing.JFrame {
         for (TreatmentBean treatment : treatments) {
             treatmentList.addItem(treatment.getTreatmentName());
         }
+        treatmentList.setSelectedItem("Consultation");
     }
 
     private void loadHistory() {
@@ -955,14 +955,10 @@ public class PatientTreatment extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.setOpaque(false);
         jScrollPane3.setViewportView(jTree1);
-
-        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         labWorkLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         labWorkLbl.setForeground(new java.awt.Color(51, 51, 255));
@@ -1234,14 +1230,14 @@ public class PatientTreatment extends javax.swing.JFrame {
                         .addGroup(newTreatmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(newTreatmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(addPriscriptionMedicineNameTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(addPriscriptionMedicineFrequencyCB, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(newTreatmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(addPriscriptionTypeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(priscriptionLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(addPriscriptionMedicineStrengthTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(addPriscriptionMedicineConditionBox)
                                     .addComponent(addPriscriptionMedicineDurationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(addPriscriptionMedicineFrequencyCB, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel2)))
                             .addComponent(addPriscriptionBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1333,8 +1329,6 @@ public class PatientTreatment extends javax.swing.JFrame {
             priscriptionHistoryTbl.getColumnModel().getColumn(3).setPreferredWidth(50);
             priscriptionHistoryTbl.getColumnModel().getColumn(4).setPreferredWidth(30);
         }
-
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         labWorkHistoryLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         labWorkHistoryLbl.setForeground(new java.awt.Color(51, 51, 255));

@@ -393,14 +393,15 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="nextVisitDate" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                              <Component id="feesLbl" linkSize="12" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
+                              <Component id="feesLbl" min="-2" pref="41" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="fees" min="-2" pref="75" max="-2" attributes="0"/>
-                              <EmptySpace pref="156" max="32767" attributes="0"/>
-                              <Component id="consultingDocFeeLbl" min="-2" pref="160" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="consultingDocFeeLbl" min="-2" pref="149" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="consultingDocFeeTxt" min="-2" pref="74" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="addPriscriptionTypeCB" min="-2" pref="113" max="-2" attributes="0"/>
@@ -409,14 +410,14 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="addPriscriptionMedicineStrengthTxt" min="-2" pref="138" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="addPriscriptionMedicineFrequencyCB" min="-2" pref="102" max="-2" attributes="0"/>
+                              <Component id="addPriscriptionMedicineFrequencyCB" min="-2" pref="126" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="addPriscriptionMedicineConditionBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="addPriscriptionMedicineDurationTxt" min="-2" pref="61" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Component id="addPriscriptionMedicineDurationTxt" min="-2" pref="48" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="36" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="addPriscriptionBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="dignosisSummery" alignment="0" max="32767" attributes="0"/>
@@ -461,11 +462,11 @@
                           <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jPanel5" max="32767" attributes="0"/>
                           <Component id="jScrollPane3" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="51" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -473,8 +474,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="doctorLbl" linkSize="10" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
@@ -510,38 +511,37 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="addPriscriptionMedicineNameTxt" linkSize="11" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="addPriscriptionMedicineFrequencyCB" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="addPriscriptionTypeCB" linkSize="11" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                                          <Component id="priscriptionLbl" linkSize="10" alignment="3" max="32767" attributes="0"/>
-                                          <Component id="addPriscriptionMedicineStrengthTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addPriscriptionMedicineConditionBox" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addPriscriptionMedicineDurationTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel2" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="addPriscriptionMedicineFrequencyCB" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="addPriscriptionTypeCB" linkSize="11" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                                      <Component id="priscriptionLbl" linkSize="10" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="addPriscriptionMedicineStrengthTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addPriscriptionMedicineConditionBox" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addPriscriptionMedicineDurationTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addPriscriptionMedicineNameTxt" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="addPriscriptionBtn" linkSize="11" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="211" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPane3" min="-2" pref="192" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jPanel5" max="32767" attributes="0"/>
+                              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="nextVisitDateLbl" linkSize="10" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="consultingDocFeeTxt" linkSize="11" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="fees" linkSize="11" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                                   <Component id="feesLbl" linkSize="10" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="consultingDocFeeLbl" linkSize="10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="consultingDocFeeTxt" linkSize="11" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="nextVisitDate" min="-2" max="-2" attributes="0"/>
@@ -686,6 +686,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="dignosisSummery">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Dignosis Summery"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="addPriscriptionTypeCB"/>
                 </Property>
@@ -812,17 +813,15 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="labLbl" max="32767" attributes="0"/>
-                              <Component id="labWorkLbl" pref="63" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="labWorkCB" linkSize="22" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
-                              <Component id="jPanel1" alignment="1" min="-2" pref="199" max="-2" attributes="0"/>
-                              <Component id="labCB" linkSize="22" min="-2" pref="155" max="-2" attributes="0"/>
+                              <Component id="labWorkLbl" min="-2" pref="63" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labWorkCB" linkSize="22" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
+                                  <Component id="jPanel1" alignment="1" min="-2" pref="199" max="-2" attributes="0"/>
+                                  <Component id="labCB" linkSize="22" min="-2" pref="155" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -831,21 +830,14 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="labWorkCB" linkSize="24" alignment="3" pref="30" max="32767" attributes="0"/>
-                              <Component id="labWorkLbl" linkSize="24" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="labWorkLbl" linkSize="24" min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          <Component id="labWorkCB" linkSize="24" pref="30" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="labCB" linkSize="24" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="labLbl" linkSize="24" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <Component id="labCB" linkSize="24" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -871,17 +863,6 @@
                   <Events>
                     <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="labWorkCBItemStateChanged"/>
                   </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labLbl">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Verdana" size="12" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="33" red="33" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Lab"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="labCB">
                   <Properties>
@@ -1021,13 +1002,20 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[52, 26]"/>
+                </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="addPriscriptionMedicineNameTxt"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[52, 26]"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="addPriscriptionMedicineNameTxt">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Medicine Name"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="addPriscriptionMedicineStrengthTxt"/>
                 </Property>
@@ -1050,6 +1038,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="addPriscriptionMedicineStrengthTxt">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Medicine Strength"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="addPriscriptionMedicineFrequencyCB"/>
                 </Property>
@@ -1069,6 +1058,7 @@
                   </StringArray>
                 </Property>
                 <Property name="selectedIndex" type="int" value="2"/>
+                <Property name="toolTipText" type="java.lang.String" value="Medicine Frequency"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="addPriscriptionMedicineConditionBox"/>
                 </Property>
@@ -1077,6 +1067,7 @@
             <Component class="javax.swing.JCheckBox" name="addPriscriptionMedicineConditionBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="BM"/>
+                <Property name="toolTipText" type="java.lang.String" value="Before Meal"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="addPriscriptionMedicineDurationTxt"/>
                 </Property>
@@ -1084,6 +1075,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="addPriscriptionMedicineDurationTxt">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Medicine Duration"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="addPriscriptionBtn"/>
                 </Property>

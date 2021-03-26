@@ -2,6 +2,7 @@ com/ekdant/dentalsolution/principal/Employees$6.class
 com/ekdant/dentalsolution/principal/Principal$24.class
 com/ekdant/dentalsolution/reports/Reports$14.class
 com/ekdant/dentalsolution/treatments/PatientTreatment.class
+com/ekdant/dentalsolution/principal/Principal$37.class
 com/ekdant/dentalsolution/labwork/LabWorkTracking$7.class
 com/ekdant/dentalsolution/domain/LabBean.class
 com/ekdant/dentalsolution/principal/Principal$11.class
@@ -42,7 +43,6 @@ com/ekdant/dentalsolution/principal/Principal$16.class
 com/ekdant/dentalsolution/appointment/Appointments$16.class
 com/ekdant/dentalsolution/principal/InitialDoctorSettings$2.class
 com/ekdant/dentalsolution/masters/ReferedBy$1.class
-com/ekdant/dentalsolution/reports/Reports$19.class
 com/ekdant/dentalsolution/principal/Employees$1.class
 com/ekdant/dentalsolution/masters/Treatment$4.class
 com/ekdant/dentalsolution/utilities/CalendarComboBox$DatePanel.class
@@ -67,6 +67,7 @@ com/ekdant/dentalsolution/masters/Lab$2.class
 com/ekdant/dentalsolution/domain/AppointmentBean.class
 com/ekdant/dentalsolution/view/ViewPatient.class
 com/ekdant/dentalsolution/register/RegisterUser$2.class
+com/ekdant/dentalsolution/utilities/DatabaseUtility.class
 com/ekdant/dentalsolution/principal/About.class
 com/ekdant/dentalsolution/principal/Principal$4.class
 com/ekdant/dentalsolution/register/RegisterUser.class
@@ -75,6 +76,7 @@ com/ekdant/dentalsolution/view/ViewDoctor$3.class
 com/ekdant/dentalsolution/register/RegisterUser$7.class
 com/ekdant/dentalsolution/treatments/PatientTreatment$3.class
 com/ekdant/dentalsolution/masters/LabWorkName$4.class
+com/ekdant/dentalsolution/principal/Main$1.class
 com/ekdant/dentalsolution/document/Documents.class
 com/ekdant/dentalsolution/printing/TreatmentCanvas.class
 com/ekdant/dentalsolution/treatments/PatientTreatment$15.class
@@ -89,6 +91,7 @@ com/ekdant/dentalsolution/register/RegisterDoctor$1.class
 com/ekdant/dentalsolution/reports/Reports$8.class
 com/ekdant/dentalsolution/principal/Principal$33.class
 com/ekdant/dentalsolution/view/ViewDoctor$4.class
+com/ekdant/dentalsolution/utilities/PropertiesCache.class
 com/ekdant/dentalsolution/principal/Principal$28.class
 com/ekdant/dentalsolution/principal/Doctors.class
 com/ekdant/dentalsolution/register/RegisterEmployee$1.class
@@ -146,7 +149,6 @@ com/ekdant/dentalsolution/reports/Reports$18.class
 com/ekdant/dentalsolution/masters/ReferedBy$2.class
 com/ekdant/dentalsolution/domain/MedicineBean.class
 com/ekdant/dentalsolution/principal/InitialClinicSettings$3.class
-com/ekdant/dentalsolution/register/RegisterEmployee$8.class
 com/ekdant/dentalsolution/masters/Lab$8.class
 com/ekdant/dentalsolution/principal/initialSettings.class
 com/ekdant/dentalsolution/domain/TreatmentBean.class
@@ -175,6 +177,7 @@ com/ekdant/dentalsolution/principal/Login.class
 com/ekdant/dentalsolution/view/ViewPatient$3.class
 com/ekdant/dentalsolution/login/Login$2.class
 com/ekdant/dentalsolution/masters/ReferedBy$6.class
+com/ekdant/dentalsolution/utilities/Mailer.class
 com/ekdant/dentalsolution/reports/Reports$10.class
 com/ekdant/dentalsolution/reports/Reports$13.class
 com/ekdant/dentalsolution/principal/Principal$12.class
@@ -201,10 +204,12 @@ com/ekdant/dentalsolution/masters/Settings$2.class
 com/ekdant/dentalsolution/utilities/Java2sAutoTextField$AutoDocument.class
 com/ekdant/dentalsolution/principal/Principal$6.class
 com/ekdant/dentalsolution/view/ViewPatient$5.class
+com/ekdant/dentalsolution/utilities/PropertiesCache$LazyHolder.class
 com/ekdant/dentalsolution/appointment/Appointments$9.class
 com/ekdant/dentalsolution/view/ViewEmployee$3.class
 com/ekdant/dentalsolution/view/ViewDoctor$1.class
 com/ekdant/dentalsolution/masters/Lab$10.class
+com/ekdant/dentalsolution/labwork/LabWorkTracking$10.class
 com/ekdant/dentalsolution/masters/Cities$2.class
 com/ekdant/dentalsolution/register/RegisterEmployee$4.class
 com/ekdant/dentalsolution/register/RegisterDoctor$4.class
@@ -219,6 +224,7 @@ com/ekdant/dentalsolution/masters/MedicineType$5.class
 com/ekdant/dentalsolution/masters/Treatment$2.class
 com/ekdant/dentalsolution/utilities/CalendarComboBox$DatePanel$1.class
 com/ekdant/dentalsolution/domain/DoctorBean.class
+com/ekdant/dentalsolution/principal/InitialClinicSettings$4.class
 com/ekdant/dentalsolution/masters/DocumentType$5.class
 com/ekdant/dentalsolution/treatments/PatientTreatment$6.class
 com/ekdant/dentalsolution/treatments/PatientTreatment$12.class
@@ -248,7 +254,6 @@ com/ekdant/dentalsolution/treatments/PatientTreatment$7.class
 com/ekdant/dentalsolution/labwork/LabWorkTracking$4.class
 com/ekdant/dentalsolution/register/RegisterUser$3.class
 com/ekdant/dentalsolution/dao/ReportsDao.class
-com/ekdant/dentalsolution/expense/ExpenseTracking$6.class
 com/ekdant/dentalsolution/domain/LabWorkNameBean.class
 com/ekdant/dentalsolution/utilities/CalendarComboBox$2.class
 com/ekdant/dentalsolution/register/RegisterPatient$2.class
@@ -257,6 +262,7 @@ com/ekdant/dentalsolution/register/RegisterUser$9.class
 com/ekdant/dentalsolution/principal/Principal$27.class
 com/ekdant/dentalsolution/domain/ReferedByReportBean.class
 com/ekdant/dentalsolution/dao/DocumentsDao.class
+com/ekdant/dentalsolution/utilities/PropertiesCache$1.class
 com/ekdant/dentalsolution/masters/ExpenseCategories$5.class
 com/ekdant/dentalsolution/masters/Treatment.class
 com/ekdant/dentalsolution/register/RegisterEmployee$3.class
@@ -328,13 +334,13 @@ com/ekdant/dentalsolution/expense/ExpenseTracking$4.class
 com/ekdant/dentalsolution/masters/Medicine$2.class
 com/ekdant/dentalsolution/register/RegisterPatient$6.class
 com/ekdant/dentalsolution/dao/AppointmentsDao.class
-com/ekdant/dentalsolution/principal/initialSettings$3.class
 com/ekdant/dentalsolution/masters/Cities$1.class
 com/ekdant/dentalsolution/appointment/Appointments$15.class
 com/ekdant/dentalsolution/principal/Principal$23.class
 com/ekdant/dentalsolution/expense/ExpenseTracking$2.class
 com/ekdant/dentalsolution/dao/ReferedByDao.class
 com/ekdant/dentalsolution/masters/Treatment$5.class
+com/ekdant/dentalsolution/principal/Principal$38.class
 com/ekdant/dentalsolution/principal/Principal$20.class
 com/ekdant/dentalsolution/labwork/LabWorkTracking$8.class
 com/ekdant/dentalsolution/login/ForgotPassword.class
@@ -381,7 +387,6 @@ com/ekdant/dentalsolution/register/RegisterEmployee.class
 com/ekdant/dentalsolution/masters/Treatment$8.class
 com/ekdant/dentalsolution/principal/Patients$3.class
 com/ekdant/dentalsolution/domain/TimeslotBean.class
-com/ekdant/dentalsolution/principal/Employees$7.class
 com/ekdant/dentalsolution/masters/Cities$4.class
 com/ekdant/dentalsolution/masters/MedicineType$2.class
 com/ekdant/dentalsolution/domain/OdontogramBean.class

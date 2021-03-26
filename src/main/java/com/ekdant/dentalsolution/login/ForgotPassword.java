@@ -6,11 +6,14 @@
 package com.ekdant.dentalsolution.login;
 
 import com.ekdant.dentalsolution.dao.DoctorDao;
+import com.ekdant.dentalsolution.dao.SettingsDao;
 import com.ekdant.dentalsolution.dao.UserDao;
 import com.ekdant.dentalsolution.domain.DoctorBean;
 import com.ekdant.dentalsolution.domain.UserBean;
+import com.ekdant.dentalsolution.utilities.Mailer;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 
@@ -22,6 +25,7 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     DoctorDao doctorDao;
     UserDao userDao;
+    SettingsDao settingsDao; 
     final static Logger logger = Logger.getLogger(ForgotPassword.class);
     /**
      * Creates new form ForgotPassword
@@ -29,6 +33,7 @@ public class ForgotPassword extends javax.swing.JFrame {
     public ForgotPassword() {
         doctorDao = new DoctorDao();
         userDao = new UserDao();
+        settingsDao = new SettingsDao();
         initComponents();
         populateFields();
     }
@@ -38,11 +43,29 @@ public class ForgotPassword extends javax.swing.JFrame {
         headerLbl.setText("Please click below button to get your password on your registered mail id :" + mainDoctor.getEmail());        
     }
     
+    private UserBean getUser(List<UserBean> users, String userName){
+        UserBean nonAdminUser = null;
+        for(UserBean user : users){
+            if(!"admin".equalsIgnoreCase(user.getUserType())){
+                if(nonAdminUser == null)
+                    nonAdminUser = user;
+                if(userNameTxt.getText().length() == 0){
+                    return user;
+                } else if(userNameTxt.getText().equals(user.getLoginId())) {
+                    return user;
+                }
+            }
+        }
+        return nonAdminUser;
+    }
+    
     private void sendPassword(){
-        UserBean doctor = userDao.fetchDoctor();
+        List<UserBean> users = userDao.fetchAllUsers();
         DoctorBean mainDoctor = doctorDao.fetchMainDoctor();
-        String loginId = doctor.getLoginId();
-        String password = doctor.getPassword();
+        UserBean doctorUser = getUser(users, userNameTxt.getText());
+        
+        String loginId = doctorUser.getLoginId();
+        String password = doctorUser.getPassword();
         String emailTo = mainDoctor.getEmail();
         String emailSubject = "[EkDant-Support] Password retrival information";
         String emailBody = "<html><body>"
@@ -59,8 +82,14 @@ public class ForgotPassword extends javax.swing.JFrame {
                 + "EkDant Team <br><br>"
                 + "This is an auto generated email. Do not reply to this email. "
                 + "</body></html>";
-        successMsgLbl.setText("Password Send to registered email id successfully");
-        JOptionPane.showConfirmDialog(null,emailBody, "Retrive Password", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Calendar Confirmed.png")));
+        String doctorEmail =settingsDao.getSettingValue("DOCTOR_EMAIL");
+        int result = JOptionPane.showConfirmDialog(this, "Do you want to send email to below registered email address?\n\t"+doctorEmail, "Email confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(result == JOptionPane.YES_OPTION) {
+            Mailer mailer = new Mailer();            
+            mailer.sendEmailPassword(doctorEmail, emailSubject, emailBody);
+            JOptionPane.showMessageDialog(null,"Password sent to : " + doctorEmail);
+            this.dispose();
+        }        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,6 +104,8 @@ public class ForgotPassword extends javax.swing.JFrame {
         headerLbl = new javax.swing.JLabel();
         submitBtn = new javax.swing.JButton();
         successMsgLbl = new javax.swing.JLabel();
+        userNameTxt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Forgot Password");
@@ -93,6 +124,8 @@ public class ForgotPassword extends javax.swing.JFrame {
         successMsgLbl.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         successMsgLbl.setForeground(new java.awt.Color(51, 51, 255));
 
+        jLabel1.setText("Username you want to retrive password for");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -101,10 +134,15 @@ public class ForgotPassword extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(headerLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(successMsgLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 343, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(userNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addComponent(successMsgLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,11 +150,19 @@ public class ForgotPassword extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(headerLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(successMsgLbl)
-                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(successMsgLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(19, 19, 19)))
                 .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {headerLbl, successMsgLbl});
@@ -147,8 +193,10 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel headerLbl;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton submitBtn;
     private javax.swing.JLabel successMsgLbl;
+    private javax.swing.JTextField userNameTxt;
     // End of variables declaration//GEN-END:variables
 }

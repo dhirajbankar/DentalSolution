@@ -27,7 +27,8 @@ public class SettingsDao {
 
     public String getSettingValue(String keyName) {
         String settingValue = null;
-        ResultSet rs = connection.getResult("SELECT VALUE FROM SETTINGS WHERE KEYNAME = '" + keyName + "' AND ACTIVEIND = 1");
+        ConnectionPool connection = ConnectionPool.getInstance();
+        ResultSet rs = connection.getResult("SELECT * FROM SETTINGS WHERE KEYNAME = '" + keyName + "' AND ACTIVEIND = 1");
         try {
             while (rs.next()) {
                 settingValue = rs.getString("VALUE");

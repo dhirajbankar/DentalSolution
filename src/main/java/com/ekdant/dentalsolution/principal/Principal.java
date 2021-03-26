@@ -63,6 +63,7 @@ public class Principal extends javax.swing.JFrame {
     DoctorDao doctorDao;
     ClinicDao clinicDao;
     SettingsDao settingsDao;
+    String doctorEmail;
     
     Date today = new Date();
     String title;
@@ -99,7 +100,7 @@ public class Principal extends javax.swing.JFrame {
         initMainPage();        
         LookAndFeel();
         utility = new Utils();
-        
+        doctorEmail = settingsDao.getSettingValue("DOCTOR_EMAIL");
         
     }
     
@@ -122,16 +123,7 @@ public class Principal extends javax.swing.JFrame {
             UIManager.setLookAndFeel(lookAndFeel);            
             SwingUtilities.updateComponentTreeUI(this);
         }
-        catch(ClassNotFoundException error) {
-            JOptionPane.showMessageDialog(null,"Error matching downloads theme : "+error);
-            logger.error(error);
-        } catch (IllegalAccessException error) {
-            JOptionPane.showMessageDialog(null,"Error matching downloads theme : "+error);
-            logger.error(error);
-        } catch (InstantiationException error) {
-            JOptionPane.showMessageDialog(null,"Error matching downloads theme : "+error);
-            logger.error(error);
-        } catch (UnsupportedLookAndFeelException error) {
+        catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException error) {
             JOptionPane.showMessageDialog(null,"Error matching downloads theme : "+error);
             logger.error(error);
         }    
@@ -227,11 +219,12 @@ public class Principal extends javax.swing.JFrame {
     
     private void backUp(){
         String fileName = "ekDantBackup_"+databaseDateFormat.format(today)+".sqlite";
-        File sourceFile = new File(utility.getPath() + File.separatorChar + databaseFile);
+        String filePath = utility.getPath() + File.separatorChar + databaseFile;
+        File sourceFile = new File(filePath);
         File backupFile1 = new File(settingsDao.getMySQLPath() + File.separatorChar + PropertiesCache.getInstance().getProperty("folder.backup"));
         if(!backupFile1.exists()){
-                backupFile1.mkdirs();
-            }
+            backupFile1.mkdirs();
+        }
         InputStream is = null;
         OutputStream os = null;
         try{
@@ -244,12 +237,21 @@ public class Principal extends javax.swing.JFrame {
                     os.write(buffer, 0, length);
                 }
                 JOptionPane.showMessageDialog(null,"Backup Completed : " + backupFile1 + File.separator + fileName);
-            } catch(Exception e){
+            } catch(HeadlessException | IOException e){
                 logger.error(e);
             }finally {
                 is.close();
                 os.close();
             }
+            String clinicName = clinicDao.fetchClinics().get(0).getName();
+           // String doctorEmail = settingsDao.getSettingValue("﻿DOCTOR_EMAIL");
+            int result = JOptionPane.showConfirmDialog(this, "Do you want to send email to below registered email address?\n\t"+doctorEmail, "Email confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(result == JOptionPane.YES_OPTION){
+               Mailer mailer = new Mailer();
+               mailer.sendEmail(doctorEmail, clinicName +" - "+PropertiesCache.getInstance().getProperty("email.subject"), filePath);
+               JOptionPane.showMessageDialog(null,"Email sent to : " + doctorEmail);
+            }
+            
         }catch(IOException ioe){
             logger.error(ioe);
         }

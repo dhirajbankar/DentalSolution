@@ -22,8 +22,8 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Upload artifact
-        uses: actions/upload-artifact@v2.2.2
-        with:
-          name: DentalSolution*
-          path: target/*.jar
+    - uses: actions/upload-artifact@v2
+      with:
+        name: DentalSolution
+        path: |
+          target/*.jar

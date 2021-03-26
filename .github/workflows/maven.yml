@@ -26,4 +26,4 @@ jobs:
       with:
         name: DentalSolution
         path: |
-          target/*.jar
+          target/*spring-boot.jar

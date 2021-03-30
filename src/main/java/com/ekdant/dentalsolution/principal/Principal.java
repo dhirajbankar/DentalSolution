@@ -105,7 +105,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     private void exit() throws HeadlessException {
-        int exitMessageChosenOption = JOptionPane.showConfirmDialog(null,"Really want to quit?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Gnome-Application-Exit-48.png")));
+        int exitMessageChosenOption = JOptionPane.showConfirmDialog(null,"Really want to quit?"+System.getenv("SECRET_KEY"), "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/EkDant/icones/Gnome-Application-Exit-48.png")));
         if(exitMessageChosenOption == JOptionPane.YES_OPTION){
             backUp();
             System.exit(0);

@@ -48,8 +48,16 @@
             <version>4.7.2</version>
         </dependency>
 
-
     </dependencies>
+    
+    <distributionManagement>
+        <repository>
+          <id>github</id>
+          <name>Dental Solution</name>
+          <url>https://maven.pkg.github.com/raut-sushant/DentalSolution</url>
+        </repository>
+     </distributionManagement>
+    
     <build>
         <plugins>
             <plugin>

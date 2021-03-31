@@ -27,4 +27,4 @@ jobs:
         name: DentalSolution
         path: |
           target/*spring-boot.jar
-    
+          - name: Download a Build Artifact
